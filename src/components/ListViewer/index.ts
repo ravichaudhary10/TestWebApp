@@ -1,2 +1,2 @@
-export { default } from "./ListViewer";
+export { default as ListViewer } from "./ListViewer";
 export * from "./ListViewer.types";

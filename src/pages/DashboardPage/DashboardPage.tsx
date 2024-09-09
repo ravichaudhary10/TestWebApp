@@ -1,54 +1,40 @@
-import React from "react";
-import { Breadcrumbs, Link, Typography } from "@mui/material";
-import Header from "../../components/Header";
-import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
+import React, { useEffect } from "react";
+import { Header } from "../../components/Header";
+import { MenuItem } from "primereact/menuitem";
+import { TabView, TabPanel } from "primereact/tabview";
 
-import DashboardTabView from "../../components/DashboardTabView";
+import { dashboardPageTitle } from "./DashboardPage.constants";
+import { Breadcrumb } from "../../components/Breadcrumb";
 
 import "./DashboardPage.scss";
+import { DealList } from "../../components/DealList";
 
 const DashboardPage: React.FC = () => {
+  const breadcrumbItems: MenuItem[] = [
+    {
+      icon: "pi pi-home",
+      label: dashboardPageTitle,
+      url: "/",
+    },
+  ];
+
   return (
     <div className="page">
       <Header />
 
-      <div className="page__content-area">
-        <Breadcrumbs aria-label="breadcrumb">
-          <Link
-            underline="hover"
-            sx={{ display: "flex", alignItems: "center" }}
-            color="inherit"
-            href="/"
-          >
-            <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-            MUI
-          </Link>
-          <Link
-            underline="hover"
-            sx={{ display: "flex", alignItems: "center" }}
-            color="inherit"
-            href="/material-ui/getting-started/installation/"
-          >
-            <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-            Core
-          </Link>
-          <Typography
-            sx={{
-              color: "text.primary",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-            Breadcrumb
-          </Typography>
-        </Breadcrumbs>
+      <div className="page__content-body">
+        <Breadcrumb items={breadcrumbItems} />
 
-        <h1 className="page__title">Dashboard</h1>
+        <h1 className="page__title">{dashboardPageTitle}</h1>
 
-        <DashboardTabView />
+        <TabView>
+          <TabPanel header="Deals" key="deals">
+            <DealList />
+          </TabPanel>
+          <TabPanel header="History" key="history">
+            <p className="m-0">History</p>
+          </TabPanel>
+        </TabView>
       </div>
     </div>
   );

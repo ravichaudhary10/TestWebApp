@@ -4,7 +4,7 @@
   align-items: center;
 }
 
-.page__content-area {
+.page__content-body {
   flex: 1;
   width: 80%;
   padding: 1rem;
@@ -15,4 +15,8 @@
   font-size: 1.25rem;
   line-height: 1.5rem;
   text-align: left;
+}
+
+.page .p-tabview .p-tabview-panels {
+  padding: 1.25rem 0rem;
 }

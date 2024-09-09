@@ -7,18 +7,24 @@ import CreateDealPage from "./pages/CreateDealPage";
 import CreateResourcePage from "./pages/CreateResourcePage";
 import "./index.css";
 
+import "primeicons/primeicons.css";
+import { PrimeReactProvider } from "primereact/api";
+import "primeflex/primeflex.css";
+import "primereact/resources/primereact.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <DashboardPage />,
   },
   {
-    path: "/createdeal",
-    element: <CreateDealPage />,
+    path: "/deals/:dealId",
+    element: <ResourceListPage />,
   },
   {
-    path: "/:dealId",
-    element: <ResourceListPage />,
+    path: "/createdeal",
+    element: <CreateDealPage />,
   },
   {
     path: "/createresource",
@@ -32,6 +38,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <PrimeReactProvider value={{ ripple: true }}>
+      <RouterProvider router={router} />
+    </PrimeReactProvider>
   </React.StrictMode>
 );
