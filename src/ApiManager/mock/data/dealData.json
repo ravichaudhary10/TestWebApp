@@ -1,0 +1,692 @@
+[
+  {
+    "id": "1000",
+    "name": "BANFF FD Team",
+    "therapeuticArea": {
+      "id": "1",
+      "name": "CRM"
+    },
+    "stage": {
+      "id": "1",
+      "name": "Triage"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1001",
+    "name": "BOSTON FD Team",
+    "therapeuticArea": {
+      "id": "1",
+      "name": "CRM"
+    },
+    "stage": {
+      "id": "2",
+      "name": "Focused Diligence"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1002",
+    "name": "BRAVO FD Team",
+    "therapeuticArea": {
+      "id": "1",
+      "name": "CRM"
+    },
+    "stage": {
+      "id": "3",
+      "name": "Full Assessment"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "2",
+      "name": "Ishika Roy"
+    },
+    "leads": [
+      {
+        "id": "2",
+        "name": "Ishika Roy"
+      }
+    ]
+  },
+  {
+    "id": "1003",
+    "name": "BRAVO FN TEAM",
+    "therapeuticArea": {
+      "id": "1",
+      "name": "CRM"
+    },
+    "stage": {
+      "id": "4",
+      "name": "Final Negotiation"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "2",
+      "name": "Ishika Roy"
+    },
+    "leads": [
+      {
+        "id": "2",
+        "name": "Ishika Roy"
+      }
+    ]
+  },
+  {
+    "id": "1004",
+    "name": "BRAVO FN TRIANGLE",
+    "therapeuticArea": {
+      "id": "1",
+      "name": "CRM"
+    },
+    "stage": {
+      "id": "5",
+      "name": "Signed"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "2",
+      "name": "Ishika Roy"
+    },
+    "leads": [
+      {
+        "id": "2",
+        "name": "Ishika Roy"
+      }
+    ]
+  },
+  {
+    "id": "1005",
+    "name": "BANFF FD Team 2",
+    "therapeuticArea": {
+      "id": "2",
+      "name": "IMM"
+    },
+    "stage": {
+      "id": "1",
+      "name": "Triage"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "2",
+      "name": "Ishika Roy"
+    },
+    "leads": [
+      {
+        "id": "2",
+        "name": "Ishika Roy"
+      }
+    ]
+  },
+  {
+    "id": "1006",
+    "name": "BOSTON FD Team 2",
+    "therapeuticArea": {
+      "id": "2",
+      "name": "IMM"
+    },
+    "stage": {
+      "id": "2",
+      "name": "Focused Diligence"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "2",
+      "name": "Ishika Roy"
+    },
+    "leads": [
+      {
+        "id": "2",
+        "name": "Ishika Roy"
+      }
+    ]
+  },
+  {
+    "id": "1007",
+    "name": "BRAVO FD Team 2",
+    "therapeuticArea": {
+      "id": "2",
+      "name": "IMM"
+    },
+    "stage": {
+      "id": "3",
+      "name": "Full Assessment"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1008",
+    "name": "BRAVO FN TEAM 2",
+    "therapeuticArea": {
+      "id": "2",
+      "name": "IMM"
+    },
+    "stage": {
+      "id": "4",
+      "name": "Final Negotiation"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1009",
+    "name": "BRAVO FN TRIANGLE 2",
+    "therapeuticArea": {
+      "id": "2",
+      "name": "IMM"
+    },
+    "stage": {
+      "id": "5",
+      "name": "Signed"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1010",
+    "name": "BANFF FD Team 3",
+    "therapeuticArea": {
+      "id": "3",
+      "name": "NS"
+    },
+    "stage": {
+      "id": "1",
+      "name": "Triage"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "3",
+      "name": "Brian Philip"
+    },
+    "leads": [
+      {
+        "id": "3",
+        "name": "Brian Philip"
+      }
+    ]
+  },
+  {
+    "id": "1011",
+    "name": "BOSTON FD Team 3",
+    "therapeuticArea": {
+      "id": "3",
+      "name": "NS"
+    },
+    "stage": {
+      "id": "2",
+      "name": "Focused Diligence"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "3",
+      "name": "Brian Philip"
+    },
+    "leads": [
+      {
+        "id": "3",
+        "name": "Brian Philip"
+      }
+    ]
+  },
+  {
+    "id": "1012",
+    "name": "BRAVO FD Team 3",
+    "therapeuticArea": {
+      "id": "3",
+      "name": "NS"
+    },
+    "stage": {
+      "id": "3",
+      "name": "Full Assessment"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "3",
+      "name": "Brian Philip"
+    },
+    "leads": [
+      {
+        "id": "3",
+        "name": "Brian Philip"
+      }
+    ]
+  },
+  {
+    "id": "1013",
+    "name": "BRAVO FN TEAM 3",
+    "therapeuticArea": {
+      "id": "3",
+      "name": "NS"
+    },
+    "stage": {
+      "id": "4",
+      "name": "Final Negotiation"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1014",
+    "name": "BRAVO FN TRIANGLE 3",
+    "therapeuticArea": {
+      "id": "3",
+      "name": "NS"
+    },
+    "stage": {
+      "id": "5",
+      "name": "Signed"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1015",
+    "name": "BANFF FD Team 4",
+    "therapeuticArea": {
+      "id": "4",
+      "name": "GTX"
+    },
+    "stage": {
+      "id": "1",
+      "name": "Triage"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1016",
+    "name": "BOSTON FD Team 4",
+    "therapeuticArea": {
+      "id": "4",
+      "name": "GTX"
+    },
+    "stage": {
+      "id": "2",
+      "name": "Focused Diligence"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1017",
+    "name": "BRAVO FD Team 4",
+    "therapeuticArea": {
+      "id": "4",
+      "name": "GTX"
+    },
+    "stage": {
+      "id": "3",
+      "name": "Full Assessment"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1018",
+    "name": "BRAVO FN TEAM 4",
+    "therapeuticArea": {
+      "id": "4",
+      "name": "GTX"
+    },
+    "stage": {
+      "id": "4",
+      "name": "Final Negotiation"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1019",
+    "name": "BRAVO FN TRIANGLE 4",
+    "therapeuticArea": {
+      "id": "4",
+      "name": "GTX"
+    },
+    "stage": {
+      "id": "5",
+      "name": "Signed"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1020",
+    "name": "BANFF FD Team 5",
+    "therapeuticArea": {
+      "id": "5",
+      "name": "ONCO"
+    },
+    "stage": {
+      "id": "1",
+      "name": "Triage"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1021",
+    "name": "BOSTON FD Team 5",
+    "therapeuticArea": {
+      "id": "5",
+      "name": "ONCO"
+    },
+    "stage": {
+      "id": "2",
+      "name": "Focused Diligence"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1022",
+    "name": "BRAVO FD Team 5",
+    "therapeuticArea": {
+      "id": "5",
+      "name": "ONCO"
+    },
+    "stage": {
+      "id": "3",
+      "name": "Full Assessment"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1023",
+    "name": "BRAVO FN TEAM 5",
+    "therapeuticArea": {
+      "id": "5",
+      "name": "ONCO"
+    },
+    "stage": {
+      "id": "4",
+      "name": "Final Negotiation"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1024",
+    "name": "BRAVO FN TRIANGLE 5",
+    "therapeuticArea": {
+      "id": "5",
+      "name": "ONCO"
+    },
+    "stage": {
+      "id": "5",
+      "name": "Signed"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1025",
+    "name": "BANFF FD Team 6",
+    "therapeuticArea": {
+      "id": "6",
+      "name": "RLT"
+    },
+    "stage": {
+      "id": "1",
+      "name": "Triage"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1026",
+    "name": "BOSTON FD Team 6",
+    "therapeuticArea": {
+      "id": "6",
+      "name": "RLT"
+    },
+    "stage": {
+      "id": "2",
+      "name": "Focused Diligence"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1027",
+    "name": "BRAVO FD Team 6",
+    "therapeuticArea": {
+      "id": "6",
+      "name": "RLT"
+    },
+    "stage": {
+      "id": "3",
+      "name": "Full Assessment"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1028",
+    "name": "BRAVO FN TEAM 6",
+    "therapeuticArea": {
+      "id": "7",
+      "name": "Platform"
+    },
+    "stage": {
+      "id": "4",
+      "name": "Final Negotiation"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "1",
+      "name": "Kunal Dhar"
+    },
+    "leads": [
+      {
+        "id": "1",
+        "name": "Kunal Dhar"
+      }
+    ]
+  },
+  {
+    "id": "1029",
+    "name": "BRAVO FN TRIANGLE 6",
+    "therapeuticArea": {
+      "id": "7",
+      "name": "Platform"
+    },
+    "stage": {
+      "id": "5",
+      "name": "Signed"
+    },
+    "dateModified": 1726079400000,
+    "modifiedBy": {
+      "id": "2",
+      "name": "Ishika Roy"
+    },
+    "leads": [
+      {
+        "id": "2",
+        "name": "Ishika Roy"
+      }
+    ]
+  }
+]

@@ -7,7 +7,7 @@ import { dashboardPageTitle } from "./DashboardPage.constants";
 import { Breadcrumb } from "../../components/Breadcrumb";
 
 import "./DashboardPage.scss";
-import { DealList } from "../../components/DealList";
+import { DealListView } from "../../components/DealListView";
 
 const DashboardPage: React.FC = () => {
   const breadcrumbItems: MenuItem[] = [
@@ -29,7 +29,7 @@ const DashboardPage: React.FC = () => {
 
         <TabView>
           <TabPanel header="Deals" key="deals">
-            <DealList />
+            <DealListView />
           </TabPanel>
           <TabPanel header="History" key="history">
             <p className="m-0">History</p>
