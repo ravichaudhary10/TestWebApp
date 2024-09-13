@@ -44,7 +44,6 @@ class DealMockService {
             }
 
             // Filter by stage
-
             if (
               filters.stage?.length &&
               !(filters.stage as any).includes((item.stage as any).id)
@@ -54,7 +53,7 @@ class DealMockService {
 
             // Filter by stage
             if (
-              filters.therapeuticArea.length &&
+              filters.therapeuticArea?.length &&
               !(filters.therapeuticArea as any).includes(
                 (item.therapeuticArea as any).id
               )

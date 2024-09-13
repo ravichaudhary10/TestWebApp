@@ -5,6 +5,8 @@ import ApiManager from "../../ApiManager/ApiManager";
 import { createPayload } from "./DealListView.helpers";
 import editIcon from "../../assets/icons/edit.svg";
 import deleteIcon from "../../assets/icons/delete.svg";
+import calendarIcon from "../../assets/icons/calendar.svg";
+
 import {
   THERAPEUTIC_AREA,
   DEAL_NAME,
@@ -157,7 +159,7 @@ const DealListView: React.FC = () => {
           aria-label="Edit Button"
           style={{ width: "1.5rem", height: "1.5rem" }}
         > */}
-        <img src={editIcon} alt="Edit Icon" />
+        <img src={editIcon} alt="Edit Icon" style={{ padding: "0 0.5rem" }} />
 
         {/* <Button
           size="small"
@@ -167,7 +169,11 @@ const DealListView: React.FC = () => {
           aria-label="Delete Button"
           style={{ width: "1.5rem", height: "1.5rem" }}
         > */}
-        <img src={deleteIcon} alt="Delete Icon" />
+        <img
+          src={deleteIcon}
+          alt="Delete Icon"
+          style={{ padding: "0 1.5rem" }}
+        />
       </div>
     );
   };
@@ -246,7 +252,7 @@ const DealListView: React.FC = () => {
           options.filterApplyCallback(e.value)
         }
         optionLabel="name"
-        placeholder="Any"
+        placeholder="Select"
         className="p-column-filter"
         tooltip={options.value?.map((item: any) => item.name)}
         maxSelectedLabels={1}
@@ -273,7 +279,7 @@ const DealListView: React.FC = () => {
           options.filterApplyCallback(e.value)
         }
         optionLabel="name"
-        placeholder="Any"
+        placeholder="Select"
         className="p-column-filter"
         tooltip={options.value?.map((item: any) => item.name)}
         maxSelectedLabels={1}
@@ -288,9 +294,11 @@ const DealListView: React.FC = () => {
     return (
       <Calendar
         value={options.value}
-        placeholder="Search"
+        placeholder="Select"
         onChange={(e) => options.filterApplyCallback(e.value)}
         style={{ minWidth: "10rem" }}
+        // showIcon
+        // icon={() => <img src={calendarIcon} alt="Calendar Icon" />}
       />
     );
   };

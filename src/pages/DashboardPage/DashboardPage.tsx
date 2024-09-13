@@ -3,7 +3,10 @@ import { Header } from "../../components/Header";
 import { MenuItem } from "primereact/menuitem";
 import { TabView, TabPanel } from "primereact/tabview";
 
-import { dashboardPageTitle } from "./DashboardPage.constants";
+import {
+  dashboardPageTitle,
+  breadcrumbHomeTitle,
+} from "./DashboardPage.constants";
 import { Breadcrumb } from "../../components/Breadcrumb";
 
 import "./DashboardPage.scss";
@@ -13,8 +16,7 @@ const DashboardPage: React.FC = () => {
   const breadcrumbItems: MenuItem[] = [
     {
       icon: "pi pi-home",
-      label: dashboardPageTitle,
-      url: "/",
+      label: breadcrumbHomeTitle,
     },
   ];
 
