@@ -59,35 +59,35 @@ const DealListView: React.FC = () => {
   // TODO: It's temporary. This harcoded data will be replaced with data fetched from API
   const [taList] = useState<Item[]>([
     {
-      id: "1",
+      id: 1,
       name: "CRM",
     },
     {
-      id: "2",
+      id: 2,
       name: "IMM",
     },
     {
-      id: "3",
+      id: 3,
       name: "NS",
     },
     {
-      id: "4",
+      id: 4,
       name: "GTX",
     },
     {
-      id: "5",
+      id: 5,
       name: "ONCO",
     },
     {
-      id: "6",
+      id: 6,
       name: "RLT",
     },
     {
-      id: "7",
+      id: 7,
       name: "Platform",
     },
     {
-      id: "8",
+      id: 8,
       name: "Others",
     },
   ]);
@@ -95,27 +95,27 @@ const DealListView: React.FC = () => {
   // TODO: It's temporary. This harcoded data will be replaced with data fetched from API
   const [stageList] = useState<Item[]>([
     {
-      id: "1",
+      id: 1,
       name: "Triage",
     },
     {
-      id: "2",
+      id: 2,
       name: "Focused Diligence",
     },
     {
-      id: "3",
+      id: 3,
       name: "Full Assessment",
     },
     {
-      id: "4",
+      id: 4,
       name: "Final Negotiation",
     },
     {
-      id: "5",
+      id: 5,
       name: "Signed",
     },
     {
-      id: "6",
+      id: 6,
       name: "Closed",
     },
   ]);
@@ -132,9 +132,9 @@ const DealListView: React.FC = () => {
         const res: any = await ApiManager.getDeals(payload);
 
         // Update data in states
-        setTotalRecords(res.totalRecords);
-        setDeals(res.data);
-        console.log("Deal list response:", res);
+        setTotalRecords(res.data.totalRecords);
+        setDeals(res.data.data);
+        console.log("Deal list response:", res.data);
       } catch (error: any) {
         // Update error state
         setError(error.message);
@@ -297,7 +297,7 @@ const DealListView: React.FC = () => {
         placeholder="Select"
         onChange={(e) => options.filterApplyCallback(e.value)}
         style={{ minWidth: "10rem" }}
-        // showIcon
+        showIcon
         // icon={() => <img src={calendarIcon} alt="Calendar Icon" />}
       />
     );
@@ -362,6 +362,7 @@ const DealListView: React.FC = () => {
           filter
           filterPlaceholder="Search"
           showFilterMenu={false}
+          filterClear
         />
         <Column
           field={DealListField.THERAPEUTIC_AREA + ".name"}

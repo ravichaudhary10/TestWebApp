@@ -10,8 +10,8 @@ import { LazyTableState } from "../../types/commonTypes";
 export const createPayload = (userId: string, lazyState: LazyTableState) => {
   const payload: Record<string, any> = {
     userId,
-    start: lazyState.first,
-    rows: lazyState.rows,
+    page: lazyState.page,
+    limit: lazyState.rows,
   };
 
   if (lazyState.filters) {
@@ -20,7 +20,7 @@ export const createPayload = (userId: string, lazyState: LazyTableState) => {
       let item = (lazyState.filters[key] as DataTableFilterMetaData).value;
 
       if (Array.isArray(item)) {
-        item = item.map((o) => o.id);
+        item = item.map((o) => o?.id);
       }
 
       filters[key] = item;

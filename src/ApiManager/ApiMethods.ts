@@ -1,5 +1,3 @@
-import { LazyTableState } from "../types/commonTypes";
-
 const BASE_URL = "https://dev.novartis.com/api"; // TODO: Change it with the acutal base url
 
 const getHeaders = () => {

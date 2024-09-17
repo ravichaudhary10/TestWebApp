@@ -1,10 +1,10 @@
 export interface Item {
-  id: string;
+  id: number;
   name: string;
 }
 
 export interface Deal {
-  id: string;
+  id: number;
   name?: string | null;
   therapeuticArea?: Item | null;
   stage?: Item | null;

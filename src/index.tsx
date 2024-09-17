@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import ResourceListPage from "./pages/ResourceListPage";
 import CreateDealPage from "./pages/CreateDealPage";
 import CreateResourcePage from "./pages/CreateResourcePage";
+import "./__mock__";
 import "./index.css";
-
 import "primeicons/primeicons.css";
 import { PrimeReactProvider } from "primereact/api";
 import "primeflex/primeflex.css";
@@ -38,8 +40,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <PrimeReactProvider value={{ ripple: true }}>
-      <RouterProvider router={router} />
-    </PrimeReactProvider>
+    <Provider store={store}>
+      <PrimeReactProvider value={{ ripple: true }}>
+        <RouterProvider router={router} />
+      </PrimeReactProvider>
+    </Provider>
   </React.StrictMode>
 );
