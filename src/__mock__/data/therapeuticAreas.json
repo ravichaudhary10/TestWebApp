@@ -1,0 +1,40 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "CRM"
+    },
+    {
+      "id": 2,
+      "name": "IMM"
+    },
+    {
+      "id": 3,
+      "name": "NS & GTX"
+    },
+    {
+      "id": 4,
+      "name": "ONCO"
+    },
+    {
+      "id": 5,
+      "name": "RLT"
+    },
+    {
+      "id": 6,
+      "name": "Platform"
+    },
+    {
+      "id": 7,
+      "name": "Others"
+    }
+  ],
+  "error": null,
+  "pagination": {
+    "totalRecords": 7,
+    "currentPage": 1,
+    "totalPages": 1,
+    "pageSize": 7
+  },
+  "status": 200
+}

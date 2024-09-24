@@ -1,0 +1,207 @@
+@use "./variables.scss" as *;
+
+* {
+  font-family: $font-volta55;
+}
+
+/*** Button custom styling ***/
+
+.p-button {
+  border: none;
+  background-color: $primary-color;
+  font-weight: $bold-font;
+  border-radius: 4px;
+  box-shadow: none;
+
+  &.p-button-text {
+    background-color: transparent;
+    border-color: transparent;
+    color: $primary-color;
+  }
+
+  &:disabled {
+    background-color: #eee;
+    color: $disabled-color;
+  }
+
+  &.p-button-outlined {
+    background-color: rgba(4, 95, 168, 0);
+    border: 1px solid rgba(0, 0, 0, 0.38);
+    color: $primary-color;
+
+    &:hover {
+      background-color: rgba(4, 95, 168, 0.04);
+    }
+
+    &:active {
+      background-color: rgba(4, 95, 168, 0.12);
+      border-color: $primary-color;
+    }
+  }
+}
+
+/*** InputText custom styling ***/
+.p-inputtext {
+  border: 1px solid $secondary-text-color;
+
+  ~ label {
+    color: $secondary-text-color;
+    font-weight: $light-font;
+    background-color: white;
+    padding: 0 0.1rem;
+  }
+
+  &:hover {
+    border: 1px solid $primary-text-color;
+  }
+
+  &:hover ~ label {
+    color: $primary-text-color;
+  }
+
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 1px $primary-color;
+  }
+
+  &:focus ~ label {
+    color: $primary-color;
+  }
+
+  &:disabled {
+    border: 1px solid $disabled-color;
+  }
+
+  &:disabled ~ label {
+    color: rgba(0, 0, 0, 0.38);
+  }
+
+  &:invalid {
+    border: 1px solid $danger-color;
+    box-shadow: 0 0 0 1px $danger-color;
+  }
+
+  &:invalid ~ label {
+    color: #d32f2f;
+  }
+}
+
+/*** Multiselect and dropdown custom styling ***/
+.p-multiselect,
+.p-dropdown,
+.p-calendar {
+  border: 1px solid $secondary-text-color;
+  border-radius: 4px;
+
+  ~ label {
+    color: $secondary-text-color;
+    font-weight: $light-font;
+    background-color: white;
+    padding: 0 0.1rem;
+  }
+
+  &:hover {
+    border: 1px solid $primary-text-color;
+  }
+
+  &:hover ~ label {
+    color: $primary-text-color;
+  }
+
+  &.p-inputwrapper-focus,
+  &.p-focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 1px $primary-color;
+
+    .p-multiselect-trigger {
+      color: $primary-color;
+    }
+
+    .p-dropdown-trigger {
+      color: $primary-color;
+    }
+  }
+
+  &.p-inputwrapper-focus ~ label,
+  &.p-focus ~ label {
+    color: $primary-color;
+  }
+
+  &.p-inputwrapper-disabled {
+    border: 1px solid $disabled-color;
+  }
+
+  &.p-inputwrapper-disabled ~ label {
+    color: rgba(0, 0, 0, 0.38);
+  }
+
+  &.p-inputwrapper-invalid {
+    border: 1px solid $danger-color;
+    box-shadow: 0 0 0 1px $danger-color;
+  }
+
+  &.p-inputwrapper-invalid ~ label {
+    color: #d32f2f;
+  }
+}
+
+/*** Dropdown custom styling ***/
+.p-dropdown,
+.p-calendar {
+  .p-inputtext {
+    border: none;
+    box-shadow: none;
+  }
+}
+
+/*** Float label custom styling ***/
+.p-float-label input:focus ~ label,
+.p-float-label input:-webkit-autofill ~ label,
+.p-float-label input.p-filled ~ label,
+.p-float-label textarea:focus ~ label,
+.p-float-label textarea.p-filled ~ label,
+.p-float-label .p-focus ~ label,
+.p-float-label .p-inputwrapper-focus ~ label,
+.p-float-label .p-inputwrapper-filled ~ label,
+.p-float-label .p-tooltip-target-wrapper ~ label {
+  top: 2px;
+  font-size: 12px;
+}
+
+/*** Tab menu custom styling ***/
+.p-tabmenu .p-tabmenu-nav {
+  border-width: 0 0 4px 0;
+  border-color: transparent;
+}
+
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link {
+  border-color: transparent;
+  color: $secondary-text-color;
+  height: 40px;
+}
+
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link {
+  border-width: 0 0 4px 0;
+  border-color: $primary-color;
+  color: $primary-text-color;
+}
+
+.primary-text {
+  color: $primary-text-color;
+}
+
+.secondary-text {
+  color: $secondary-text-color;
+}
+
+.required-text {
+  color: $danger-color;
+}
+
+.optional-text {
+  color: $disabled-color;
+}
+
+.error-text {
+  color: $danger-color;
+}

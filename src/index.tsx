@@ -1,38 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Provider } from "react-redux";
-import { store } from "./redux/store";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import DashboardPage from "./pages/DashboardPage/DashboardPage";
-import ResourceListPage from "./pages/ResourceListPage";
-import CreateDealPage from "./pages/CreateDealPage";
-import CreateResourcePage from "./pages/CreateResourcePage";
+import { Provider as ReduxProvider } from "react-redux";
+import { RouterProvider } from "react-router-dom";
+import store from "./redux/store";
+import { router } from "./routes";
 import "./__mock__";
 import "./index.css";
+import "./styles/global.styles.scss";
+
+// Prime react imports
 import "primeicons/primeicons.css";
 import { PrimeReactProvider } from "primereact/api";
 import "primeflex/primeflex.css";
 import "primereact/resources/primereact.css";
 import "primereact/resources/themes/lara-light-blue/theme.css";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <DashboardPage />,
-  },
-  {
-    path: "/deals/:dealId",
-    element: <ResourceListPage />,
-  },
-  {
-    path: "/createdeal",
-    element: <CreateDealPage />,
-  },
-  {
-    path: "/createresource",
-    element: <CreateResourcePage />,
-  },
-]);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -40,10 +21,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <ReduxProvider store={store}>
       <PrimeReactProvider value={{ ripple: true }}>
         <RouterProvider router={router} />
       </PrimeReactProvider>
-    </Provider>
+    </ReduxProvider>
   </React.StrictMode>
 );

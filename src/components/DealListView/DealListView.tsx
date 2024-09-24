@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Deal, Item, DealListField } from "./DealListView.types";
+import React, { useState, useEffect, SyntheticEvent } from "react";
+import { Item } from "../../types/commonTypes";
+import { Deal, DealListField } from "./DealListView.types";
 import { LazyTableState } from "../../types/commonTypes";
-import ApiManager from "../../ApiManager/ApiManager";
-import { createPayload } from "./DealListView.helpers";
 import editIcon from "../../assets/icons/edit.svg";
 import deleteIcon from "../../assets/icons/delete.svg";
 import calendarIcon from "../../assets/icons/calendar.svg";
+import { fetchDeals } from "../../redux/middleware/fetchDeals";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { getFiltersPayload } from "../../utils/getFilterPayload";
 
 import {
   THERAPEUTIC_AREA,
@@ -13,14 +15,18 @@ import {
   DEAL_STAGE,
   DEAL_LEAD,
   MODIFIED_BY,
-  DATE_MODIFIED,
+  MODIFIED_AT,
   EMPTY_MESSAGE,
+  INITIAL_FILTERS,
+  CLEAR_ALL_LABEL,
 } from "./DealListView.constants";
 
+// PrimeReact imports
 import {
   DataTable,
   DataTablePageEvent,
   DataTableFilterEvent,
+  DataTableFilterMetaData,
 } from "primereact/datatable";
 import {
   Column,
@@ -35,119 +41,41 @@ import { Dropdown } from "primereact/dropdown";
 import { Button } from "primereact/button";
 import { MultiSelect, MultiSelectChangeEvent } from "primereact/multiselect";
 import { Calendar } from "primereact/calendar";
+import { InputText } from "primereact/inputtext";
+import { SelectItem } from "primereact/selectitem";
 
 const DealListView: React.FC = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [totalRecords, setTotalRecords] = useState<number>(0);
-  const [deals, setDeals] = useState<Deal[] | undefined>();
-  const [error, setError] = useState<string | null>(null);
+  // Dispatch function
+  const dispatch = useAppDispatch();
 
+  // Selectors
+  const user = useAppSelector((state) => state.user);
+  const deals = useAppSelector((state) => state.deals);
+  const therapeuticAreas = useAppSelector((state) => state.therapeuticAreas);
+  const stages = useAppSelector((state) => state.stages);
+  const isLoading = useAppSelector((state) => state.isLoading);
+  const error = useAppSelector((state) => state.error);
+
+  // Create lazy state for the data table
   const [lazyState, setlazyState] = useState<LazyTableState>({
     first: 0,
     rows: 10,
     page: 0,
-    filters: {
-      [DealListField.NAME]: { value: "", matchMode: "contains" },
-      [DealListField.THERAPEUTIC_AREA]: { value: [], matchMode: "contains" },
-      [DealListField.STAGE]: { value: [], matchMode: "contains" },
-      [DealListField.MODIFIED_BY]: { value: "", matchMode: "contains" },
-      [DealListField.DATE_MODIFIED]: { value: null, matchMode: "contains" },
-      [DealListField.LEADS]: { value: "", matchMode: "contains" },
-    },
+    filters: INITIAL_FILTERS,
   });
 
-  // TODO: It's temporary. This harcoded data will be replaced with data fetched from API
-  const [taList] = useState<Item[]>([
-    {
-      id: 1,
-      name: "CRM",
-    },
-    {
-      id: 2,
-      name: "IMM",
-    },
-    {
-      id: 3,
-      name: "NS",
-    },
-    {
-      id: 4,
-      name: "GTX",
-    },
-    {
-      id: 5,
-      name: "ONCO",
-    },
-    {
-      id: 6,
-      name: "RLT",
-    },
-    {
-      id: 7,
-      name: "Platform",
-    },
-    {
-      id: 8,
-      name: "Others",
-    },
-  ]);
-
-  // TODO: It's temporary. This harcoded data will be replaced with data fetched from API
-  const [stageList] = useState<Item[]>([
-    {
-      id: 1,
-      name: "Triage",
-    },
-    {
-      id: 2,
-      name: "Focused Diligence",
-    },
-    {
-      id: 3,
-      name: "Full Assessment",
-    },
-    {
-      id: 4,
-      name: "Final Negotiation",
-    },
-    {
-      id: 5,
-      name: "Signed",
-    },
-    {
-      id: 6,
-      name: "Closed",
-    },
-  ]);
-
   useEffect(() => {
-    // Downloads list of deals associated with the user
-    const fetchDealList = async () => {
-      try {
-        // Show loading state
-        setLoading(true);
-
-        // Fetch deal list
-        const payload = createPayload("1", lazyState); // TODO: replace "1" with real user Id once login is implemented
-        const res: any = await ApiManager.getDeals(payload);
-
-        // Update data in states
-        setTotalRecords(res.data.totalRecords);
-        setDeals(res.data.data);
-        console.log("Deal list response:", res.data);
-      } catch (error: any) {
-        // Update error state
-        setError(error.message);
-        console.log("Error while downloading deals:", error);
-      } finally {
-        // Hide loading state
-        setLoading(false);
-      }
-    };
-
-    // Download the list of deals from backend API
-    fetchDealList();
-  }, [lazyState]);
+    // Fetch the list of deals from backend API
+    user?.id &&
+      dispatch(
+        fetchDeals(
+          user.id,
+          getFiltersPayload(lazyState.filters),
+          lazyState.page + 1,
+          lazyState.rows
+        )
+      );
+  }, [dispatch, lazyState, user]);
 
   const actionColumnTemplate = (data: any, options: ColumnBodyOptions) => {
     return (
@@ -226,7 +154,7 @@ const DealListView: React.FC = () => {
       ...lazyState,
       first: event.first,
       rows: event.rows,
-      page: event.page,
+      page: event.page ?? 0,
     });
   };
 
@@ -234,72 +162,67 @@ const DealListView: React.FC = () => {
     setlazyState({ ...lazyState, filters: event.filters });
   };
 
-  const taListItemTemplate = (option: Item) => {
+  const multiSelectListItemTemplate = (option: SelectItem) => {
     return (
-      <div className="flex align-items-center gap-2">
-        <span>{option.name}</span>
+      <div key={option.value} className="flex align-items-center gap-2">
+        <span>{option.label}</span>
       </div>
     );
   };
 
-  const taFilterTemplate = (options: ColumnFilterElementTemplateOptions) => {
-    return (
-      <MultiSelect
-        value={options.value}
-        options={taList}
-        itemTemplate={taListItemTemplate}
-        onChange={(e: MultiSelectChangeEvent) =>
-          options.filterApplyCallback(e.value)
-        }
-        optionLabel="name"
-        placeholder="Select"
-        className="p-column-filter"
-        tooltip={options.value?.map((item: any) => item.name)}
-        maxSelectedLabels={1}
-        style={{ minWidth: "13rem" }}
-      />
-    );
-  };
+  const multiSelectFilterTemplate =
+    (data: SelectItem[] | null) =>
+    (options: ColumnFilterElementTemplateOptions) => {
+      return (
+        <div className="p-float-label">
+          <MultiSelect
+            value={options.value}
+            options={data || []}
+            itemTemplate={multiSelectListItemTemplate}
+            onChange={(e: MultiSelectChangeEvent) =>
+              options.filterApplyCallback(e.value)
+            }
+            optionLabel="label"
+            className="p-column-filter"
+            tooltip={
+              options.value && options.value.length > 1
+                ? options.value?.map((item: string) => item)
+                : null
+            }
+            maxSelectedLabels={1}
+            // style={{ minWidth: "12rem" }}
+          />
+          <label>Select</label>
+        </div>
+      );
+    };
 
-  const stageListItemTemplate = (option: Item) => {
+  const dateFilterTemplate = (options: ColumnFilterElementTemplateOptions) => {
     return (
-      <div className="flex align-items-center gap-2">
-        <span>{option.name}</span>
+      <div className="p-float-label">
+        <Calendar
+          value={options.value}
+          onChange={(e) => options.filterApplyCallback(e.value)}
+          style={{ minWidth: "15rem" }}
+          showIcon
+          // icon={() => <img src={calendarIcon} alt="Calendar Icon" />}
+        />
+        <label>Select</label>
       </div>
     );
   };
 
-  const stageFilterTemplate = (options: ColumnFilterElementTemplateOptions) => {
-    return (
-      <MultiSelect
-        value={options.value}
-        options={stageList}
-        itemTemplate={stageListItemTemplate}
-        onChange={(e: MultiSelectChangeEvent) =>
-          options.filterApplyCallback(e.value)
-        }
-        optionLabel="name"
-        placeholder="Select"
-        className="p-column-filter"
-        tooltip={options.value?.map((item: any) => item.name)}
-        maxSelectedLabels={1}
-        style={{ minWidth: "12rem" }}
-      />
-    );
-  };
-
-  const dateModifiedFilterTemplate = (
+  const inputTextFilterTemplate = (
     options: ColumnFilterElementTemplateOptions
   ) => {
     return (
-      <Calendar
-        value={options.value}
-        placeholder="Select"
-        onChange={(e) => options.filterApplyCallback(e.value)}
-        style={{ minWidth: "10rem" }}
-        showIcon
-        // icon={() => <img src={calendarIcon} alt="Calendar Icon" />}
-      />
+      <div className="p-float-label">
+        <InputText
+          value={options.value}
+          onChange={(e) => options.filterApplyCallback(e.target.value)}
+        />
+        <label>Search</label>
+      </div>
     );
   };
 
@@ -311,48 +234,63 @@ const DealListView: React.FC = () => {
     );
   };
 
-  const dateModifiedBodyTemplate = (rowData: Deal) => {
+  const modifiedAtBodyTemplate = (rowData: Deal) => {
     return (
       <div className="flex align-items-center gap-2">
         <span>
-          {new Date(rowData[DealListField.DATE_MODIFIED] as any).toDateString()}
+          {new Date(rowData[DealListField.MODIFIED_AT] as any).toDateString()}
         </span>
       </div>
     );
   };
 
-  // const countryBodyTemplate = (rowData: Customer) => {
-  //   return (
-  //     <div className="flex align-items-center gap-2">
-  //       <img
-  //         alt="flag"
-  //         src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png"
-  //         className={`flag flag-${rowData.country.code}`}
-  //         style={{ width: "24px" }}
-  //       />
-  //       <span>{rowData.country.name}</span>
-  //     </div>
-  //   );
-  // };
+  /**
+   * Clear all the filters applied on data table
+   */
+  const clearAllFilters = (e: SyntheticEvent) => {
+    setlazyState({ ...lazyState, filters: INITIAL_FILTERS });
+  };
+
+  /**
+   * Checks whether the deals list is filtered or  not
+   * @returns {boolean}
+   */
+  const isListFiltered = () => {
+    return Object.values(lazyState.filters).some((item) => {
+      const value = (item as DataTableFilterMetaData).value;
+      return Boolean(value?.toString());
+    });
+  };
+
+  const clearFilterTemplate = () => {
+    return (
+      <Button
+        size="small"
+        label={CLEAR_ALL_LABEL}
+        disabled={!isListFiltered()}
+        onClick={clearAllFilters}
+      />
+    );
+  };
 
   return (
     <div>
       <DataTable
-        value={deals}
+        value={deals?.data}
         size="small"
         lazy
         dataKey="id"
         paginator
         first={lazyState.first}
         rows={lazyState.rows}
-        totalRecords={totalRecords}
+        totalRecords={deals?.totalRecords || 0}
         paginatorTemplate={paginatorTemplate}
         paginatorClassName="justify-content-end"
         onPage={onPage}
         onFilter={onFilter}
         filterDisplay="row"
         filters={lazyState.filters}
-        loading={loading}
+        loading={isLoading}
         tableStyle={{ minWidth: "75rem" }}
         emptyMessage={EMPTY_MESSAGE}
       >
@@ -360,9 +298,9 @@ const DealListView: React.FC = () => {
           field={DealListField.NAME}
           header={DEAL_NAME}
           filter
-          filterPlaceholder="Search"
           showFilterMenu={false}
-          filterClear
+          filterElement={inputTextFilterTemplate}
+          style={{ minWidth: "15rem" }}
         />
         <Column
           field={DealListField.THERAPEUTIC_AREA + ".name"}
@@ -371,7 +309,8 @@ const DealListView: React.FC = () => {
           filterPlaceholder="Search"
           showFilterMenu={false}
           filterField={DealListField.THERAPEUTIC_AREA}
-          filterElement={taFilterTemplate}
+          filterElement={multiSelectFilterTemplate(therapeuticAreas)}
+          style={{ minWidth: "10rem" }}
         />
         <Column
           field={DealListField.STAGE + ".name"}
@@ -380,7 +319,8 @@ const DealListView: React.FC = () => {
           filterPlaceholder="Search"
           showFilterMenu={false}
           filterField={DealListField.STAGE}
-          filterElement={stageFilterTemplate}
+          filterElement={multiSelectFilterTemplate(stages)}
+          style={{ minWidth: "10rem" }}
         />
         <Column
           field={DealListField.MODIFIED_BY + ".name"}
@@ -389,15 +329,18 @@ const DealListView: React.FC = () => {
           filterPlaceholder="Search"
           showFilterMenu={false}
           filterField={DealListField.MODIFIED_BY}
+          filterElement={inputTextFilterTemplate}
+          style={{ minWidth: "10rem" }}
         />
         <Column
-          body={dateModifiedBodyTemplate}
-          header={DATE_MODIFIED}
+          body={modifiedAtBodyTemplate}
+          header={MODIFIED_AT}
           filter
           filterPlaceholder="Search"
           showFilterMenu={false}
-          filterField={DealListField.DATE_MODIFIED}
-          filterElement={dateModifiedFilterTemplate}
+          filterField={DealListField.MODIFIED_AT}
+          filterElement={dateFilterTemplate}
+          style={{ minWidth: "10rem" }}
         />
         <Column
           body={dealLeadBodyTemplate}
@@ -406,8 +349,18 @@ const DealListView: React.FC = () => {
           filterPlaceholder="Search"
           showFilterMenu={false}
           filterField={DealListField.LEADS}
+          filterElement={inputTextFilterTemplate}
+          style={{ minWidth: "10rem" }}
         />
-        <Column field="actions" header="" body={actionColumnTemplate}></Column>
+        <Column
+          field="actions"
+          header=""
+          body={actionColumnTemplate}
+          filter
+          showFilterMenu={false}
+          showClearButton={false}
+          filterElement={clearFilterTemplate}
+        ></Column>
       </DataTable>
     </div>
   );

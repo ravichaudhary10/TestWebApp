@@ -1,16 +1,28 @@
 const END_POINTS = {
-  GET_DEALS: () => {
+  FETCH_DEALS: () => {
     return `/deals`;
   },
 
-  GET_STAGES: () => {
+  FETCH_STAGES: () => {
     return `/stages`;
   },
 
-  GET_TA: (userId: string) => {
-    let url = `/ta?userId=${userId}`;
+  FETCH_TA: () => {
+    let url = `/therapeutic-areas`;
 
     return url;
+  },
+
+  FETCH_LINE_FUNCTIONS: () => {
+    return `/line-functions`;
+  },
+
+  LOGIN: () => {
+    return `/login`;
+  },
+
+  SEARCH_PERSON: () => {
+    return `/search-person`;
   },
 };
 

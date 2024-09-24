@@ -1,0 +1,18 @@
+[
+  {
+    "id": 10,
+    "email": "test1@novartis.com",
+    "novartisId": "test1",
+    "title": "Exe. Director, Search and Elevation",
+    "firstName": "Ross",
+    "lastName": "Michelle"
+  },
+  {
+    "id": 11,
+    "email": "test2@novartis.com",
+    "novartisId": "test2",
+    "title": "Director, Search and Elevation",
+    "firstName": "Abraham",
+    "lastName": "Rachel"
+  }
+]

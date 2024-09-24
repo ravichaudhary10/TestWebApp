@@ -4,10 +4,10 @@ export interface ListViewerProps {
 }
 
 interface ListViewerConfig {
-  showFilters?: Boolean;
-  allowPagination?: Boolean;
-  allowRecordSelection?: Boolean;
-  allowSorting?: Boolean;
+  showFilters?: boolean;
+  allowPagination?: boolean;
+  allowRecordSelection?: boolean;
+  allowSorting?: boolean;
   fieldConfigs: Array<ListViewerFieldConfig>;
 }
 
@@ -16,6 +16,6 @@ interface ListViewerFieldConfig {
   label: String;
   type: String;
   values?: Array<String>;
-  multiSelect?: Boolean;
+  multiSelect?: boolean;
   width?: Number;
 }

@@ -1,12 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import dealReducer from "./slices/dealSlice";
+import rootReducer from "./slices/rootSlice";
 
-export const store = configureStore({
-  reducer: {
-    deals: dealReducer,
-  },
+const store = configureStore({
+  reducer: rootReducer,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+// Get the type of our store variable
+export type AppStore = typeof store;
 
-export type AppDispatch = typeof store.dispatch;
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<AppStore["getState"]>;
+export type AppDispatch = AppStore["dispatch"];
+
+export default store;

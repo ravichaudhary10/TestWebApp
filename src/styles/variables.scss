@@ -1,0 +1,22 @@
+@use "font-family" as *;
+
+$primary-text-color: rgba(0, 0, 0, 0.87);
+$secondary-text-color: rgba(0, 0, 0, 0.6);
+$disabled-color: rgba(0, 0, 0, 0.38);
+$primary-color: #0460a9;
+$danger-color: #d32f2f;
+$bold-font: 700;
+$medium-font: 600;
+$light-font: 400;
+
+// Fonts
+$font-body: georgia, times, "Times New Roman", serif;
+$font-heading: "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+
+// Novartis Fonts
+$font-arial: Arial, Verdana, Tahoma;
+$font-volta55: volta_modern_display55_roman, $font-arial;
+$font-volta45: volta_modern_display45_light, $font-arial;
+$font-volta65: volta_modern_display65_medium, $font-arial;
+$font-volta75: volta_modern_display75_bold, $font-arial;
+$font-volta25: volta_modern_display25_thin, $font-arial;

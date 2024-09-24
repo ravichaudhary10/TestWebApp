@@ -1,0 +1,264 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Alliance Management"
+    },
+    {
+      "id": 2,
+      "name": "Antitrust"
+    },
+    {
+      "id": 3,
+      "name": "BD&L Transactions"
+    },
+    {
+      "id": 4,
+      "name": "Biomarker Development"
+    },
+    {
+      "id": 5,
+      "name": "Biostatistics"
+    },
+    {
+      "id": 6,
+      "name": "BR Finance"
+    },
+    {
+      "id": 7,
+      "name": "BRC (Biologics Research Center)"
+    },
+    {
+      "id": 8,
+      "name": "C&BD Finance"
+    },
+    {
+      "id": 9,
+      "name": "Clinical Development"
+    },
+    {
+      "id": 10,
+      "name": "Commercial INT"
+    },
+    {
+      "id": 11,
+      "name": "Commercial US"
+    },
+    {
+      "id": 12,
+      "name": "Corporate Strategy"
+    },
+    {
+      "id": 13,
+      "name": "DA Head"
+    },
+    {
+      "id": 14,
+      "name": "Development Finance"
+    },
+    {
+      "id": 15,
+      "name": "DRA"
+    },
+    {
+      "id": 16,
+      "name": "DU Head"
+    },
+    {
+      "id": 17,
+      "name": "DU Pipeline Planning"
+    },
+    {
+      "id": 18,
+      "name": "Due Diligence Director"
+    },
+    {
+      "id": 19,
+      "name": "Due Diligence Head"
+    },
+    {
+      "id": 20,
+      "name": "External"
+    },
+    {
+      "id": 21,
+      "name": "Forecasting"
+    },
+    {
+      "id": 22,
+      "name": "GCO"
+    },
+    {
+      "id": 23,
+      "name": "GDC (Global Discovery Center)"
+    },
+    {
+      "id": 24,
+      "name": "GISO"
+    },
+    {
+      "id": 25,
+      "name": "GPH"
+    },
+    {
+      "id": 26,
+      "name": "IIP"
+    },
+    {
+      "id": 27,
+      "name": "IT"
+    },
+    {
+      "id": 28,
+      "name": "Legal"
+    },
+    {
+      "id": 29,
+      "name": "M&A"
+    },
+    {
+      "id": 30,
+      "name": "Other"
+    },
+    {
+      "id": 31,
+      "name": "P&O"
+    },
+    {
+      "id": 32,
+      "name": "Patient Access"
+    },
+    {
+      "id": 33,
+      "name": "Patient Advocacy"
+    },
+    {
+      "id": 34,
+      "name": "Patient Safety"
+    },
+    {
+      "id": 35,
+      "name": "PCS"
+    },
+    {
+      "id": 36,
+      "name": "PKS"
+    },
+    {
+      "id": 37,
+      "name": "PMX"
+    },
+    {
+      "id": 38,
+      "name": "Precision Medicine"
+    },
+    {
+      "id": 39,
+      "name": "QA Lead"
+    },
+    {
+      "id": 40,
+      "name": "QA Team"
+    },
+    {
+      "id": 41,
+      "name": "REFs"
+    },
+    {
+      "id": 42,
+      "name": "Reg CMC"
+    },
+    {
+      "id": 43,
+      "name": "Research"
+    },
+    {
+      "id": 44,
+      "name": "S&E"
+    },
+    {
+      "id": 45,
+      "name": "S&G TAS"
+    },
+    {
+      "id": 46,
+      "name": "S&G TASH"
+    },
+    {
+      "id": 47,
+      "name": "Tax"
+    },
+    {
+      "id": 48,
+      "name": "Technical Development - Lead"
+    },
+    {
+      "id": 49,
+      "name": "Technical Development - Team"
+    },
+    {
+      "id": 50,
+      "name": "Technical Operations"
+    },
+    {
+      "id": 51,
+      "name": "Technical Operations Finance"
+    },
+    {
+      "id": 52,
+      "name": "TM / TCO"
+    },
+    {
+      "id": 53,
+      "name": "TPMR - Animal Welfare"
+    },
+    {
+      "id": 54,
+      "name": "TPMR - Anti-Bribery"
+    },
+    {
+      "id": 55,
+      "name": "TPMR - Data Privacy"
+    },
+    {
+      "id": 56,
+      "name": "TPMR - Finance"
+    },
+    {
+      "id": 57,
+      "name": "TPMR - HSE"
+    },
+    {
+      "id": 58,
+      "name": "TPMR - Information Security"
+    },
+    {
+      "id": 59,
+      "name": "TPMR - Labour Rights"
+    },
+    {
+      "id": 60,
+      "name": "TPMR - Lead"
+    },
+    {
+      "id": 61,
+      "name": "TPMR - Quality"
+    },
+    {
+      "id": 62,
+      "name": "Transition Lead"
+    },
+    {
+      "id": 63,
+      "name": "Transition Team Member"
+    }
+  ],
+  "error": null,
+  "pagination": {
+    "totalRecords": 63,
+    "currentPage": 1,
+    "totalPages": 1,
+    "pageSize": 63
+  },
+  "status": 200
+}

@@ -9,7 +9,7 @@ mock.onPost("/deals").reply(async (config: any) => {
 
     const { page, limit, filters } = JSON.parse(config.data);
 
-    let data = [...dealData];
+    let data = [...dealData.data];
 
     if (filters) {
       data = data.filter((item: Deal) => {
@@ -62,8 +62,8 @@ mock.onPost("/deals").reply(async (config: any) => {
 
         // Filter by date modified
         if (
-          filters.dateModified &&
-          filters.dateModified.getTime() !== item.dateModified
+          filters.modifiedAt &&
+          filters.modifiedAt.getTime() !== item.modifiedAt
         ) {
           return false;
         }
@@ -73,7 +73,7 @@ mock.onPost("/deals").reply(async (config: any) => {
     }
 
     const totalRecords = data.length;
-    const start = page * limit;
+    const start = (page - 1) * limit;
     data = data.slice(start, start + limit);
 
     return [200, { data, totalRecords }];

@@ -1,7 +1,4 @@
-export interface Item {
-  id: number;
-  name: string;
-}
+import { Item } from "../../types/commonTypes";
 
 export interface Deal {
   id: number;
@@ -9,7 +6,7 @@ export interface Deal {
   therapeuticArea?: Item | null;
   stage?: Item | null;
   modifiedBy?: Item | null;
-  dateModified?: number | null;
+  modifiedAt?: number | null;
   leads?: Item[] | null;
 }
 
@@ -20,6 +17,6 @@ export enum DealListField {
   THERAPEUTIC_AREA = "therapeuticArea",
   STAGE = "stage",
   MODIFIED_BY = "modifiedBy",
-  DATE_MODIFIED = "dateModified",
+  MODIFIED_AT = "modifiedAt",
   LEADS = "leads",
 }

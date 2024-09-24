@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Triage"
+    },
+    {
+      "id": 2,
+      "name": "Focused Diligence"
+    },
+    {
+      "id": 3,
+      "name": "Full Assessment"
+    },
+    {
+      "id": 4,
+      "name": "Final Negotiation"
+    },
+    {
+      "id": 5,
+      "name": "Signed"
+    },
+    {
+      "id": 6,
+      "name": "Closed"
+    }
+  ],
+  "error": null,
+  "pagination": {
+    "totalRecords": 6,
+    "currentPage": 1,
+    "totalPages": 1,
+    "pageSize": 6
+  },
+  "status": 200
+}

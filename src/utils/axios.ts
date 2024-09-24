@@ -3,7 +3,7 @@ import AxiosMockAdapter from "axios-mock-adapter";
 
 const options = {
   baseURL: process.env.REACT_APP_BASE_URL,
-  timeout: 1000,
+  timeout: 5000,
 };
 
 const axiosLiveInstance = axios.create(options);

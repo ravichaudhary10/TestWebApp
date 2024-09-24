@@ -9,10 +9,7 @@ interface BreadcrumbProps {
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
   const breadcrumbItemTemplate = (item: MenuItem, options: MenuItemOptions) => (
     <a className={options.className} href={item.url}>
-      <span
-        className={`${options.labelClassName} ${item.icon}`}
-        style={{ marginRight: "0.25rem" }}
-      ></span>
+      <span className={`${options.labelClassName} ${item.icon} mr-1`}></span>
       <span className={options.labelClassName}>{item.label}</span>
     </a>
   );
@@ -25,7 +22,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
   return (
     <BreadCrumb
       model={itemsWithTemplate}
-      style={{ padding: 0, border: "none" }}
+      style={{ padding: 0, border: "none", height: "1.5rem" }}
     />
   );
 };
