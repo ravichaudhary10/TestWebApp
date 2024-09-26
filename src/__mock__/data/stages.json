@@ -25,12 +25,9 @@
       "name": "Closed"
     }
   ],
-  "error": null,
-  "pagination": {
-    "totalRecords": 6,
-    "currentPage": 1,
-    "totalPages": 1,
-    "pageSize": 6
-  },
-  "status": 200
+
+  "totalRecords": 6,
+  "currentPage": 1,
+  "totalPages": 1,
+  "pageSize": 6
 }

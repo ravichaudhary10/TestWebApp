@@ -696,12 +696,8 @@
       ]
     }
   ],
-  "error": null,
-  "pagination": {
-    "totalRecords": 30,
-    "currentPage": 1,
-    "totalPages": 1,
-    "pageSize": 30
-  },
-  "status": 200
+  "totalRecords": 30,
+  "currentPage": 1,
+  "totalPages": 1,
+  "pageSize": 30
 }

@@ -6,6 +6,7 @@ import {
   hasError,
 } from "../slices/rootSlice";
 import { AppDispatch } from "../store";
+import { useNavigate } from "react-router-dom";
 
 export const createDeal = (data: any) => async (dispatch: AppDispatch) => {
   // Show loading spinner

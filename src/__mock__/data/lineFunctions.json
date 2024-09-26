@@ -253,12 +253,8 @@
       "name": "Transition Team Member"
     }
   ],
-  "error": null,
-  "pagination": {
-    "totalRecords": 63,
-    "currentPage": 1,
-    "totalPages": 1,
-    "pageSize": 63
-  },
-  "status": 200
+  "totalRecords": 63,
+  "currentPage": 1,
+  "totalPages": 1,
+  "pageSize": 63
 }

@@ -29,12 +29,9 @@
       "name": "Others"
     }
   ],
-  "error": null,
-  "pagination": {
-    "totalRecords": 7,
-    "currentPage": 1,
-    "totalPages": 1,
-    "pageSize": 7
-  },
-  "status": 200
+
+  "totalRecords": 7,
+  "currentPage": 1,
+  "totalPages": 1,
+  "pageSize": 7
 }

@@ -54,7 +54,6 @@ const DealListView: React.FC = () => {
   const therapeuticAreas = useAppSelector((state) => state.therapeuticAreas);
   const stages = useAppSelector((state) => state.stages);
   const isLoading = useAppSelector((state) => state.isLoading);
-  const error = useAppSelector((state) => state.error);
 
   // Create lazy state for the data table
   const [lazyState, setlazyState] = useState<LazyTableState>({

@@ -22,7 +22,7 @@ mock.onPost("/deals/create").reply(async (config: any) => {
 
 mock.onPost("/deals/list").reply(async (config: any) => {
   try {
-    await wait(10000);
+    await wait(1000);
 
     const { page, limit, filters } = JSON.parse(config.data);
 

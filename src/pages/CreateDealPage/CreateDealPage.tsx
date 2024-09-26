@@ -7,6 +7,7 @@ import { BREADCRUMB_ITEMS } from "./CreateDealPage.constants";
 import { PersonSearch } from "../../components/PersonSearch";
 import { Person } from "../../types/commonTypes";
 import { PersonInfoCard } from "../../components/PersonInfoCard";
+import { LoadingIndicator } from "../../components/LoadingIndicator";
 
 import {
   CANCEL,
@@ -166,17 +167,9 @@ const CreateDealPage: React.FC = () => {
     );
   };
 
-  const loadingSpinner = () => {
-    return (
-      <div className="loading-overlay">
-        <span className="pi pi-spin pi-spinner text-4xl" />
-      </div>
-    );
-  };
-
   return (
     <div className="flex flex-column align-items-center">
-      {isLoading && loadingSpinner()}
+      {isLoading && <LoadingIndicator />}
 
       <ConfirmDialog
         acceptLabel={CONFIRMATION_ACCEPT_LABEL}
