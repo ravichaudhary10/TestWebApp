@@ -14,9 +14,9 @@ mock.onGet(/search-person\/?.*/).reply(async (config) => {
       return [200, person];
     }
 
-    return [404, { message: "Email not found" }];
+    return [500, { data: null, error: { message: "Email not found" } }];
   } catch (err) {
     console.error(err);
-    return [500, { message: "Internal server error" }];
+    return [500, { data: null, error: { message: "Internal server error" } }];
   }
 });

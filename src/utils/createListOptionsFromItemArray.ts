@@ -7,5 +7,5 @@ export const createListOptionsFromItemArray = (
   arr?.map((item: Record<string, any>) => ({
     id: item.id,
     label: item.name,
-    value: item.name,
+    value: item.id,
   }));

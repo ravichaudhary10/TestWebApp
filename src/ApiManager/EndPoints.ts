@@ -1,6 +1,6 @@
 const END_POINTS = {
   FETCH_DEALS: () => {
-    return `/deals`;
+    return `/deals/list`;
   },
 
   FETCH_STAGES: () => {
@@ -23,6 +23,18 @@ const END_POINTS = {
 
   SEARCH_PERSON: () => {
     return `/search-person`;
+  },
+
+  CREATE_DEAL: () => {
+    return `/deals/create`;
+  },
+
+  UPDATE_DEAL: (id: number) => {
+    return `/deals/${id}`;
+  },
+
+  DELETE_DEAL: (id: number) => {
+    return `/deals/${id}`;
   },
 };
 

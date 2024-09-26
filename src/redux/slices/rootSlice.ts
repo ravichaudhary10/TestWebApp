@@ -14,6 +14,7 @@ export interface RootState {
   isAuthenticated: boolean;
   isInitialized: boolean;
   user: User | null;
+  toastInfo: { severity: string; message: string } | null;
 }
 
 const initialState: RootState = {
@@ -27,6 +28,7 @@ const initialState: RootState = {
   isAuthenticated: false,
   isInitialized: false,
   user: null,
+  toastInfo: null,
 };
 
 export const rootSlice = createSlice({
@@ -78,6 +80,11 @@ export const rootSlice = createSlice({
     initialized(state) {
       state.isInitialized = true;
     },
+
+    // Show toast message
+    showToast(state, action) {
+      state.toastInfo = action.payload;
+    },
   },
 });
 
@@ -92,6 +99,7 @@ export const {
   storeTherapeuticAreas,
   storeAuthInfo,
   initialized,
+  showToast,
 } = rootSlice.actions;
 
 export default rootSlice.reducer;

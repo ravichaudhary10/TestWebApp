@@ -3,9 +3,26 @@ import { axiosMockAdapterInstance as mock } from "../utils/axios";
 import wait from "../utils/wait";
 import { Deal } from "../components/DealListView";
 
-mock.onPost("/deals").reply(async (config: any) => {
+mock.onPost("/deals/create").reply(async (config: any) => {
   try {
     await wait(1000);
+
+    const { name, stage, therapeuticArea, userId, dealLead } = JSON.parse(
+      config.data
+    );
+
+    console.log(name, stage, therapeuticArea, userId, dealLead);
+
+    return [200, { message: "Deal created successfully" }];
+  } catch (err) {
+    console.error(err);
+    return [500, { data: null, error: { message: "Internal server error" } }];
+  }
+});
+
+mock.onPost("/deals/list").reply(async (config: any) => {
+  try {
+    await wait(10000);
 
     const { page, limit, filters } = JSON.parse(config.data);
 
@@ -79,6 +96,6 @@ mock.onPost("/deals").reply(async (config: any) => {
     return [200, { data, totalRecords }];
   } catch (err) {
     console.error(err);
-    return [500, { message: "Internal server error" }];
+    return [500, { data: null, error: { message: "Internal server error" } }];
   }
 });

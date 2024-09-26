@@ -9,6 +9,6 @@ mock.onGet(/therapeutic-areas\/?.*/).reply(async (config) => {
     return [200, therapeuticAreas];
   } catch (err) {
     console.error(err);
-    return [500, { message: "Internal server error" }];
+    return [500, { data: null, error: { message: "Internal server error" } }];
   }
 });

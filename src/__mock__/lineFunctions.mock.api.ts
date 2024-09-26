@@ -1,12 +1,12 @@
-import loginResponse from "./data/loginResponse.json";
+import lineFunctions from "./data/lineFunctions.json";
 import { axiosMockAdapterInstance as mock } from "../utils/axios";
 import wait from "../utils/wait";
 
-mock.onPost("/login").reply(async () => {
+mock.onGet(/line-functions\/?.*/).reply(async (config) => {
   try {
     await wait(1000);
 
-    return [200, loginResponse];
+    return [200, lineFunctions];
   } catch (err) {
     console.error(err);
     return [500, { data: null, error: { message: "Internal server error" } }];

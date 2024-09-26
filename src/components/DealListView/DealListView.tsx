@@ -348,7 +348,7 @@ const DealListView: React.FC = () => {
           filter
           filterPlaceholder="Search"
           showFilterMenu={false}
-          filterField={DealListField.LEADS}
+          filterField={DealListField.DEAL_LEAD}
           filterElement={inputTextFilterTemplate}
           style={{ minWidth: "10rem" }}
         />

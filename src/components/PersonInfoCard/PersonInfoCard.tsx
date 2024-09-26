@@ -4,6 +4,7 @@ import "./PersonInfoCard.styles.scss";
 
 // Prime react imports
 import { Button } from "primereact/button";
+import { classNames } from "primereact/utils";
 
 const CHANGE_LABEL = "Change";
 const REMOVE_LABEL = "Remove";
@@ -13,6 +14,7 @@ interface PersonInfoCardProps {
   showActionButtons?: boolean;
   onChange?: (event: React.SyntheticEvent<HTMLButtonElement>) => void;
   onRemove?: (event: React.SyntheticEvent<HTMLButtonElement>) => void;
+  isSelectable?: boolean;
 }
 
 const PersonInfoCard: React.FC<PersonInfoCardProps> = ({
@@ -20,13 +22,19 @@ const PersonInfoCard: React.FC<PersonInfoCardProps> = ({
   showActionButtons = false,
   onChange,
   onRemove,
+  isSelectable = false,
 }) => {
   if (!model) {
     return null;
   }
 
   return (
-    <div className="search-result-card flex flex-column gap-2">
+    <div
+      className={classNames({
+        "search-result-card flex flex-column gap-2": true,
+        selectable: isSelectable,
+      })}
+    >
       {showActionButtons && (
         <div className="flex justify-content-end gap-2">
           <Button

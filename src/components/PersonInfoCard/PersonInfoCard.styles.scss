@@ -2,3 +2,10 @@
   box-shadow: 1px 1px 3px #ccc;
   padding: 1rem;
 }
+
+.selectable {
+  cursor: pointer;
+  &:hover {
+    background-color: #eee;
+  }
+}

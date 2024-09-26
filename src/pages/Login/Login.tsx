@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { login } from "../../redux/middleware/login";
 import { Path } from "../../routes";
@@ -11,12 +11,17 @@ const Login: React.FC = () => {
   const isAuthenticated = useAppSelector((state) => state.isAuthenticated);
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    if (!isInitialized) {
+      dispatch(login());
+    }
+  }, [isInitialized, dispatch]);
+
   if (isInitialized && isAuthenticated) {
     return <Navigate to={Path.ROOT} />;
   }
 
   if (!isInitialized) {
-    dispatch(login());
     return <></>;
   }
 

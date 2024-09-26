@@ -19,4 +19,5 @@ export enum DealListField {
   MODIFIED_BY = "modifiedBy",
   MODIFIED_AT = "modifiedAt",
   LEADS = "leads",
+  DEAL_LEAD = "dealLead",
 }

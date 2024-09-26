@@ -36,6 +36,11 @@ class ApiManager {
     const url = END_POINTS.SEARCH_PERSON();
     return axios.get(url, { params: { email } });
   }
+
+  static createDeal(data: any) {
+    const url = END_POINTS.CREATE_DEAL();
+    return axios.post(url, data);
+  }
 }
 
 export default ApiManager;

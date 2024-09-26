@@ -19,5 +19,5 @@ export const INITIAL_FILTERS: DataTableFilterMeta = {
   [DealListField.STAGE]: { value: null, matchMode: "contains" },
   [DealListField.MODIFIED_BY]: { value: null, matchMode: "contains" },
   [DealListField.MODIFIED_AT]: { value: null, matchMode: "contains" },
-  [DealListField.LEADS]: { value: null, matchMode: "contains" },
+  [DealListField.DEAL_LEAD]: { value: null, matchMode: "contains" },
 };
