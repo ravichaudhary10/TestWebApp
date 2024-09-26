@@ -16,23 +16,14 @@ export const axiosMockAdapterInstance = new AxiosMockAdapter(
   }
 );
 
-const axiosInstance = process.env.REACT_APP_IS_AXIOS_MOCK
-  ? axiosMockInstance
-  : axiosLiveInstance;
-
-axiosInstance.interceptors.response.use(
-  (response) => response,
-  (error) =>
-    Promise.reject(
-      (error.response && error.response.data) || "Something went wrong"
-    )
-);
-
-axiosInstance.interceptors.request.use((config) => {
+const middleware = (config: any) => {
   const token = localStorage.getItem("accessToken");
   config.headers.Authorization = token ? `Bearer ${token}` : "";
   config.headers["Content-Type"] = "application/json";
   return config;
-});
+};
 
-export default axiosInstance;
+axiosLiveInstance.interceptors.request.use(middleware);
+axiosMockInstance.interceptors.request.use(middleware);
+
+export { axiosLiveInstance, axiosMockInstance };
