@@ -1,12 +1,9 @@
 import ApiManager from "../../ApiManager/ApiManager";
-import {
-  startLoading,
-  stopLoading,
-  showToast,
-  hasError,
-} from "../slices/rootSlice";
+import { SUCCESS_MESSAGES } from "../../constants/global.constants";
+import { handleError } from "../../utils/handleError";
+import { handleSuccess } from "../../utils/handleSuccess";
+import { startLoading, stopLoading, hasError } from "../slices/rootSlice";
 import { AppDispatch } from "../store";
-import { useNavigate } from "react-router-dom";
 
 export const createDeal = (data: any) => async (dispatch: AppDispatch) => {
   // Show loading spinner
@@ -19,11 +16,14 @@ export const createDeal = (data: any) => async (dispatch: AppDispatch) => {
     await ApiManager.createDeal(data);
 
     // Show success toast
-    dispatch(
-      showToast({ severity: "success", message: "Deal created successfully" })
-    );
-  } catch (error) {
-    dispatch(hasError(error));
+    handleSuccess(dispatch, SUCCESS_MESSAGES.DEAL_CREATION_SUCCESS);
+
+    // TODO: Temporary solution. Will figure out some other way to navigate the user back to previous page
+    // eslint-disable-next-line no-restricted-globals
+    history.back();
+  } catch (error: any) {
+    // Show error toast
+    handleError(dispatch, error);
   } finally {
     dispatch(stopLoading());
   }

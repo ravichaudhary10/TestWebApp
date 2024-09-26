@@ -2,6 +2,7 @@ import {
   DataTableFilterMeta,
   DataTableFilterMetaData,
 } from "primereact/datatable";
+import { getFormattedDateString } from "./getFormattedDateString";
 
 /**
  * This method forms the payload required by getDeals API from the provided params
@@ -17,6 +18,11 @@ export const getFiltersPayload = (filters: DataTableFilterMeta) => {
 
     if (Array.isArray(item)) {
       item = item.map((o) => o?.id);
+    }
+
+    if (item instanceof Date) {
+      // Convert the date to yyyy-mm-dd format
+      item = getFormattedDateString(item);
     }
 
     filterPayload[key] = item;

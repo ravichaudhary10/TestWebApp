@@ -81,12 +81,6 @@ export const rootSlice = createSlice({
       state.isInitialized = true;
     },
 
-    // dealCreated(state){
-    //   state.isLoading = false;
-    //   state.error = null;
-
-    // }
-
     // Show toast message
     showToast(state, action) {
       state.toastInfo = action.payload;

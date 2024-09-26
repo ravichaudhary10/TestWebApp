@@ -1,4 +1,5 @@
 import ApiManager from "../../ApiManager/ApiManager";
+import { handleError } from "../../utils/handleError";
 import {
   startLoading,
   stopLoading,
@@ -24,8 +25,9 @@ export const fetchDeals =
         limit
       );
       dispatch(storeDeals(response.data));
-    } catch (error) {
-      dispatch(hasError(error));
+    } catch (error: any) {
+      // Show error toast
+      handleError(dispatch, error);
     } finally {
       dispatch(stopLoading());
     }

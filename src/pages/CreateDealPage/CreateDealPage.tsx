@@ -37,20 +37,21 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 // Prime react imports
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
-import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
+import { Dropdown } from "primereact/dropdown";
 import { classNames } from "primereact/utils";
 import { ConfirmDialog } from "primereact/confirmdialog";
 import { confirmDialog } from "primereact/confirmdialog";
 import { createDeal } from "../../redux/middleware/createDeal";
+import useAuth from "../../hooks/useAuth";
 
 const CreateDealPage: React.FC = () => {
   // States
-  const [formData, setFormData] = useState({});
   const [lastDealLeadInfo, setLastDealLeadInfo] = useState<Person | null>(null);
+
+  const { user } = useAuth();
 
   // Selectors
   const isLoading = useAppSelector((state) => state.isLoading);
-  const error = useAppSelector((state) => state.error);
   const therapeuticAreas = useAppSelector((state) => state.therapeuticAreas);
   const stages = useAppSelector((state) => state.stages);
 
@@ -98,7 +99,7 @@ const CreateDealPage: React.FC = () => {
       stage: formData.dealStage,
       therapeuticArea: formData.therapeuticArea,
       dealLead: formData.dealLead.id,
-      userId: 1,
+      userId: user?.id,
     };
     dispatch(createDeal(payload));
   };

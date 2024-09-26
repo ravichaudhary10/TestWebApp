@@ -4,6 +4,11 @@
 export const ERROR_MESSAGES = {
   GENERIC: "The application has encountered an unknown error.",
   AUTHORIZATION: "You do not have permission to access this page",
+  GENERIC_API_ERROR: "Something went wrong.",
+};
+
+export const SUCCESS_MESSAGES = {
+  DEAL_CREATION_SUCCESS: "Deal created successfully",
 };
 
 export const DASHBOARD_TITLE = "My Dashboard";

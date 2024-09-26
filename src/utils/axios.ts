@@ -16,14 +16,14 @@ export const axiosMockAdapterInstance = new AxiosMockAdapter(
   }
 );
 
-const middleware = (config: any) => {
+const addHeaders = (config: any) => {
   const token = localStorage.getItem("accessToken");
   config.headers.Authorization = token ? `Bearer ${token}` : "";
   config.headers["Content-Type"] = "application/json";
   return config;
 };
 
-axiosLiveInstance.interceptors.request.use(middleware);
-axiosMockInstance.interceptors.request.use(middleware);
+axiosLiveInstance.interceptors.request.use(addHeaders);
+axiosMockInstance.interceptors.request.use(addHeaders);
 
 export { axiosLiveInstance, axiosMockInstance };

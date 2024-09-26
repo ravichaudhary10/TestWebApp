@@ -1,5 +1,6 @@
 import ApiManager from "../../ApiManager/ApiManager";
 import { createListOptionsFromItemArray } from "../../utils/createListOptionsFromItemArray";
+import { handleError } from "../../utils/handleError";
 import { storeLineFunctions, hasError } from "../slices/rootSlice";
 import { AppDispatch } from "../store";
 
@@ -15,7 +16,8 @@ export const fetchLineFunctions = () => async (dispatch: AppDispatch) => {
 
     // Save line funcitons areas in redux store
     dispatch(storeLineFunctions(lineFuncitons));
-  } catch (error) {
-    dispatch(hasError(error));
+  } catch (error: any) {
+    // Show error toast
+    handleError(dispatch, error);
   }
 };

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, SyntheticEvent } from "react";
-import { Item } from "../../types/commonTypes";
 import { Deal, DealListField } from "./DealListView.types";
 import { LazyTableState } from "../../types/commonTypes";
 import editIcon from "../../assets/icons/edit.svg";
@@ -228,7 +227,7 @@ const DealListView: React.FC = () => {
   const dealLeadBodyTemplate = (rowData: Deal) => {
     return (
       <div className="flex align-items-center gap-2">
-        <span>{rowData[DealListField.LEADS]?.[0]?.name}</span>
+        <span>{rowData[DealListField.LEADS]?.[0]?.name || ""}</span>
       </div>
     );
   };
@@ -237,7 +236,9 @@ const DealListView: React.FC = () => {
     return (
       <div className="flex align-items-center gap-2">
         <span>
-          {new Date(rowData[DealListField.MODIFIED_AT] as any).toDateString()}
+          {rowData[DealListField.MODIFIED_AT]
+            ? new Date(rowData[DealListField.MODIFIED_AT] as any).toDateString()
+            : ""}
         </span>
       </div>
     );
