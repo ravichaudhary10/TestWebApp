@@ -49,7 +49,9 @@ const PersonSearch: React.FC<PersonSearchProps> = ({
       setSearchEnabled(false);
 
       // Make API request
-      const response = await ApiManager.searchPersonByEmail(email);
+      const response = await ApiManager.searchPersonByEmail(
+        email.toLowerCase()
+      );
       setPerson(response.data);
     } catch (error: any) {
       handleError(dispatch, error);

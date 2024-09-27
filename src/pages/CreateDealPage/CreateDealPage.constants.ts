@@ -19,9 +19,9 @@ export const BREADCRUMB_ITEMS: MenuItem[] = [
 ];
 
 // Field labels
-export const DEAL_NAME = "Deal Name";
+export const DEAL_NAME = "Project Code";
 export const THERAPEUTIC_AREA = "Therapeutic Area";
-export const DEAL_STAGE = "Deal Stage";
+export const DEAL_STAGE = "Stage";
 export const DEAL_LEAD = "Deal Lead";
 export const ADD_DEAL_LEAD = "Add Deal Lead";
 export const DEAL_LEAD_DETAILS = "Deal Lead Details";
