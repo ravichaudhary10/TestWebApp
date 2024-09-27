@@ -63,6 +63,10 @@ mock.onPost("/deals/list").reply(async (config: any) => {
         // Filter by date modified
         if (filters.modifiedAt) {
           let date = new Date(filters.modifiedAt);
+          date.setHours(0);
+          date.setMinutes(0);
+          date.setSeconds(0);
+          date.setMilliseconds(0);
           if (date.getTime() !== item.modifiedAt) {
             return false;
           }

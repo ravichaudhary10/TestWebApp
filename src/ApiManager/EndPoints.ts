@@ -37,8 +37,8 @@ const END_POINTS = {
     return `/deals/${id}`;
   },
 
-  DELETE_DEAL: (id: number) => {
-    return `/deals/${id}`;
+  DELETE_DEAL: (id: number, userId: number) => {
+    return `/deals/${id}?userId?${userId}`;
   },
 };
 

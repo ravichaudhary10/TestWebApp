@@ -8,8 +8,8 @@ export const getFormattedDateString = (d: Date) => {
     return "";
   }
 
-  const month = d.getMonth() + 1;
-  const date = d.getDate();
+  const month = (d.getMonth() + 1).toString().padStart(2, "0");
+  const date = d.getDate().toString().padStart(2, "0");
   const year = d.getFullYear();
 
   return [year, month, date].join("-");

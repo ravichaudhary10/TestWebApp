@@ -61,10 +61,10 @@ class ApiManager {
     return axios.put(url, data);
   }
 
-  static deleteDeal(dealId: number, data: any) {
-    const url = END_POINTS.DELETE_DEAL(dealId);
+  static deleteDeal(dealId: number, userId: number) {
+    const url = END_POINTS.DELETE_DEAL(dealId, userId);
     const axios = getAxiosInstance("deleteDealAPI");
-    return axios.delete(url, data);
+    return axios.delete(url);
   }
 }
 

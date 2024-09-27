@@ -12,6 +12,7 @@ import { LoadingIndicator } from "../../components/LoadingIndicator";
 import {
   CANCEL,
   CREATE_NEW_DEAL,
+  EDIT_DEAL,
   SAVE,
 } from "../../constants/global.constants";
 
@@ -210,6 +211,16 @@ const CreateDealPage: React.FC = () => {
     );
   };
 
+  const breadcrumbCurrentItem = params.dealId
+    ? {
+        icon: "pi pi-folder",
+        label: EDIT_DEAL,
+      }
+    : {
+        icon: "pi pi-folder",
+        label: CREATE_NEW_DEAL,
+      };
+
   return (
     <div className="flex flex-column align-items-center">
       {isLoading && <LoadingIndicator />}
@@ -226,14 +237,14 @@ const CreateDealPage: React.FC = () => {
       <Header />
 
       <div className="flex-1  w-11  p-3">
-        <Breadcrumb items={BREADCRUMB_ITEMS} />
+        <Breadcrumb items={[...BREADCRUMB_ITEMS, breadcrumbCurrentItem]} />
 
         {/* Create deal form */}
         <form>
           {/* Page Header section */}
           <div className="flex align-items-center mb-5 w-full">
             <h1 className="font-bold text-xl line-height-2">
-              {CREATE_NEW_DEAL}
+              {params.dealId ? EDIT_DEAL : CREATE_NEW_DEAL}
             </h1>
 
             <div className="flex flex-1 gap-2 justify-content-end ">

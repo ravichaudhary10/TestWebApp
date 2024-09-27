@@ -15,6 +15,7 @@ export const SUCCESS_MESSAGES = {
 
 export const DASHBOARD_TITLE = "My Dashboard";
 export const CREATE_NEW_DEAL = "Create New Deal";
+export const EDIT_DEAL = "Edit Deal";
 export const ONBOARD_DEAL_LEAD = "Onboard Deal Lead";
 export const CANCEL = "Cancel";
 export const SAVE = "Save";

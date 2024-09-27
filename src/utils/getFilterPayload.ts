@@ -16,10 +16,6 @@ export const getFilterPayload = (filters: DataTableFilterMeta) => {
   for (const key of Object.keys(filters)) {
     let item = (filters[key] as DataTableFilterMetaData)?.value;
 
-    if (Array.isArray(item)) {
-      item = item.map((o) => o?.id);
-    }
-
     if (item instanceof Date) {
       // Convert the date to yyyy-mm-dd format
       item = getFormattedDateString(item);

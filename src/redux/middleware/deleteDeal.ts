@@ -15,7 +15,7 @@ export const deleteDeal =
 
     try {
       if (dealId) {
-        await ApiManager.deleteDeal(dealId, { userId });
+        await ApiManager.deleteDeal(dealId, userId);
 
         // Show success toast
         handleSuccess(dispatch, SUCCESS_MESSAGES.DEAL_DELETION_SUCCESS);

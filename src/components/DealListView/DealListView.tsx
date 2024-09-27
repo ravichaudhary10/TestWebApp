@@ -271,6 +271,10 @@ const DealListView: React.FC = () => {
     );
   };
 
+  /**
+   * Handles deletion of deal by showing a confirmation popup before deletion
+   * @param id {number} Id of the deal to be deleted
+   */
   const handleDealDeletion = (id: number) => {
     const accept = () => {
       user?.id && dispatch(deleteDeal(id, user.id));

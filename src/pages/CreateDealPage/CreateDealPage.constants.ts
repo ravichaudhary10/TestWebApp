@@ -16,10 +16,6 @@ export const BREADCRUMB_ITEMS: MenuItem[] = [
     label: DASHBOARD_TITLE,
     url: "#",
   },
-  {
-    icon: "pi pi-folder",
-    label: CREATE_NEW_DEAL,
-  },
 ];
 
 // Field labels
