@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Breadcrumb } from "../../components/Breadcrumb";
 import { BREADCRUMB_ITEMS } from "./CreateDealPage.constants";
@@ -43,6 +43,9 @@ import { ConfirmDialog } from "primereact/confirmdialog";
 import { confirmDialog } from "primereact/confirmdialog";
 import { createDeal } from "../../redux/middleware/createDeal";
 import useAuth from "../../hooks/useAuth";
+import { startLoading, stopLoading } from "../../redux/slices/rootSlice";
+import ApiManager from "../../ApiManager/ApiManager";
+import { handleError } from "../../utils/handleError";
 
 const CreateDealPage: React.FC = () => {
   // States
@@ -55,6 +58,7 @@ const CreateDealPage: React.FC = () => {
   const therapeuticAreas = useAppSelector((state) => state.therapeuticAreas);
   const stages = useAppSelector((state) => state.stages);
 
+  // useForm hook for form validation
   const defaultValues = {
     [Field.DEAL_NAME]: "",
     [Field.DEAL_STAGE]: null,
@@ -66,6 +70,7 @@ const CreateDealPage: React.FC = () => {
     control,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm({ defaultValues, mode: "onSubmit" });
 
   // Dispatch function
@@ -74,10 +79,43 @@ const CreateDealPage: React.FC = () => {
   // Navigate function
   const navigate = useNavigate();
 
+  // Get params if any
+  const params = useParams<{ dealId: string }>();
+
+  // Download the deal detail if this is a update deal page.
+  useEffect(() => {
+    if (params.dealId) {
+      const dealId = parseInt(params.dealId);
+      (async () => {
+        // Show loading spinner
+        dispatch(startLoading());
+
+        try {
+          const response = await ApiManager.fetchDealDetail(dealId);
+          if (response.data) {
+            reset({
+              [Field.DEAL_NAME]: response.data.name,
+              [Field.DEAL_STAGE]: response.data.stage.id,
+              [Field.THERAPEUTIC_AREA]: response.data.therapeuticArea.id,
+              [Field.DEAL_LEAD]: response.data.dealLeads?.[0],
+            });
+          }
+        } catch (error: any) {
+          // Show error toast
+          handleError(dispatch, error);
+        } finally {
+          dispatch(stopLoading());
+        }
+      })();
+    }
+  }, [params.dealId, dispatch, reset]);
+
   /**
    * Gets invoked when user clicks form cancel button
    */
-  const handleCancelClick = () => {
+  const handleCancelClick = (e: any) => {
+    e.preventDefault();
+
     const accept = () => {
       navigate(-1);
     };
@@ -94,14 +132,18 @@ const CreateDealPage: React.FC = () => {
    */
   const handleSave = (formData: any) => {
     console.log("Form data: ", formData);
+
+    // Form payload
     const payload = {
-      name: formData.dealName,
-      stage: formData.dealStage,
+      name: formData.name,
+      stage: formData.stage,
       therapeuticArea: formData.therapeuticArea,
       dealLead: formData.dealLead.id,
       userId: user?.id,
     };
-    dispatch(createDeal(payload));
+
+    const dealId = params.dealId ? parseInt(params.dealId) : null;
+    dispatch(createDeal(dealId, payload));
   };
 
   const requiredFieldIndicator = <span className="required-text">*</span>;
@@ -121,10 +163,10 @@ const CreateDealPage: React.FC = () => {
    * Clear out deal lead info after confirmation
    */
   const removeDealLead = (field: any) => {
-    showDealLeadRemovalConfirmationDialog(() => {
-      // Clears out deal lead info
-      field.onChange(null);
-    });
+    // showDealLeadRemovalConfirmationDialog(() => {
+    // Clears out deal lead info
+    field.onChange(null);
+    // });
   };
 
   /**
@@ -187,7 +229,7 @@ const CreateDealPage: React.FC = () => {
         <Breadcrumb items={BREADCRUMB_ITEMS} />
 
         {/* Create deal form */}
-        <form onSubmit={handleSubmit(handleSave)}>
+        <form>
           {/* Page Header section */}
           <div className="flex align-items-center mb-5 w-full">
             <h1 className="font-bold text-xl line-height-2">
@@ -201,7 +243,11 @@ const CreateDealPage: React.FC = () => {
                 outlined
                 onClick={handleCancelClick}
               />
-              <Button type="submit" label={SAVE} size="small" />
+              <Button
+                label={SAVE}
+                size="small"
+                onClick={handleSubmit(handleSave)}
+              />
             </div>
           </div>
 
@@ -356,9 +402,13 @@ const CreateDealPage: React.FC = () => {
                         model={field.value}
                         showActionButtons
                         onChange={() => {
+                          // e.preventDeafult();
+                          // e.stopPropagation();
                           changeDealLead(field);
                         }}
                         onRemove={() => {
+                          // e.preventDeafult();
+                          // e.stopPropagation();
                           removeDealLead(field);
                         }}
                       />

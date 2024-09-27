@@ -33,6 +33,11 @@ export const DEAL_LEAD_DETAILS = "Deal Lead Details";
 // Constants related to Confirmation dialog
 export const DEAL_LEAD_REMOVAL_CONFIRMATION_MSG =
   "Are you sure you want to remove the deal lead?";
+export const DEAL_DELETION_CONFIRMATION_MSG =
+  "Are you sure you want to delete this deal?";
+
+export const DEAL_DELETION_CONFIRMATION_HEADER = "Confirm Deletion";
+
 export const DEAL_LEAD_REMOVAL_CONFIRMATION_HEADER = "Confirm Removal";
 export const CONFIRMATION_ACCEPT_LABEL = "Confirm";
 export const CONFIRMATION_REJECT_LABEL = "Cancel";
@@ -43,8 +48,8 @@ export const CANCEL_CREATE_DEAL_CONFIRMATION_HEADER = "Confirm";
 export const REQUIRED_MESSAGE = "{0} is required";
 
 export enum Field {
-  DEAL_NAME = "dealName",
-  DEAL_STAGE = "dealStage",
+  DEAL_NAME = "name",
+  DEAL_STAGE = "stage",
   THERAPEUTIC_AREA = "therapeuticArea",
   DEAL_LEAD = "dealLead",
 }

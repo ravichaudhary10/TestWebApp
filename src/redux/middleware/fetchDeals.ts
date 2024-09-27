@@ -1,11 +1,6 @@
 import ApiManager from "../../ApiManager/ApiManager";
 import { handleError } from "../../utils/handleError";
-import {
-  startLoading,
-  stopLoading,
-  storeDeals,
-  hasError,
-} from "../slices/rootSlice";
+import { startLoading, stopLoading, storeDeals } from "../slices/rootSlice";
 import { AppDispatch } from "../store";
 
 export const fetchDeals =
@@ -13,9 +8,6 @@ export const fetchDeals =
   async (dispatch: AppDispatch) => {
     // Show loading spinner
     dispatch(startLoading());
-
-    // Reset the error
-    dispatch(hasError(null));
 
     try {
       const response = await ApiManager.fetchDeals(

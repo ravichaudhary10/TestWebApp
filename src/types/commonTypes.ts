@@ -26,7 +26,7 @@ export interface User {
 export interface Person {
   id?: string;
   email?: string;
-  novartisID?: string;
+  novartis521ID?: string;
   firstName?: string;
   lastName?: string;
   title?: string;

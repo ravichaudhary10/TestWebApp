@@ -5,8 +5,11 @@ import editIcon from "../../assets/icons/edit.svg";
 import deleteIcon from "../../assets/icons/delete.svg";
 import calendarIcon from "../../assets/icons/calendar.svg";
 import { fetchDeals } from "../../redux/middleware/fetchDeals";
+import { deleteDeal } from "../../redux/middleware/deleteDeal";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { getFiltersPayload } from "../../utils/getFilterPayload";
+import { getFilterPayload } from "../../utils/getFilterPayload";
+import { Link } from "react-router-dom";
+import { Path } from "../../routes";
 
 import {
   THERAPEUTIC_AREA,
@@ -27,11 +30,7 @@ import {
   DataTableFilterEvent,
   DataTableFilterMetaData,
 } from "primereact/datatable";
-import {
-  Column,
-  ColumnBodyOptions,
-  ColumnFilterElementTemplateOptions,
-} from "primereact/column";
+import { Column, ColumnFilterElementTemplateOptions } from "primereact/column";
 import {
   PaginatorCurrentPageReportOptions,
   PaginatorRowsPerPageDropdownOptions,
@@ -42,6 +41,13 @@ import { MultiSelect, MultiSelectChangeEvent } from "primereact/multiselect";
 import { Calendar } from "primereact/calendar";
 import { InputText } from "primereact/inputtext";
 import { SelectItem } from "primereact/selectitem";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import {
+  CONFIRMATION_ACCEPT_LABEL,
+  CONFIRMATION_REJECT_LABEL,
+  DEAL_DELETION_CONFIRMATION_HEADER,
+  DEAL_DELETION_CONFIRMATION_MSG,
+} from "../../pages/CreateDealPage/CreateDealPage.constants";
 
 const DealListView: React.FC = () => {
   // Dispatch function
@@ -68,38 +74,30 @@ const DealListView: React.FC = () => {
       dispatch(
         fetchDeals(
           user.id,
-          getFiltersPayload(lazyState.filters),
+          getFilterPayload(lazyState.filters),
           lazyState.page + 1,
           lazyState.rows
         )
       );
   }, [dispatch, lazyState, user]);
 
-  const actionColumnTemplate = (data: any, options: ColumnBodyOptions) => {
+  const actionColumnTemplate = (rowData: Deal) => {
     return (
       <div className="flex justify-content-center">
-        {/* <button
-          size="small"
-          text
-          rounded
-          aria-label="Edit Button"
-          style={{ width: "1.5rem", height: "1.5rem" }}
-        > */}
-        <img src={editIcon} alt="Edit Icon" style={{ padding: "0 0.5rem" }} />
+        <Link to={`${Path.UPDATE_DEAL}/${rowData.id}`}>
+          <img src={editIcon} alt="Edit Icon" style={{ padding: "0 0.5rem" }} />
+        </Link>
 
-        {/* <Button
-          size="small"
-          text
-          rounded
-          outlined
-          aria-label="Delete Button"
-          style={{ width: "1.5rem", height: "1.5rem" }}
-        > */}
-        <img
-          src={deleteIcon}
-          alt="Delete Icon"
-          style={{ padding: "0 1.5rem" }}
-        />
+        <div
+          onClick={() => handleDealDeletion(rowData.id)}
+          style={{ cursor: "pointer" }}
+        >
+          <img
+            src={deleteIcon}
+            alt="Delete Icon"
+            style={{ padding: "0 1.5rem" }}
+          />
+        </div>
       </div>
     );
   };
@@ -273,8 +271,29 @@ const DealListView: React.FC = () => {
     );
   };
 
+  const handleDealDeletion = (id: number) => {
+    const accept = () => {
+      dispatch(deleteDeal(id));
+    };
+
+    confirmDialog({
+      message: DEAL_DELETION_CONFIRMATION_MSG,
+      header: DEAL_DELETION_CONFIRMATION_HEADER,
+      accept,
+    });
+  };
+
   return (
     <div>
+      <ConfirmDialog
+        acceptLabel={CONFIRMATION_ACCEPT_LABEL}
+        rejectLabel={CONFIRMATION_REJECT_LABEL}
+        closable={false}
+        acceptClassName="p-button-sm"
+        rejectClassName="p-button-outlined p-button-sm"
+        defaultFocus="reject"
+      />
+
       <DataTable
         value={deals?.data}
         size="small"

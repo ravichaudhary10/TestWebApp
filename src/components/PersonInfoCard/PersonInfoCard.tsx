@@ -63,7 +63,7 @@ const PersonInfoCard: React.FC<PersonInfoCardProps> = ({
             Novartis 521 Id
           </span>
           <span className="font-normal text-base primary-text">
-            {model.novartisID}
+            {model.novartis521ID}
           </span>
         </div>
       </div>

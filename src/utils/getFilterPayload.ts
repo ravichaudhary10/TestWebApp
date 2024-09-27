@@ -10,7 +10,7 @@ import { getFormattedDateString } from "./getFormattedDateString";
  * @param lazyState
  * @returns {Object} Payload required by getDeals API
  */
-export const getFiltersPayload = (filters: DataTableFilterMeta) => {
+export const getFilterPayload = (filters: DataTableFilterMeta) => {
   const filterPayload: Record<string, any> = {};
 
   for (const key of Object.keys(filters)) {

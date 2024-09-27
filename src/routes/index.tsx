@@ -32,6 +32,10 @@ export const router = createBrowserRouter([
         element: <CreateDealPage />,
       },
       {
+        path: `${Path.UPDATE_DEAL}/:dealId`,
+        element: <CreateDealPage />,
+      },
+      {
         path: `${Path.ONBOARD_DEAL_LEAD}`,
         element: <OnboardDealLead />,
       },

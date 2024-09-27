@@ -24,7 +24,13 @@
       "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -44,10 +50,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -67,10 +79,16 @@
         "id": 2,
         "name": "Ishika Roy"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 2,
-          "name": "Ishika Roy"
+          "name": "Ishika Roy",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -90,10 +108,16 @@
         "id": 2,
         "name": "Ishika Roy"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 2,
-          "name": "Ishika Roy"
+          "name": "Ishika Roy",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -113,10 +137,16 @@
         "id": 2,
         "name": "Ishika Roy"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 2,
-          "name": "Ishika Roy"
+          "name": "Ishika Roy",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -136,10 +166,16 @@
         "id": 2,
         "name": "Ishika Roy"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 2,
-          "name": "Ishika Roy"
+          "name": "Ishika Roy",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -159,10 +195,16 @@
         "id": 2,
         "name": "Ishika Roy"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 2,
-          "name": "Ishika Roy"
+          "name": "Ishika Roy",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -182,10 +224,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -205,10 +253,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -228,10 +282,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -251,10 +311,16 @@
         "id": 3,
         "name": "Brian Philip"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 3,
-          "name": "Brian Philip"
+          "name": "Brian Philip",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -274,10 +340,16 @@
         "id": 3,
         "name": "Brian Philip"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 3,
-          "name": "Brian Philip"
+          "name": "Brian Philip",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -297,10 +369,16 @@
         "id": 3,
         "name": "Brian Philip"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 3,
-          "name": "Brian Philip"
+          "name": "Brian Philip",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -320,10 +398,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -343,10 +427,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -366,10 +456,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -389,10 +485,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -412,10 +514,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -435,10 +543,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -458,10 +572,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -481,10 +601,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -504,10 +630,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -527,10 +659,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -550,10 +688,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -573,10 +717,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -596,10 +746,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -619,10 +775,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -642,10 +804,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -665,10 +833,16 @@
         "id": 1,
         "name": "Kunal Dhar"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 1,
-          "name": "Kunal Dhar"
+          "name": "Kunal Dhar",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     },
@@ -688,10 +862,16 @@
         "id": 2,
         "name": "Ishika Roy"
       },
-      "leads": [
+      "dealLeads": [
         {
           "id": 2,
-          "name": "Ishika Roy"
+          "name": "Ishika Roy",
+          "email": "test1@novartis.com",
+          "novartis521ID": "test1",
+          "title": "Exe. Director, Search and Elevation",
+          "firstName": "Ross",
+          "lastName": "Michelle",
+          "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
         }
       ]
     }

@@ -3,6 +3,10 @@ const END_POINTS = {
     return `/deals/list`;
   },
 
+  FETCH_DEAL_DETAIL: (id: number) => {
+    return `/deals/${id}`;
+  },
+
   FETCH_STAGES: () => {
     return `/stages`;
   },

@@ -11,6 +11,7 @@ export interface RootState {
   lineFunctions: SelectItem[] | null;
   stages: SelectItem[] | null;
   therapeuticAreas: SelectItem[] | null;
+  dealDetail: Deal | null;
   isAuthenticated: boolean;
   isInitialized: boolean;
   user: User | null;
@@ -25,6 +26,7 @@ const initialState: RootState = {
   lineFunctions: [],
   stages: [],
   therapeuticAreas: [],
+  dealDetail: null,
   isAuthenticated: false,
   isInitialized: false,
   user: null,
@@ -53,6 +55,11 @@ export const rootSlice = createSlice({
     // Store deals
     storeDeals(state, action) {
       state.deals = action.payload;
+    },
+
+    // Store deal detail
+    storeDealDetail(state, action) {
+      state.dealDetail = action.payload;
     },
 
     // Store line functions
@@ -94,6 +101,7 @@ export const {
   stopLoading,
   hasError,
   storeDeals,
+  storeDealDetail,
   storeLineFunctions,
   storeStages,
   storeTherapeuticAreas,

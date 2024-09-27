@@ -9,6 +9,8 @@ export const ERROR_MESSAGES = {
 
 export const SUCCESS_MESSAGES = {
   DEAL_CREATION_SUCCESS: "Deal created successfully",
+  DEAL_UPDATION_SUCCESS: "Deal updated successfully",
+  DEAL_DELETION_SUCCESS: "Deal deleted successfully",
 };
 
 export const DASHBOARD_TITLE = "My Dashboard";
@@ -18,13 +20,14 @@ export const CANCEL = "Cancel";
 export const SAVE = "Save";
 
 export const MOCK_CONFIG: Record<string, boolean> = {
-  "/deals/list": true,
-  "/stages": true,
-  "/therapeutic-areas": true,
-  "/line-functions": true,
-  "/login": true,
-  "/search-person": true,
-  "/deals/create": true,
-  "/deals/delete": true,
-  "/deals/update": true,
+  dealsListAPI: true,
+  dealDetailAPI: true,
+  stagesAPI: true,
+  therapeuticAreasAPI: true,
+  lineFunctionsAPI: true,
+  loginAPI: true,
+  searchPersonAPI: true,
+  createDealAPI: true,
+  deleteDealAPI: true,
+  updateDealAPI: true,
 };

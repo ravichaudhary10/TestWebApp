@@ -3,23 +3,6 @@ import { axiosMockAdapterInstance as mock } from "../utils/axios";
 import wait from "../utils/wait";
 import { Deal } from "../components/DealListView";
 
-mock.onPost("/deals/create").reply(async (config: any) => {
-  try {
-    await wait(1000);
-
-    const { name, stage, therapeuticArea, userId, dealLead } = JSON.parse(
-      config.data
-    );
-
-    console.log(name, stage, therapeuticArea, userId, dealLead);
-
-    return [200, { message: "Deal created successfully" }];
-  } catch (err) {
-    console.error(err);
-    return [500, { data: null, error: { message: "Internal server error" } }];
-  }
-});
-
 mock.onPost("/deals/list").reply(async (config: any) => {
   try {
     await wait(1000);
@@ -78,11 +61,11 @@ mock.onPost("/deals/list").reply(async (config: any) => {
         }
 
         // Filter by date modified
-        if (
-          filters.modifiedAt &&
-          filters.modifiedAt.getTime() !== item.modifiedAt
-        ) {
-          return false;
+        if (filters.modifiedAt) {
+          let date = new Date(filters.modifiedAt);
+          if (date.getTime() !== item.modifiedAt) {
+            return false;
+          }
         }
 
         return true;
@@ -94,6 +77,86 @@ mock.onPost("/deals/list").reply(async (config: any) => {
     data = data.slice(start, start + limit);
 
     return [200, { data, totalRecords }];
+  } catch (err) {
+    console.error(err);
+    return [500, { data: null, error: { message: "Internal server error" } }];
+  }
+});
+
+mock.onGet(/deals\/*/).reply(async (config: any) => {
+  try {
+    await wait(1000);
+
+    const id = parseInt(config.url.split("/").at(-1));
+
+    if (!isNaN(id)) {
+      let data = [...dealData.data];
+      const item = data.find((item) => item.id === id);
+      if (item) {
+        return [200, item];
+      }
+      return [404, { message: "Deal not found" }];
+    }
+    return [400, { message: "Id not found in url" }];
+  } catch (err) {
+    console.error(err);
+    return [500, { data: null, error: { message: "Internal server error" } }];
+  }
+});
+
+mock.onPost("/deals/create").reply(async (config: any) => {
+  try {
+    await wait(1000);
+
+    const { name, stage, therapeuticArea, userId, dealLead } = JSON.parse(
+      config.data
+    );
+
+    console.log(name, stage, therapeuticArea, userId, dealLead);
+
+    return [200, { message: "Deal created successfully" }];
+  } catch (err) {
+    console.error(err);
+    return [500, { data: null, error: { message: "Internal server error" } }];
+  }
+});
+
+mock.onPut(/deals\/*/).reply(async (config: any) => {
+  try {
+    await wait(1000);
+
+    const id = parseInt(config.url.split("/").at(-1));
+
+    if (!isNaN(id)) {
+      let data = [...dealData.data];
+      const item = data.find((item) => item.id === id);
+      if (item) {
+        return [200, { message: "Deal updated successfully" }];
+      }
+      return [404, { message: "Deal not found" }];
+    }
+    return [400, { message: "Id not found in url" }];
+  } catch (err) {
+    console.error(err);
+    return [500, { data: null, error: { message: "Internal server error" } }];
+  }
+});
+
+mock.onDelete(/deals\/*/).reply(async (config: any) => {
+  try {
+    await wait(1000);
+
+    const id = parseInt(config.url.split("/").at(-1));
+
+    if (!isNaN(id)) {
+      let data = [...dealData.data];
+      const item = data.find((item) => item.id === id);
+      if (item) {
+        return [200, { message: "Deal deleted successfully" }];
+      }
+      return [404, { message: "Deal not found" }];
+    }
+    return [400, { message: "Id not found in url" }];
   } catch (err) {
     console.error(err);
     return [500, { data: null, error: { message: "Internal server error" } }];
