@@ -273,7 +273,7 @@ const DealListView: React.FC = () => {
 
   const handleDealDeletion = (id: number) => {
     const accept = () => {
-      dispatch(deleteDeal(id));
+      user?.id && dispatch(deleteDeal(id, user.id));
     };
 
     confirmDialog({

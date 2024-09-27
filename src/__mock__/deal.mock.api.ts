@@ -32,10 +32,10 @@ mock.onPost("/deals/list").reply(async (config: any) => {
         }
 
         // Filter by deal lead
-        if (filters.leads) {
-          const leadNames = item.leads?.map((o) => o.name);
+        if (filters.dealLead) {
+          const leadNames = item.dealLeads?.map((o) => o.name);
           let isMatch = leadNames?.some((o) =>
-            o.toLowerCase().includes(filters.leads.toLowerCase())
+            o.toLowerCase().includes(filters.dealLead.toLowerCase())
           );
           if (!isMatch) {
             return false;

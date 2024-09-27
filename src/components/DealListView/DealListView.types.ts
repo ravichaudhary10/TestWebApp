@@ -7,7 +7,7 @@ export interface Deal {
   stage?: Item | null;
   modifiedBy?: Item | null;
   modifiedAt?: number | null;
-  leads?: Item[] | null;
+  dealLeads?: Item[] | null;
 }
 
 // Field names
@@ -18,6 +18,6 @@ export enum DealListField {
   STAGE = "stage",
   MODIFIED_BY = "modifiedBy",
   MODIFIED_AT = "modifiedAt",
-  LEADS = "leads",
+  LEADS = "dealLeads",
   DEAL_LEAD = "dealLead",
 }
