@@ -213,7 +213,7 @@ const CreateDealPage: React.FC = () => {
 
   const breadcrumbCurrentItem = params.dealId
     ? {
-        icon: "pi pi-folder",
+        icon: "pi pi-pencil",
         label: EDIT_DEAL,
       }
     : {
