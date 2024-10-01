@@ -1,11 +1,10 @@
 import ApiManager from "../../ApiManager/ApiManager";
 import { createListOptionsFromItemArray } from "../../utils/createListOptionsFromItemArray";
-import { hasError, storeStages } from "../slices/rootSlice";
+import { handleError } from "../../utils/handleError";
+import { storeStages } from "../slices/rootSlice";
 import { AppDispatch } from "../store";
 
 export const fetchStages = () => async (dispatch: AppDispatch) => {
-  // Reset the error
-  dispatch(hasError(null));
   try {
     // Make API request to fetch stages
     const response = await ApiManager.fetchStages();
@@ -16,6 +15,7 @@ export const fetchStages = () => async (dispatch: AppDispatch) => {
     // Save stages in redux store
     dispatch(storeStages(stages));
   } catch (error) {
-    dispatch(hasError(error));
+    // Show error toast
+    handleError(dispatch, error);
   }
 };

@@ -1,23 +1,3 @@
-import { MenuItem } from "primereact/menuitem";
-
-import {
-  CREATE_NEW_DEAL,
-  DASHBOARD_TITLE,
-} from "../../constants/global.constants";
-
-export const BREADCRUMB_ITEMS: MenuItem[] = [
-  {
-    icon: "pi pi-arrow-left",
-    label: "Go back",
-    url: "#",
-  },
-  {
-    icon: "pi pi-home",
-    label: DASHBOARD_TITLE,
-    url: "#",
-  },
-];
-
 // Field labels
 export const DEAL_NAME = "Project Code";
 export const THERAPEUTIC_AREA = "Therapeutic Area";

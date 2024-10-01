@@ -3,17 +3,17 @@ import { useForm, Controller } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Breadcrumb } from "../../components/Breadcrumb";
-import { BREADCRUMB_ITEMS } from "./CreateDealPage.constants";
+import {} from "./CreateDealPage.constants";
 import { PersonSearch } from "../../components/PersonSearch";
 import { Person } from "../../types/commonTypes";
 import { PersonInfoCard } from "../../components/PersonInfoCard";
 import { LoadingIndicator } from "../../components/LoadingIndicator";
+import { getBreadcrumbItems, getPageTitle } from "./CreateDealPage.helpers";
 
 import {
   CANCEL,
-  CREATE_NEW_DEAL,
-  EDIT_DEAL,
   SAVE,
+  SUCCESS_MESSAGES,
 } from "../../constants/global.constants";
 
 import {
@@ -42,20 +42,19 @@ import { Dropdown } from "primereact/dropdown";
 import { classNames } from "primereact/utils";
 import { ConfirmDialog } from "primereact/confirmdialog";
 import { confirmDialog } from "primereact/confirmdialog";
-import { createDeal } from "../../redux/middleware/createDeal";
 import useAuth from "../../hooks/useAuth";
-import { startLoading, stopLoading } from "../../redux/slices/rootSlice";
 import ApiManager from "../../ApiManager/ApiManager";
 import { handleError } from "../../utils/handleError";
+import { handleSuccess } from "../../utils/handleSuccess";
 
 const CreateDealPage: React.FC = () => {
   // States
   const [lastDealLeadInfo, setLastDealLeadInfo] = useState<Person | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { user } = useAuth();
 
   // Selectors
-  const isLoading = useAppSelector((state) => state.isLoading);
   const therapeuticAreas = useAppSelector((state) => state.therapeuticAreas);
   const stages = useAppSelector((state) => state.stages);
 
@@ -83,13 +82,12 @@ const CreateDealPage: React.FC = () => {
   // Get params if any
   const params = useParams<{ dealId: string }>();
 
-  // Download the deal detail if this is a update deal page.
+  // Fetch the deal details if this is edit deal page.
   useEffect(() => {
     if (params.dealId) {
-      const dealId = parseInt(params.dealId);
-      (async () => {
+      const fetchDealDetail = async (dealId: number) => {
         // Show loading spinner
-        dispatch(startLoading());
+        setIsLoading(true);
 
         try {
           const response = await ApiManager.fetchDealDetail(dealId);
@@ -105,9 +103,12 @@ const CreateDealPage: React.FC = () => {
           // Show error toast
           handleError(dispatch, error);
         } finally {
-          dispatch(stopLoading());
+          // Hide loading spinner
+          setIsLoading(false);
         }
-      })();
+      };
+
+      fetchDealDetail(parseInt(params.dealId));
     }
   }, [params.dealId, dispatch, reset]);
 
@@ -144,7 +145,41 @@ const CreateDealPage: React.FC = () => {
     };
 
     const dealId = params.dealId ? parseInt(params.dealId) : null;
-    dispatch(createDeal(dealId, payload));
+    createDeal(dealId, payload);
+  };
+
+  /**
+   * Creates/edits a deal by making an API call and passing required data to
+   * @param dealId - Either null in case of create or Id of the deal in case of edit
+   * @param data - Payload to pass on to create/edit deal API call
+   */
+  const createDeal = async (dealId: number | null, data: any) => {
+    try {
+      // Show loading spinner
+      setIsLoading(true);
+
+      // Check whether it is edit or create deal call
+      if (dealId) {
+        await ApiManager.updateDeal(dealId, data);
+
+        // Show success toast
+        handleSuccess(dispatch, SUCCESS_MESSAGES.DEAL_UPDATION_SUCCESS);
+      } else {
+        await ApiManager.createDeal(data);
+
+        // Show success toast
+        handleSuccess(dispatch, SUCCESS_MESSAGES.DEAL_CREATION_SUCCESS);
+      }
+
+      // Go back to previous view on success
+      navigate(-1);
+    } catch (error: any) {
+      // Show error toast
+      handleError(dispatch, error);
+    } finally {
+      // Hide loading spinner
+      setIsLoading(false);
+    }
   };
 
   const requiredFieldIndicator = <span className="required-text">*</span>;
@@ -211,16 +246,6 @@ const CreateDealPage: React.FC = () => {
     );
   };
 
-  const breadcrumbCurrentItem = params.dealId
-    ? {
-        icon: "pi pi-pencil",
-        label: EDIT_DEAL,
-      }
-    : {
-        icon: "pi pi-folder",
-        label: CREATE_NEW_DEAL,
-      };
-
   return (
     <div className="flex flex-column align-items-center">
       {isLoading && <LoadingIndicator />}
@@ -237,14 +262,14 @@ const CreateDealPage: React.FC = () => {
       <Header />
 
       <div className="flex-1  w-11  p-3">
-        <Breadcrumb items={[...BREADCRUMB_ITEMS, breadcrumbCurrentItem]} />
+        <Breadcrumb items={getBreadcrumbItems(!!params.dealId)} />
 
         {/* Create deal form */}
         <form>
           {/* Page Header section */}
           <div className="flex align-items-center mb-5 w-full">
             <h1 className="font-bold text-xl line-height-2">
-              {params.dealId ? EDIT_DEAL : CREATE_NEW_DEAL}
+              {getPageTitle(!!params.dealId)}
             </h1>
 
             <div className="flex flex-1 gap-2 justify-content-end ">

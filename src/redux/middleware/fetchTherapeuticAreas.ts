@@ -1,12 +1,11 @@
 import ApiManager from "../../ApiManager/ApiManager";
 import { createListOptionsFromItemArray } from "../../utils/createListOptionsFromItemArray";
-import { hasError, storeTherapeuticAreas } from "../slices/rootSlice";
+import { handleError } from "../../utils/handleError";
+import { storeTherapeuticAreas } from "../slices/rootSlice";
 import { AppDispatch } from "../store";
 
 export const fetchTherapeuticAreas =
   (userId: number) => async (dispatch: AppDispatch) => {
-    // Reset the error
-    dispatch(hasError(null));
     try {
       // Make API request to fetch therapeutic areas
       const response = await ApiManager.fetchTherapeuticAreas(userId);
@@ -19,6 +18,7 @@ export const fetchTherapeuticAreas =
       // Save thetrapeutic areas in redux store
       dispatch(storeTherapeuticAreas(therapeuticAreas));
     } catch (error) {
-      dispatch(hasError(error));
+      // Show error toast
+      handleError(dispatch, error);
     }
   };

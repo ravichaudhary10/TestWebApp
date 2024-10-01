@@ -1,12 +1,10 @@
 import ApiManager from "../../ApiManager/ApiManager";
 import { createListOptionsFromItemArray } from "../../utils/createListOptionsFromItemArray";
 import { handleError } from "../../utils/handleError";
-import { storeLineFunctions, hasError } from "../slices/rootSlice";
+import { storeLineFunctions } from "../slices/rootSlice";
 import { AppDispatch } from "../store";
 
 export const fetchLineFunctions = () => async (dispatch: AppDispatch) => {
-  // Reset the error
-  dispatch(hasError(null));
   try {
     // Make API request to fetch line funcitons
     const response = await ApiManager.fetchLineFunctions();

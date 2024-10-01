@@ -4,8 +4,6 @@ import { LazyTableState } from "../../types/commonTypes";
 import editIcon from "../../assets/icons/edit.svg";
 import deleteIcon from "../../assets/icons/delete.svg";
 import calendarIcon from "../../assets/icons/calendar.svg";
-import { fetchDeals } from "../../redux/middleware/fetchDeals";
-import { deleteDeal } from "../../redux/middleware/deleteDeal";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getFilterPayload } from "../../utils/getFilterPayload";
 import { Link } from "react-router-dom";
@@ -48,17 +46,25 @@ import {
   DEAL_DELETION_CONFIRMATION_HEADER,
   DEAL_DELETION_CONFIRMATION_MSG,
 } from "../../pages/CreateDealPage/CreateDealPage.constants";
+import ApiManager from "../../ApiManager/ApiManager";
+import { handleError } from "../../utils/handleError";
+import { SUCCESS_MESSAGES } from "../../constants/global.constants";
+import { handleSuccess } from "../../utils/handleSuccess";
 
 const DealListView: React.FC = () => {
+  const [deals, setDeals] = useState<{
+    data: Deal[];
+    totalRecords: number;
+  } | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
   // Dispatch function
   const dispatch = useAppDispatch();
 
   // Selectors
   const user = useAppSelector((state) => state.user);
-  const deals = useAppSelector((state) => state.deals);
   const therapeuticAreas = useAppSelector((state) => state.therapeuticAreas);
   const stages = useAppSelector((state) => state.stages);
-  const isLoading = useAppSelector((state) => state.isLoading);
 
   // Create lazy state for the data table
   const [lazyState, setlazyState] = useState<LazyTableState>({
@@ -71,16 +77,19 @@ const DealListView: React.FC = () => {
   useEffect(() => {
     // Fetch the list of deals from backend API
     user?.id &&
-      dispatch(
-        fetchDeals(
-          user.id,
-          getFilterPayload(lazyState.filters),
-          lazyState.page + 1,
-          lazyState.rows
-        )
+      fetchDeals(
+        user.id,
+        getFilterPayload(lazyState.filters),
+        lazyState.page + 1,
+        lazyState.rows
       );
   }, [dispatch, lazyState, user]);
 
+  /**
+   * Action buttons template for Data table
+   * @param rowData
+   * @returns {React.ReactNode}
+   */
   const actionColumnTemplate = (rowData: Deal) => {
     return (
       <div className="flex justify-content-center">
@@ -102,6 +111,9 @@ const DealListView: React.FC = () => {
     );
   };
 
+  /**
+   * Paginator Template for Data table
+   */
   const paginatorTemplate = {
     layout: "RowsPerPageDropdown CurrentPageReport PrevPageLink NextPageLink",
     RowsPerPageDropdown: (options: PaginatorRowsPerPageDropdownOptions) => {
@@ -145,6 +157,10 @@ const DealListView: React.FC = () => {
     },
   };
 
+  /**
+   * Gets invoked when page is changed in data table
+   * @param event
+   */
   const onPage = (event: DataTablePageEvent) => {
     setlazyState({
       ...lazyState,
@@ -154,6 +170,10 @@ const DealListView: React.FC = () => {
     });
   };
 
+  /**
+   * Gets invoked when filtering is modified on data table
+   * @param event
+   */
   const onFilter = (event: DataTableFilterEvent) => {
     setlazyState({ ...lazyState, filters: event.filters });
   };
@@ -166,6 +186,11 @@ const DealListView: React.FC = () => {
     );
   };
 
+  /**
+   * Filter field template for multi select column
+   * @param data
+   * @returns
+   */
   const multiSelectFilterTemplate =
     (data: SelectItem[] | null) =>
     (options: ColumnFilterElementTemplateOptions) => {
@@ -193,6 +218,11 @@ const DealListView: React.FC = () => {
       );
     };
 
+  /**
+   * Filter field template for date column
+   * @param options
+   * @returns
+   */
   const dateFilterTemplate = (options: ColumnFilterElementTemplateOptions) => {
     return (
       <div className="p-float-label">
@@ -208,6 +238,11 @@ const DealListView: React.FC = () => {
     );
   };
 
+  /**
+   * Filter field template for plain input text column
+   * @param options
+   * @returns
+   */
   const inputTextFilterTemplate = (
     options: ColumnFilterElementTemplateOptions
   ) => {
@@ -222,6 +257,11 @@ const DealListView: React.FC = () => {
     );
   };
 
+  /**
+   * Content template for Deal lead column
+   * @param rowData
+   * @returns
+   */
   const dealLeadBodyTemplate = (rowData: Deal) => {
     return (
       <div className="flex align-items-center gap-2">
@@ -230,6 +270,11 @@ const DealListView: React.FC = () => {
     );
   };
 
+  /**
+   * Content template for Deal lead column
+   * @param rowData
+   * @returns
+   */
   const modifiedAtBodyTemplate = (rowData: Deal) => {
     return (
       <div className="flex align-items-center gap-2">
@@ -276,15 +321,73 @@ const DealListView: React.FC = () => {
    * @param id {number} Id of the deal to be deleted
    */
   const handleDealDeletion = (id: number) => {
-    const accept = () => {
-      user?.id && dispatch(deleteDeal(id, user.id));
-    };
+    if (id && user?.id) {
+      const accept = () => {
+        deleteDeal(id, user.id);
+      };
 
-    confirmDialog({
-      message: DEAL_DELETION_CONFIRMATION_MSG,
-      header: DEAL_DELETION_CONFIRMATION_HEADER,
-      accept,
-    });
+      confirmDialog({
+        message: DEAL_DELETION_CONFIRMATION_MSG,
+        header: DEAL_DELETION_CONFIRMATION_HEADER,
+        accept,
+      });
+    }
+  };
+
+  /**
+   *
+   * @param userId
+   * @param filters
+   * @param page
+   * @param limit
+   */
+  const fetchDeals = async (
+    userId: number,
+    filters: Record<string, any>,
+    page: number,
+    limit: number
+  ) => {
+    // Show loading spinner
+    setIsLoading(true);
+
+    try {
+      const response = await ApiManager.fetchDeals(
+        userId,
+        filters,
+        page,
+        limit
+      );
+      setDeals(response.data);
+    } catch (error: any) {
+      // Show error toast
+      handleError(dispatch, error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  /**
+   * Deletes a deal with given deal Id by making API call and passing on required data.
+   * @param dealId - Id of the deal to be deleted.
+   * @param userId - If of the logged in user.
+   */
+  const deleteDeal = async (dealId: number, userId: number) => {
+    // Show loading spinner
+    setIsLoading(true);
+
+    try {
+      await ApiManager.deleteDeal(dealId, userId);
+
+      // Show success toast
+      handleSuccess(dispatch, SUCCESS_MESSAGES.DEAL_DELETION_SUCCESS);
+
+      // Refresh the deal list
+    } catch (error: any) {
+      // Show error toast
+      handleError(dispatch, error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
