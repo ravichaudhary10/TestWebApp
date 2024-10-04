@@ -12,8 +12,8 @@ const REMOVE_LABEL = "Remove";
 interface PersonInfoCardProps {
   model: Person | null;
   showActionButtons?: boolean;
-  onChange?: (event: React.SyntheticEvent<HTMLButtonElement>) => void;
-  onRemove?: (event: React.SyntheticEvent<HTMLButtonElement>) => void;
+  onChange?: (event: any) => void;
+  onRemove?: (event: any) => void;
   isSelectable?: boolean;
 }
 

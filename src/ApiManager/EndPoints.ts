@@ -40,6 +40,11 @@ const END_POINTS = {
   DELETE_DEAL: (id: number, userId: number) => {
     return `/deals/${id}?userId=${userId}`;
   },
+
+  ASSIGN_TA: () => {
+    let url = `/therapeutic-areas/assign`;
+    return url;
+  },
 };
 
 export default END_POINTS;

@@ -66,6 +66,12 @@ class ApiManager {
     const axios = getAxiosInstance("deleteDealAPI");
     return axios.delete(url);
   }
+
+  static assignTherapeuticAreas(data: any) {
+    const url = END_POINTS.ASSIGN_TA();
+    const axios = getAxiosInstance("taAssignAPI");
+    return axios.post(url, data);
+  }
 }
 
 export default ApiManager;

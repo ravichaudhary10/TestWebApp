@@ -11,6 +11,7 @@ export const SUCCESS_MESSAGES = {
   DEAL_CREATION_SUCCESS: "Deal created successfully",
   DEAL_UPDATION_SUCCESS: "Deal updated successfully",
   DEAL_DELETION_SUCCESS: "Deal deleted successfully",
+  TA_ASSIGNMENT_SUCCESS: "Therapeutic areas assigned successfully",
 };
 
 export const DASHBOARD_TITLE = "My Dashboard";
@@ -19,6 +20,9 @@ export const EDIT_DEAL = "Edit Deal";
 export const ONBOARD_DEAL_LEAD = "Onboard Deal Lead";
 export const CANCEL = "Cancel";
 export const SAVE = "Save";
+export const CONFIRMATION_ACCEPT_LABEL = "Confirm";
+export const CONFIRMATION_REJECT_LABEL = "Cancel";
+export const DEAL_LEAD_DETAILS = "Deal Lead Details";
 
 export const MOCK_CONFIG: Record<string, boolean> = {
   dealsListAPI: true,
@@ -31,4 +35,5 @@ export const MOCK_CONFIG: Record<string, boolean> = {
   createDealAPI: true,
   deleteDealAPI: true,
   updateDealAPI: true,
+  taAssignAPI: true,
 };

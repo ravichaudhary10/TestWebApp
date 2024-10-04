@@ -25,28 +25,31 @@ const PersonSearch: React.FC<PersonSearchProps> = ({
   onCancel,
   className,
 }) => {
+  // States
   const [email, setEmail] = useState<string>("");
   const [person, setPerson] = useState<Person | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [searchEnabled, setSearchEnabled] = useState<boolean>(false);
 
+  // Dispatch function
   const dispatch = useAppDispatch();
 
+  /**
+   * Gets invoked when the value in Input field gets changed
+   * @param e
+   */
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
-    setSearchEnabled(validateEmail(e.target.value));
     setPerson(null);
   };
 
   /**
-   * Shows error toast
+   * Search button click handler
    */
   const handleSearch = async (e: React.SyntheticEvent<HTMLButtonElement>) => {
     try {
       // Reset states
       setLoading(true);
       setPerson(null);
-      setSearchEnabled(false);
 
       // Make API request
       const response = await ApiManager.searchPersonByEmail(
@@ -57,7 +60,20 @@ const PersonSearch: React.FC<PersonSearchProps> = ({
       handleError(dispatch, error);
     } finally {
       setLoading(false);
-      setSearchEnabled(true);
+    }
+  };
+
+  /**
+   * PersonInfoCard click handler
+   */
+  const handleInfoCardClick = () => {
+    if (person) {
+      // Update person info in parent component
+      onUpdate(person);
+
+      // Reset view back to initial state once person is selected
+      setPerson(null);
+      setEmail("");
     }
   };
 
@@ -85,7 +101,7 @@ const PersonSearch: React.FC<PersonSearchProps> = ({
         <Button
           icon={loading ? "pi pi-spin pi-spinner" : "pi pi-search"}
           onClick={handleSearch}
-          disabled={!searchEnabled}
+          disabled={!validateEmail(email)}
           text
           style={{ position: "absolute", right: 0 }}
         ></Button>
@@ -93,7 +109,7 @@ const PersonSearch: React.FC<PersonSearchProps> = ({
 
       {/* Section showing person information */}
       {person && (
-        <div onClick={() => onUpdate(person)}>
+        <div onClick={handleInfoCardClick}>
           <PersonInfoCard model={person} isSelectable />
         </div>
       )}

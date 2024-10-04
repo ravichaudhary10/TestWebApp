@@ -1,20 +1,37 @@
 [
   {
-    "id": 10,
-    "email": "test1@novartis.com",
-    "novartis521ID": "test1",
+    "id": 1,
+    "email": "rose.michelle@novartis.com",
+    "novartis521ID": "michelle.rose",
     "title": "Exe. Director, Search and Elevation",
     "firstName": "Ross",
     "lastName": "Michelle",
-    "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
+    "therapeuticAreas": []
   },
   {
-    "id": 11,
-    "email": "test2@novartis.com",
-    "novartis521ID": "test2",
-    "title": "Director, Search and Elevation",
-    "firstName": "Abraham",
-    "lastName": "Rachel",
-    "therapeuticAreas": [{ "id": 1, "name": "CRM" }]
+    "id": 2,
+    "email": "ravi.chaudhary@novartis.com",
+    "title": "Deal Lead",
+    "firstName": "Ravi",
+    "lastName": "Chaudhary",
+    "novartis521ID": "chaudhary.ravi",
+    "therapeuticAreas": [
+      {
+        "id": 1,
+        "name": "CRM"
+      },
+      {
+        "id": 2,
+        "name": "IMM"
+      },
+      {
+        "id": 3,
+        "name": "NS & GTX"
+      },
+      {
+        "id": 4,
+        "name": "ONCO"
+      }
+    ]
   }
 ]

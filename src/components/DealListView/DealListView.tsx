@@ -41,15 +41,17 @@ import { InputText } from "primereact/inputtext";
 import { SelectItem } from "primereact/selectitem";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import {
-  CONFIRMATION_ACCEPT_LABEL,
-  CONFIRMATION_REJECT_LABEL,
   DEAL_DELETION_CONFIRMATION_HEADER,
   DEAL_DELETION_CONFIRMATION_MSG,
 } from "../../pages/CreateDealPage/CreateDealPage.constants";
 import ApiManager from "../../ApiManager/ApiManager";
 import { handleError } from "../../utils/handleError";
-import { SUCCESS_MESSAGES } from "../../constants/global.constants";
 import { handleSuccess } from "../../utils/handleSuccess";
+import {
+  SUCCESS_MESSAGES,
+  CONFIRMATION_ACCEPT_LABEL,
+  CONFIRMATION_REJECT_LABEL,
+} from "../../constants/global.constants";
 
 const DealListView: React.FC = () => {
   const [deals, setDeals] = useState<{
@@ -75,6 +77,32 @@ const DealListView: React.FC = () => {
   });
 
   useEffect(() => {
+    // Fetches the deals satisfying the filters, page and limit parameters
+    const fetchDeals = async (
+      userId: number,
+      filters: Record<string, any>,
+      page: number,
+      limit: number
+    ) => {
+      // Show loading spinner
+      setIsLoading(true);
+
+      try {
+        const response = await ApiManager.fetchDeals(
+          userId,
+          filters,
+          page,
+          limit
+        );
+        setDeals(response.data);
+      } catch (error: any) {
+        // Show error toast
+        handleError(dispatch, error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     // Fetch the list of deals from backend API
     user?.id &&
       fetchDeals(
@@ -258,6 +286,21 @@ const DealListView: React.FC = () => {
   };
 
   /**
+   * Returns the template for clear filter button
+   * @returns {React.ReactNode}
+   */
+  const clearFilterTemplate = () => {
+    return (
+      <Button
+        size="small"
+        label={CLEAR_ALL_LABEL}
+        disabled={!isListFiltered()}
+        onClick={clearAllFilters}
+      />
+    );
+  };
+
+  /**
    * Content template for Deal lead column
    * @param rowData
    * @returns
@@ -305,17 +348,6 @@ const DealListView: React.FC = () => {
     });
   };
 
-  const clearFilterTemplate = () => {
-    return (
-      <Button
-        size="small"
-        label={CLEAR_ALL_LABEL}
-        disabled={!isListFiltered()}
-        onClick={clearAllFilters}
-      />
-    );
-  };
-
   /**
    * Handles deletion of deal by showing a confirmation popup before deletion
    * @param id {number} Id of the deal to be deleted
@@ -335,38 +367,6 @@ const DealListView: React.FC = () => {
   };
 
   /**
-   *
-   * @param userId
-   * @param filters
-   * @param page
-   * @param limit
-   */
-  const fetchDeals = async (
-    userId: number,
-    filters: Record<string, any>,
-    page: number,
-    limit: number
-  ) => {
-    // Show loading spinner
-    setIsLoading(true);
-
-    try {
-      const response = await ApiManager.fetchDeals(
-        userId,
-        filters,
-        page,
-        limit
-      );
-      setDeals(response.data);
-    } catch (error: any) {
-      // Show error toast
-      handleError(dispatch, error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  /**
    * Deletes a deal with given deal Id by making API call and passing on required data.
    * @param dealId - Id of the deal to be deleted.
    * @param userId - If of the logged in user.
@@ -381,7 +381,8 @@ const DealListView: React.FC = () => {
       // Show success toast
       handleSuccess(dispatch, SUCCESS_MESSAGES.DEAL_DELETION_SUCCESS);
 
-      // Refresh the deal list
+      // Rerender the deal list to fetch latest deals
+      setlazyState({ ...lazyState });
     } catch (error: any) {
       // Show error toast
       handleError(dispatch, error);

@@ -14,6 +14,9 @@ import {
   CANCEL,
   SAVE,
   SUCCESS_MESSAGES,
+  CONFIRMATION_ACCEPT_LABEL,
+  CONFIRMATION_REJECT_LABEL,
+  DEAL_LEAD_DETAILS,
 } from "../../constants/global.constants";
 
 import {
@@ -21,10 +24,7 @@ import {
   DEAL_STAGE,
   THERAPEUTIC_AREA,
   DEAL_LEAD,
-  DEAL_LEAD_DETAILS,
   ADD_DEAL_LEAD,
-  CONFIRMATION_ACCEPT_LABEL,
-  CONFIRMATION_REJECT_LABEL,
   DEAL_LEAD_REMOVAL_CONFIRMATION_HEADER,
   DEAL_LEAD_REMOVAL_CONFIRMATION_MSG,
   CANCEL_CREATE_DEAL_CONFIRMATION_MSG,
@@ -199,10 +199,16 @@ const CreateDealPage: React.FC = () => {
    * Clear out deal lead info after confirmation
    */
   const removeDealLead = (field: any) => {
-    // showDealLeadRemovalConfirmationDialog(() => {
-    // Clears out deal lead info
-    field.onChange(null);
-    // });
+    const accept = () => {
+      // Clears out deal lead info
+      field.onChange(null);
+    };
+
+    confirmDialog({
+      message: DEAL_LEAD_REMOVAL_CONFIRMATION_MSG,
+      header: DEAL_LEAD_REMOVAL_CONFIRMATION_HEADER,
+      accept,
+    });
   };
 
   /**
@@ -228,13 +234,13 @@ const CreateDealPage: React.FC = () => {
   /**
    * Shows a confirmation popup when user clicks the remove deal lead button on person info card
    */
-  const showDealLeadRemovalConfirmationDialog = (accept: () => void) => {
-    confirmDialog({
-      message: DEAL_LEAD_REMOVAL_CONFIRMATION_MSG,
-      header: DEAL_LEAD_REMOVAL_CONFIRMATION_HEADER,
-      accept,
-    });
-  };
+  // const showDealLeadRemovalConfirmationDialog = (accept: () => void) => {
+  //   confirmDialog({
+  //     message: DEAL_LEAD_REMOVAL_CONFIRMATION_MSG,
+  //     header: DEAL_LEAD_REMOVAL_CONFIRMATION_HEADER,
+  //     accept,
+  //   });
+  // };
 
   const getFormErrorMessage = (name: string) => {
     return (
@@ -437,14 +443,12 @@ const CreateDealPage: React.FC = () => {
                       <PersonInfoCard
                         model={field.value}
                         showActionButtons
-                        onChange={() => {
-                          // e.preventDeafult();
-                          // e.stopPropagation();
+                        onChange={(e) => {
+                          e.preventDefault();
                           changeDealLead(field);
                         }}
-                        onRemove={() => {
-                          // e.preventDeafult();
-                          // e.stopPropagation();
+                        onRemove={(e) => {
+                          e.preventDefault();
                           removeDealLead(field);
                         }}
                       />
