@@ -53,7 +53,7 @@ const PersonSearch: React.FC<PersonSearchProps> = ({
 
       // Make API request
       const response = await ApiManager.searchPersonByEmail(
-        email.toLowerCase()
+        email.trim().toLowerCase()
       );
       setPerson(response.data);
     } catch (error: any) {

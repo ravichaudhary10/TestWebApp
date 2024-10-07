@@ -225,9 +225,12 @@ const OnboardDealLead: React.FC = () => {
                     {THERAPEUTIC_AREA_ASSIGNMENT_HEADER}
                   </div>
 
-                  <div className="font-normal text-base secondary-text">
-                    {NO_THERAPEUTIC_AREA_ASSIGNED_MSG}
-                  </div>
+                  {/* Show this section if no TA's assigned */}
+                  {!disabledTA.length && (
+                    <div className="font-normal text-base secondary-text">
+                      {NO_THERAPEUTIC_AREA_ASSIGNED_MSG}
+                    </div>
+                  )}
 
                   {therapeuticAreas && (
                     <div className="card flex flex-wrap gap-3">
