@@ -119,4 +119,4 @@ const PersonSearch: React.FC<PersonSearchProps> = ({
   );
 };
 
-export default PersonSearch;
+export default React.memo(PersonSearch);

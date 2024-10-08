@@ -83,4 +83,4 @@ const PersonInfoCard: React.FC<PersonInfoCardProps> = ({
   );
 };
 
-export default PersonInfoCard;
+export default React.memo(PersonInfoCard);

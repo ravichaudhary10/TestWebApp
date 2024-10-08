@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { LoadingIndicator } from "../../components/LoadingIndicator";
 import { Header } from "../../components/Header";
 import { Breadcrumb } from "../../components/Breadcrumb";
@@ -76,7 +76,7 @@ const OnboardDealLead: React.FC = () => {
    * Update deal lead info with the person info passed as parameter.
    * @param person
    */
-  const updateDealLeadInfo = (person: Person) => {
+  const updateDealLeadInfo = useCallback((person: Person) => {
     if (person) {
       setDealLeadInfo(person);
 
@@ -86,7 +86,7 @@ const OnboardDealLead: React.FC = () => {
       setSelectedTherapeuticAreas(selected);
       setDisabledTA(selected);
     }
-  };
+  }, []);
 
   /**
    * Gets invoked when TA checkboxes are selected
@@ -203,11 +203,7 @@ const OnboardDealLead: React.FC = () => {
             {/* Add deal lead section */}
 
             <div className="w-5">
-              <PersonSearch
-                onUpdate={(model: Person) => {
-                  updateDealLeadInfo(model);
-                }}
-              />
+              <PersonSearch onUpdate={updateDealLeadInfo} />
             </div>
 
             {/* Section showing deal lead information */}
