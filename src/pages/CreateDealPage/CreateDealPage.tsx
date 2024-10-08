@@ -272,8 +272,14 @@ const CreateDealPage: React.FC = () => {
    * @param person
    */
   const updateDealLeadInfo = (person: Person, field: any) => {
+    // Update the field value
     field.onChange(person);
+
+    // Reset last deal lead info to null
     setLastDealLeadInfo(null);
+
+    // Reset assginTA flag to false
+    setAssignTA(false);
   };
 
   /**
@@ -430,7 +436,12 @@ const CreateDealPage: React.FC = () => {
                       <Dropdown
                         id={field.name}
                         value={field.value}
-                        onChange={(e) => field.onChange(e.value)}
+                        onChange={(e) => {
+                          field.onChange(e.value);
+
+                          // Reset assignTA flag
+                          setAssignTA(false);
+                        }}
                         options={therapeuticAreas || []}
                         optionLabel="label"
                         className={
