@@ -17,9 +17,10 @@ import {
   CANCEL,
   SAVE,
   SUCCESS_MESSAGES,
-  CONFIRMATION_ACCEPT_LABEL,
-  CONFIRMATION_REJECT_LABEL,
+  CONFIRM_LABEL,
+  CANCEL_LABEL,
   DEAL_LEAD_DETAILS,
+  ASSIGN_LABEL,
 } from "../../constants/global.constants";
 
 import {
@@ -169,6 +170,7 @@ const CreateDealPage: React.FC = () => {
           getLabelByValue(therapeuticAreas || [], formData.therapeuticArea)
         ),
         header: DEAL_LEAD_NO_TA_ASSIGNMENT_HEADER,
+        acceptLabel: ASSIGN_LABEL,
         accept,
       });
 
@@ -300,8 +302,8 @@ const CreateDealPage: React.FC = () => {
       {isLoading && <LoadingIndicator />}
 
       <ConfirmDialog
-        acceptLabel={CONFIRMATION_ACCEPT_LABEL}
-        rejectLabel={CONFIRMATION_REJECT_LABEL}
+        acceptLabel={CONFIRM_LABEL}
+        rejectLabel={CANCEL_LABEL}
         closable={false}
         acceptClassName="p-button-sm"
         rejectClassName="p-button-outlined p-button-sm"

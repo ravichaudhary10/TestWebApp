@@ -14,8 +14,8 @@ import { handleError } from "../../utils/handleError";
 import {
   CANCEL,
   ONBOARD_DEAL_LEAD,
-  CONFIRMATION_ACCEPT_LABEL,
-  CONFIRMATION_REJECT_LABEL,
+  CONFIRM_LABEL,
+  CANCEL_LABEL,
   SAVE,
   DEAL_LEAD_DETAILS,
   SUCCESS_MESSAGES,
@@ -162,8 +162,8 @@ const OnboardDealLead: React.FC = () => {
       {isLoading && <LoadingIndicator />}
 
       <ConfirmDialog
-        acceptLabel={CONFIRMATION_ACCEPT_LABEL}
-        rejectLabel={CONFIRMATION_REJECT_LABEL}
+        acceptLabel={CONFIRM_LABEL}
+        rejectLabel={CANCEL_LABEL}
         closable={false}
         acceptClassName="p-button-sm"
         rejectClassName="p-button-outlined p-button-sm"

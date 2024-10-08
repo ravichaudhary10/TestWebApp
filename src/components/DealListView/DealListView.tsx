@@ -49,8 +49,8 @@ import { handleError } from "../../utils/handleError";
 import { handleSuccess } from "../../utils/handleSuccess";
 import {
   SUCCESS_MESSAGES,
-  CONFIRMATION_ACCEPT_LABEL,
-  CONFIRMATION_REJECT_LABEL,
+  CONFIRM_LABEL,
+  CANCEL_LABEL,
 } from "../../constants/global.constants";
 
 const DealListView: React.FC = () => {
@@ -394,8 +394,8 @@ const DealListView: React.FC = () => {
   return (
     <div>
       <ConfirmDialog
-        acceptLabel={CONFIRMATION_ACCEPT_LABEL}
-        rejectLabel={CONFIRMATION_REJECT_LABEL}
+        acceptLabel={CONFIRM_LABEL}
+        rejectLabel={CANCEL_LABEL}
         closable={false}
         acceptClassName="p-button-sm"
         rejectClassName="p-button-outlined p-button-sm"

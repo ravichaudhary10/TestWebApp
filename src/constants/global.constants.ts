@@ -20,8 +20,9 @@ export const EDIT_DEAL = "Edit Deal";
 export const ONBOARD_DEAL_LEAD = "Onboard Deal Lead";
 export const CANCEL = "Cancel";
 export const SAVE = "Save";
-export const CONFIRMATION_ACCEPT_LABEL = "Confirm";
-export const CONFIRMATION_REJECT_LABEL = "Cancel";
+export const CONFIRM_LABEL = "Confirm";
+export const CANCEL_LABEL = "Cancel";
+export const ASSIGN_LABEL = "Assign";
 export const DEAL_LEAD_DETAILS = "Deal Lead Details";
 
 export const MOCK_CONFIG: Record<string, boolean> = {
