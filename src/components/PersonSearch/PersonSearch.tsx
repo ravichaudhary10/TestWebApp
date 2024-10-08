@@ -46,6 +46,8 @@ const PersonSearch: React.FC<PersonSearchProps> = ({
    * Search button click handler
    */
   const handleSearch = async (e: React.SyntheticEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
     try {
       // Reset states
       setLoading(true);

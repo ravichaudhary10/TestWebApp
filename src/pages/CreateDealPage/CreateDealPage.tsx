@@ -3,9 +3,12 @@ import { useForm, Controller } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Breadcrumb } from "../../components/Breadcrumb";
-import {} from "./CreateDealPage.constants";
+import {
+  DEAL_LEAD_NO_TA_ASSIGNMENT_HEADER,
+  DEAL_LEAD_NO_TA_ASSIGNMENT_MSG,
+} from "./CreateDealPage.constants";
 import { PersonSearch } from "../../components/PersonSearch";
-import { Person } from "../../types/commonTypes";
+import { Item, Person } from "../../types/commonTypes";
 import { PersonInfoCard } from "../../components/PersonInfoCard";
 import { LoadingIndicator } from "../../components/LoadingIndicator";
 import { getBreadcrumbItems, getPageTitle } from "./CreateDealPage.helpers";
@@ -46,11 +49,13 @@ import useAuth from "../../hooks/useAuth";
 import ApiManager from "../../ApiManager/ApiManager";
 import { handleError } from "../../utils/handleError";
 import { handleSuccess } from "../../utils/handleSuccess";
+import { getLabelByValue } from "../../utils/getLabelByValue";
 
 const CreateDealPage: React.FC = () => {
   // States
   const [lastDealLeadInfo, setLastDealLeadInfo] = useState<Person | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [assignTA, setAssignTA] = useState(false);
 
   const { user } = useAuth();
 
@@ -71,6 +76,7 @@ const CreateDealPage: React.FC = () => {
     formState: { errors },
     handleSubmit,
     reset,
+    getValues,
   } = useForm({ defaultValues, mode: "onSubmit" });
 
   // Dispatch function
@@ -130,10 +136,44 @@ const CreateDealPage: React.FC = () => {
   };
 
   /**
+   * Checks if selected deal lead has selected TA assigned
+   * @param formData
+   * @returns
+   */
+  const isTAAssignedToDealLead = () => {
+    const formData = getValues() as any;
+    return Boolean(
+      assignTA ||
+        (formData.therapeuticArea &&
+          formData.dealLead?.therapeuticAreas?.find(
+            (item: Item) => item.id === formData.therapeuticArea
+          ))
+    );
+  };
+
+  /**
    * Gets invoked when user clicks form save button
    */
   const handleSave = (formData: any) => {
-    console.log("Form data: ", formData);
+    // Check if selected deal lead has the selected TA assigned.
+    // If not, ask for user's confirmation to assign TA.
+    if (!isTAAssignedToDealLead()) {
+      const accept = () => {
+        setAssignTA(true);
+      };
+
+      // Show a dialog asking for user's confirmation on TA assignment
+      confirmDialog({
+        message: DEAL_LEAD_NO_TA_ASSIGNMENT_MSG.replace(
+          "{0}",
+          getLabelByValue(therapeuticAreas || [], formData.therapeuticArea)
+        ),
+        header: DEAL_LEAD_NO_TA_ASSIGNMENT_HEADER,
+        accept,
+      });
+
+      return;
+    }
 
     // Form payload
     const payload = {
@@ -144,6 +184,7 @@ const CreateDealPage: React.FC = () => {
       userId: user?.id,
     };
 
+    // Create the deal
     const dealId = params.dealId ? parseInt(params.dealId) : null;
     createDeal(dealId, payload);
   };
@@ -157,6 +198,19 @@ const CreateDealPage: React.FC = () => {
     try {
       // Show loading spinner
       setIsLoading(true);
+
+      // If assignTA flag is true, make the TA assignment call
+      if (assignTA) {
+        // Form payload
+        const formData = getValues() as any;
+        const payload = {
+          adminUserId: user?.id,
+          dealLeadId: formData.dealLead?.id,
+          therapeuticAreaIds: [formData?.therapeuticArea],
+        };
+
+        await ApiManager.assignTherapeuticAreas(payload);
+      }
 
       // Check whether it is edit or create deal call
       if (dealId) {
@@ -231,17 +285,6 @@ const CreateDealPage: React.FC = () => {
     }
   };
 
-  /**
-   * Shows a confirmation popup when user clicks the remove deal lead button on person info card
-   */
-  // const showDealLeadRemovalConfirmationDialog = (accept: () => void) => {
-  //   confirmDialog({
-  //     message: DEAL_LEAD_REMOVAL_CONFIRMATION_MSG,
-  //     header: DEAL_LEAD_REMOVAL_CONFIRMATION_HEADER,
-  //     accept,
-  //   });
-  // };
-
   const getFormErrorMessage = (name: string) => {
     return (
       (errors as any)[name]?.message && (
@@ -263,6 +306,7 @@ const CreateDealPage: React.FC = () => {
         acceptClassName="p-button-sm"
         rejectClassName="p-button-outlined p-button-sm"
         defaultFocus="reject"
+        style={{ maxWidth: "30%" }}
       />
 
       <Header />
