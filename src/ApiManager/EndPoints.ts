@@ -21,6 +21,10 @@ const END_POINTS = {
     return `/line-functions`;
   },
 
+  FETCH_RESOURCES: () => {
+    return `/resources/list`;
+  },
+
   LOGIN: () => {
     return `/login`;
   },

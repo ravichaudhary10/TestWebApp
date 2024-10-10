@@ -1,0 +1,50 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "lineFunction": {
+        "id": 1,
+        "name": "S&E"
+      },
+      "name": "Brian Philip",
+      "stage": {
+        "id": 1,
+        "name": "Triage"
+      },
+      "title": "Director of Operations",
+      "email": "brian.philip@test.com",
+      "vdrAccessRequested": true,
+      "webTrainingStatus": "In-progress",
+      "novartis521ID": "PHILIPBR",
+      "isCoreTeamMember": true,
+      "oneToOneDiscussion": "Sample text",
+      "optionalColumn": "Sample text",
+      "siteCode": "chbs"
+    },
+    {
+      "id": 2,
+      "lineFunction": {
+        "id": 1,
+        "name": "S&E"
+      },
+      "name": "Ishika Roy",
+      "stage": {
+        "id": 1,
+        "name": "Triage"
+      },
+      "title": "Director of Operations",
+      "email": "ishika.roy@test.com",
+      "vdrAccessRequested": false,
+      "webTrainingStatus": "In-progress",
+      "novartis521ID": "ROYISHIK",
+      "isCoreTeamMember": true,
+      "oneToOneDiscussion": "Sample text",
+      "optionalColumn": "Sample text",
+      "siteCode": "chbs"
+    }
+  ],
+  "totalRecords": 30,
+  "currentPage": 1,
+  "totalPages": 1,
+  "pageSize": 30
+}

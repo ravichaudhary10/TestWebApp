@@ -5,11 +5,12 @@ import { Breadcrumb } from "../../components/Breadcrumb";
 
 import { BREADCRUMB_ITEMS, TAB_MENU_ITEMS } from "./DashboardPage.constants";
 
+import { DASHBOARD_TITLE } from "../../constants/global.constants";
+
 import {
-  DASHBOARD_TITLE,
-  CREATE_NEW_DEAL,
-  ONBOARD_DEAL_LEAD,
-} from "../../constants/global.constants";
+  CREATE_NEW_DEAL_BUTTON_TITLE,
+  ONBOARD_DEAL_LEAD_BUTTON_TITLE,
+} from "./DashboardPage.constants";
 
 import { Tab } from "./DashboardPage.types";
 import { DealListView } from "../../components/DealListView";
@@ -66,13 +67,13 @@ const DashboardPage: React.FC = () => {
           />
           <div className="flex flex-1 gap-2 justify-content-end ">
             <Button
-              label={CREATE_NEW_DEAL}
+              label={CREATE_NEW_DEAL_BUTTON_TITLE}
               size="small"
               onClick={openCreateDealView}
             />
             <RoleBasedGuard accessibleRoles={[Role.ADMIN]}>
               <Button
-                label={ONBOARD_DEAL_LEAD}
+                label={ONBOARD_DEAL_LEAD_BUTTON_TITLE}
                 size="small"
                 onClick={openOnboardDealLeadView}
               />

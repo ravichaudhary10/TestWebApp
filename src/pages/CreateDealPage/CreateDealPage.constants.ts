@@ -4,6 +4,8 @@ export const THERAPEUTIC_AREA = "Therapeutic Area";
 export const DEAL_STAGE = "Stage";
 export const DEAL_LEAD = "Deal Lead";
 export const ADD_DEAL_LEAD = "Add Deal Lead";
+export const EDIT_DEAL_PAGE_TITLE = "Edit Deal";
+export const CREATE_NEW_DEAL_PAGE_TITLE = "Create New Deal";
 
 // Constants related to Confirmation dialog
 export const DEAL_LEAD_REMOVAL_CONFIRMATION_MSG =

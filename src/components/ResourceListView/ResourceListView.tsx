@@ -1,5 +1,5 @@
 import React, { useState, useEffect, SyntheticEvent } from "react";
-import { Deal, DealListField } from "./DealListView.types";
+import { Resource, ResourceListField } from "./ResourceListView.types";
 import { LazyTableState } from "../../types/commonTypes";
 import editIcon from "../../assets/icons/edit.svg";
 import deleteIcon from "../../assets/icons/delete.svg";
@@ -7,24 +7,24 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getFilterPayload } from "../../utils/getFilterPayload";
 import { Link } from "react-router-dom";
 import { Path } from "../../routes";
-import {
-  paginatorTemplate,
-  inputTextFilterTemplate,
-  multiSelectFilterTemplate,
-  dateFilterTemplate,
-} from "../../utils/templates";
 
 import {
-  THERAPEUTIC_AREA,
-  DEAL_NAME,
-  DEAL_STAGE,
-  DEAL_LEAD,
-  MODIFIED_BY,
-  MODIFIED_AT,
+  LINE_FUNCTION,
+  NAME,
+  TITLE,
+  EMAIL,
+  STAGE,
+  VDR_ACCESS,
+  WEB_TRAINING,
+  NOVARTIS_ID,
+  KICK_OFF_ATTENDANCE,
+  OPTIONAL,
+  CORE_TEAM_MEMBER,
+  SITE,
   EMPTY_MESSAGE,
   INITIAL_FILTERS,
   CLEAR_ALL_LABEL,
-} from "./DealListView.constants";
+} from "./ResourceListView.constants";
 import {
   DEAL_DELETION_CONFIRMATION_HEADER,
   DEAL_DELETION_CONFIRMATION_MSG,
@@ -38,6 +38,17 @@ import {
   CANCEL_LABEL,
 } from "../../constants/global.constants";
 
+import {
+  paginatorTemplate,
+  multiSelectFilterTemplate,
+  inputTextFilterTemplate,
+} from "../../utils/templates";
+
+import {
+  webTrainingOptions,
+  booleanOptions,
+} from "./ResourceListView.constants";
+
 // PrimeReact imports
 import {
   DataTable,
@@ -49,14 +60,17 @@ import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 
-const DealListView: React.FC = () => {
+interface ResourceListViewProps {
+  dealId: number;
+}
+
+const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
   // States
-  const [deals, setDeals] = useState<{
-    data: Deal[];
+  const [resources, setResources] = useState<{
+    data: Resource[];
     totalRecords: number;
   } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-
   // Create lazy state for the data table
   const [lazyState, setlazyState] = useState<LazyTableState>({
     first: 0,
@@ -65,17 +79,17 @@ const DealListView: React.FC = () => {
     filters: INITIAL_FILTERS,
   });
 
+  // Selectors
+  const user = useAppSelector((state) => state.user);
+  const lineFunctions = useAppSelector((state) => state.lineFunctions);
+  const stages = useAppSelector((state) => state.stages);
+
   // Dispatch function
   const dispatch = useAppDispatch();
 
-  // Selectors
-  const user = useAppSelector((state) => state.user);
-  const therapeuticAreas = useAppSelector((state) => state.therapeuticAreas);
-  const stages = useAppSelector((state) => state.stages);
-
   useEffect(() => {
-    // Fetches the deals satisfying the filters, page and limit parameters
-    const fetchDeals = async (
+    // Fetches the resources satisfying the filters, page and limit parameters
+    const fetchResources = async (
       userId: number,
       filters: Record<string, any>,
       page: number,
@@ -85,13 +99,14 @@ const DealListView: React.FC = () => {
       setIsLoading(true);
 
       try {
-        const response = await ApiManager.fetchDeals(
+        const response = await ApiManager.fetchResources(
           userId,
+          dealId,
           filters,
           page,
           limit
         );
-        setDeals(response.data);
+        setResources(response.data);
       } catch (error: any) {
         // Show error toast
         handleError(dispatch, error);
@@ -102,26 +117,26 @@ const DealListView: React.FC = () => {
 
     // Fetch the list of deals from backend API
     user?.id &&
-      fetchDeals(
+      fetchResources(
         user.id,
         getFilterPayload(lazyState.filters),
         lazyState.page + 1,
         lazyState.rows
       );
-  }, [dispatch, lazyState, user]);
+  }, [dispatch, lazyState, user, dealId]);
 
   /**
    * Action buttons template for Data table
    * @param rowData
    * @returns {React.ReactNode}
    */
-  const actionColumnTemplate = (rowData: Deal) => {
+  const actionColumnTemplate = (rowData: Resource) => {
     return (
       <div className="flex justify-content-center">
         <Link to={`${Path.UPDATE_DEAL}/${rowData.id}`}>
           <img
             src={editIcon}
-            alt="Edit Deal Button"
+            alt="Edit Resource Button"
             style={{ padding: "0 0.5rem" }}
           />
         </Link>
@@ -132,7 +147,7 @@ const DealListView: React.FC = () => {
         >
           <img
             src={deleteIcon}
-            alt="Delete Deal Button"
+            alt="Delete Resource Button"
             style={{ padding: "0 1.5rem" }}
           />
         </div>
@@ -173,49 +188,6 @@ const DealListView: React.FC = () => {
         disabled={!isListFiltered()}
         onClick={clearAllFilters}
       />
-    );
-  };
-
-  /**
-   * Content template for Deal name column
-   * @param rowData
-   * @returns
-   */
-  const dealNameBodyTemplate = (rowData: Deal) => {
-    return (
-      <Link to={`/deals/${rowData.id}`}>
-        <span>{rowData[DealListField.NAME] || ""}</span>
-      </Link>
-    );
-  };
-
-  /**
-   * Content template for Deal lead column
-   * @param rowData
-   * @returns
-   */
-  const dealLeadBodyTemplate = (rowData: Deal) => {
-    return (
-      <div className="flex align-items-center gap-2">
-        <span>{rowData[DealListField.LEADS]?.[0]?.name || ""}</span>
-      </div>
-    );
-  };
-
-  /**
-   * Content template for Deal lead column
-   * @param rowData
-   * @returns
-   */
-  const modifiedAtBodyTemplate = (rowData: Deal) => {
-    return (
-      <div className="flex align-items-center gap-2">
-        <span>
-          {rowData[DealListField.MODIFIED_AT]
-            ? new Date(rowData[DealListField.MODIFIED_AT] as any).toDateString()
-            : ""}
-        </span>
-      </div>
     );
   };
 
@@ -292,14 +264,14 @@ const DealListView: React.FC = () => {
       />
 
       <DataTable
-        value={deals?.data}
+        value={resources?.data}
         size="small"
         lazy
         dataKey="id"
         paginator
         first={lazyState.first}
         rows={lazyState.rows}
-        totalRecords={deals?.totalRecords || 0}
+        totalRecords={resources?.totalRecords || 0}
         paginatorTemplate={paginatorTemplate}
         paginatorClassName="justify-content-end"
         onPage={onPage}
@@ -312,61 +284,114 @@ const DealListView: React.FC = () => {
         selectionMode="single"
       >
         <Column
-          body={dealNameBodyTemplate}
-          field={DealListField.NAME}
-          header={DEAL_NAME}
+          field={ResourceListField.LINE_FUNCTION + ".name"}
+          header={LINE_FUNCTION}
           filter
           showFilterMenu={false}
-          filterElement={inputTextFilterTemplate}
+          filterField={ResourceListField.LINE_FUNCTION}
+          filterElement={multiSelectFilterTemplate(lineFunctions)}
           style={{ minWidth: "15rem" }}
         />
         <Column
-          field={DealListField.THERAPEUTIC_AREA + ".name"}
-          header={THERAPEUTIC_AREA}
+          field={ResourceListField.NAME}
+          header={NAME}
           filter
           filterPlaceholder="Search"
           showFilterMenu={false}
-          filterField={DealListField.THERAPEUTIC_AREA}
-          filterElement={multiSelectFilterTemplate(therapeuticAreas)}
+          filterField={ResourceListField.NAME}
+          filterElement={inputTextFilterTemplate}
           style={{ minWidth: "10rem" }}
         />
         <Column
-          field={DealListField.STAGE + ".name"}
-          header={DEAL_STAGE}
+          field={ResourceListField.TITLE}
+          header={TITLE}
           filter
           filterPlaceholder="Search"
           showFilterMenu={false}
-          filterField={DealListField.STAGE}
+          filterField={ResourceListField.TITLE}
+          filterElement={inputTextFilterTemplate}
+          style={{ minWidth: "10rem" }}
+        />
+        <Column
+          field={ResourceListField.EMAIL}
+          header={EMAIL}
+          filter
+          filterPlaceholder="Search"
+          showFilterMenu={false}
+          filterField={ResourceListField.EMAIL}
+          filterElement={inputTextFilterTemplate}
+          style={{ minWidth: "10rem" }}
+        />
+        <Column
+          field={ResourceListField.STAGE + ".name"}
+          header={STAGE}
+          filter
+          showFilterMenu={false}
+          filterField={ResourceListField.STAGE}
           filterElement={multiSelectFilterTemplate(stages)}
           style={{ minWidth: "10rem" }}
         />
         <Column
-          field={DealListField.MODIFIED_BY + ".name"}
-          header={MODIFIED_BY}
+          field={ResourceListField.VDR_ACCESS}
+          header={VDR_ACCESS}
+          filter
+          showFilterMenu={false}
+          filterElement={multiSelectFilterTemplate(booleanOptions)}
+          style={{ minWidth: "15rem" }}
+        />
+        <Column
+          field={ResourceListField.WEB_TRAINING}
+          header={WEB_TRAINING}
+          filter
+          showFilterMenu={false}
+          filterElement={multiSelectFilterTemplate(webTrainingOptions)}
+          style={{ minWidth: "15rem" }}
+        />
+        <Column
+          field={ResourceListField.NOVARTIS_ID}
+          header={NOVARTIS_ID}
           filter
           filterPlaceholder="Search"
           showFilterMenu={false}
-          filterField={DealListField.MODIFIED_BY}
+          filterField={ResourceListField.NOVARTIS_ID}
           filterElement={inputTextFilterTemplate}
           style={{ minWidth: "10rem" }}
         />
         <Column
-          body={modifiedAtBodyTemplate}
-          header={MODIFIED_AT}
+          field={ResourceListField.KICK_OFF_ATTENDANCE}
+          header={KICK_OFF_ATTENDANCE}
           filter
           filterPlaceholder="Search"
           showFilterMenu={false}
-          filterField={DealListField.MODIFIED_AT}
-          filterElement={dateFilterTemplate}
+          filterField={ResourceListField.KICK_OFF_ATTENDANCE}
+          filterElement={inputTextFilterTemplate}
           style={{ minWidth: "10rem" }}
         />
         <Column
-          body={dealLeadBodyTemplate}
-          header={DEAL_LEAD}
+          field={ResourceListField.OPTIONAL}
+          header={OPTIONAL}
           filter
           filterPlaceholder="Search"
           showFilterMenu={false}
-          filterField={DealListField.DEAL_LEAD}
+          filterField={ResourceListField.OPTIONAL}
+          filterElement={inputTextFilterTemplate}
+          style={{ minWidth: "10rem" }}
+        />
+        <Column
+          field={ResourceListField.CORE_TEAM_MEMBER}
+          header={CORE_TEAM_MEMBER}
+          filter
+          showFilterMenu={false}
+          filterElement={multiSelectFilterTemplate(booleanOptions)}
+          style={{ minWidth: "15rem" }}
+        />
+        <Column
+          field={ResourceListField.SITE}
+          header={SITE}
+          filter
+          filterPlaceholder="Search"
+          showFilterMenu={false}
+          filterField={ResourceListField.SITE}
           filterElement={inputTextFilterTemplate}
           style={{ minWidth: "10rem" }}
         />
@@ -378,10 +403,12 @@ const DealListView: React.FC = () => {
           showFilterMenu={false}
           showClearButton={false}
           filterElement={clearFilterTemplate}
+          frozen
+          alignFrozen="right"
         ></Column>
       </DataTable>
     </div>
   );
 };
 
-export default DealListView;
+export default ResourceListView;

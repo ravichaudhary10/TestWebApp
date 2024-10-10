@@ -13,7 +13,6 @@ import { handleSuccess } from "../../utils/handleSuccess";
 import { handleError } from "../../utils/handleError";
 import {
   CANCEL,
-  ONBOARD_DEAL_LEAD,
   CONFIRM_LABEL,
   CANCEL_LABEL,
   SAVE,
@@ -25,6 +24,7 @@ import {
   CANCEL_ONBOARD_LEAD_HEADER,
   CANCEL_ONBOARD_LEAD_MSG,
   NO_THERAPEUTIC_AREA_ASSIGNED_MSG,
+  ONBOARD_DEAL_LEAD_PAGE_TITLE,
   THERAPEUTIC_AREA_ASSIGNMENT_HEADER,
 } from "./OnboardDealLead.constants";
 
@@ -180,7 +180,7 @@ const OnboardDealLead: React.FC = () => {
           {/* Page Header section */}
           <div className="flex align-items-center mb-3 w-full">
             <h1 className="font-bold text-xl line-height-2">
-              {ONBOARD_DEAL_LEAD}
+              {ONBOARD_DEAL_LEAD_PAGE_TITLE}
             </h1>
 
             <div className="flex flex-1 gap-2 justify-content-end ">
@@ -202,14 +202,14 @@ const OnboardDealLead: React.FC = () => {
           <div className="flex flex-column gap-5">
             {/* Add deal lead section */}
 
-            <div className="w-5">
+            <div className="w-5 item-min-width">
               <PersonSearch onUpdate={updateDealLeadInfo} />
             </div>
 
             {/* Section showing deal lead information */}
             {dealLeadInfo && (
               <>
-                <div className="flex flex-column gap-2 w-5">
+                <div className="flex flex-column gap-2 w-5 item-min-width">
                   <div className="font-bold text-base">{DEAL_LEAD_DETAILS}</div>
 
                   <PersonInfoCard model={dealLeadInfo} />

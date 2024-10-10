@@ -4,7 +4,7 @@ import AuthGuard from "../guards/AuthGuard";
 import { AppContainer } from "../pages/AppContainer";
 import { DashboardPage } from "../pages/DashboardPage";
 import { CreateDealPage } from "../pages/CreateDealPage";
-import { ResourceListPage } from "../pages/ResourceListPage";
+import { DealDetailPage } from "../pages/DealDetailPage";
 import { CreateResourcePage } from "../pages/CreateResourcePage";
 import { Login } from "../pages/Login";
 import { ErrorPage } from "../pages/ErrorPage";
@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
       },
       {
         path: `${Path.RESOURCES}`,
-        element: <ResourceListPage />,
+        element: <DealDetailPage />,
       },
       {
         path: `${Path.DEALS}/${Path.CREATE_RESOURCE}`,

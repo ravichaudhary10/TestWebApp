@@ -3,6 +3,8 @@ import { MenuItem } from "primereact/menuitem";
 export const BREADCRUMB_HOME_TITLE = "Home";
 export const DEALS_TITLE = "Deals";
 export const HISTORY_TITLE = "History";
+export const CREATE_NEW_DEAL_BUTTON_TITLE = "Create New Deal";
+export const ONBOARD_DEAL_LEAD_BUTTON_TITLE = "Onboard Deal Lead";
 
 export const BREADCRUMB_ITEMS: MenuItem[] = [
   {

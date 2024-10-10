@@ -1,8 +1,9 @@
+import { DASHBOARD_TITLE } from "../../constants/global.constants";
+
 import {
-  CREATE_NEW_DEAL,
-  DASHBOARD_TITLE,
-  EDIT_DEAL,
-} from "../../constants/global.constants";
+  EDIT_DEAL_PAGE_TITLE,
+  CREATE_NEW_DEAL_PAGE_TITLE,
+} from "./CreateDealPage.constants";
 
 export const getBreadcrumbItems = (isEditDealPage: boolean) => {
   return [
@@ -17,10 +18,10 @@ export const getBreadcrumbItems = (isEditDealPage: boolean) => {
       url: "#",
     },
     isEditDealPage
-      ? { icon: "pi pi-pencil", label: EDIT_DEAL }
+      ? { icon: "pi pi-pencil", label: EDIT_DEAL_PAGE_TITLE }
       : {
           icon: "pi pi-folder",
-          label: CREATE_NEW_DEAL,
+          label: CREATE_NEW_DEAL_PAGE_TITLE,
         },
   ];
 };
@@ -31,5 +32,5 @@ export const getBreadcrumbItems = (isEditDealPage: boolean) => {
  * @returns {string}
  */
 export const getPageTitle = (isEditDealPage: boolean) => {
-  return isEditDealPage ? EDIT_DEAL : CREATE_NEW_DEAL;
+  return isEditDealPage ? EDIT_DEAL_PAGE_TITLE : CREATE_NEW_DEAL_PAGE_TITLE;
 };

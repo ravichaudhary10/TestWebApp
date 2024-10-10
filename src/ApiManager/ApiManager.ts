@@ -9,7 +9,7 @@ class ApiManager {
     limit: number
   ) {
     const url = END_POINTS.FETCH_DEALS();
-    const axios = getAxiosInstance("dealDetailAPI");
+    const axios = getAxiosInstance("dealListAPI");
     return axios.post(url, { userId, filters, page, limit });
   }
 
@@ -35,6 +35,18 @@ class ApiManager {
     const url = END_POINTS.FETCH_LINE_FUNCTIONS();
     const axios = getAxiosInstance("lineFunctionsAPI");
     return axios.get(url);
+  }
+
+  static fetchResources(
+    userId: number,
+    dealId: number,
+    filters: Record<string, any>,
+    page: number,
+    limit: number
+  ) {
+    const url = END_POINTS.FETCH_RESOURCES();
+    const axios = getAxiosInstance("resourceListAPI");
+    return axios.post(url, { userId, filters, page, limit });
   }
 
   static login() {

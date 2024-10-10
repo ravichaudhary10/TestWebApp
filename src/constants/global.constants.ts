@@ -15,9 +15,6 @@ export const SUCCESS_MESSAGES = {
 };
 
 export const DASHBOARD_TITLE = "My Dashboard";
-export const CREATE_NEW_DEAL = "Create New Deal";
-export const EDIT_DEAL = "Edit Deal";
-export const ONBOARD_DEAL_LEAD = "Onboard Deal Lead";
 export const CANCEL = "Cancel";
 export const SAVE = "Save";
 export const CONFIRM_LABEL = "Confirm";
@@ -26,11 +23,12 @@ export const ASSIGN_LABEL = "Assign";
 export const DEAL_LEAD_DETAILS = "Deal Lead Details";
 
 export const MOCK_CONFIG: Record<string, boolean> = {
-  dealsListAPI: true,
+  dealListAPI: true,
   dealDetailAPI: true,
   stagesAPI: true,
   therapeuticAreasAPI: true,
   lineFunctionsAPI: true,
+  resourceListAPI: true,
   loginAPI: true,
   searchPersonAPI: true,
   createDealAPI: true,

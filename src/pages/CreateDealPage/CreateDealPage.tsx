@@ -367,7 +367,7 @@ const CreateDealPage: React.FC = () => {
                         autoFocus
                         maxLength={250}
                         className={
-                          "w-5 " +
+                          "w-5 item-min-width " +
                           classNames({ "p-invalid": fieldState.invalid })
                         }
                       />
@@ -401,7 +401,7 @@ const CreateDealPage: React.FC = () => {
                         options={stages || []}
                         optionLabel="label"
                         className={
-                          "w-5 " +
+                          "w-5 item-min-width " +
                           classNames({ "p-invalid": fieldState.invalid })
                         }
                       />
@@ -445,7 +445,7 @@ const CreateDealPage: React.FC = () => {
                         options={therapeuticAreas || []}
                         optionLabel="label"
                         className={
-                          "w-5 " +
+                          "w-5 item-min-width " +
                           classNames({ "p-invalid": fieldState.invalid })
                         }
                       />
@@ -468,7 +468,7 @@ const CreateDealPage: React.FC = () => {
                 <div>
                   {/* Add deal lead section */}
                   {!field.value && (
-                    <div className="flex flex-column gap-2 w-5">
+                    <div className="flex flex-column gap-2 w-5 item-min-width">
                       <div className="font-bold text-base">
                         {ADD_DEAL_LEAD} {requiredFieldIndicator}
                       </div>
@@ -492,7 +492,7 @@ const CreateDealPage: React.FC = () => {
 
                   {/* Section showing deal lead information */}
                   {field.value && (
-                    <div className="flex flex-column gap-2 w-5">
+                    <div className="flex flex-column gap-2 w-5 item-min-width">
                       <div className="font-bold text-base">
                         {DEAL_LEAD_DETAILS}
                       </div>

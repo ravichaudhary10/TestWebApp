@@ -1,5 +1,5 @@
 import { DASHBOARD_TITLE } from "../../constants/global.constants";
-import { ONBOARD_DEAL_LEAD_PAGE_TITLE } from "./OnboardDealLead.constants";
+import { DEAL_DETAIL_PAGE_TITLE } from "./DealDetailPage.constants";
 
 export const getBreadcrumbItems = () => {
   return [
@@ -13,6 +13,6 @@ export const getBreadcrumbItems = () => {
       label: DASHBOARD_TITLE,
       url: "#",
     },
-    { icon: "pi pi-user-plus", label: ONBOARD_DEAL_LEAD_PAGE_TITLE },
+    { icon: "pi pi-folder", label: DEAL_DETAIL_PAGE_TITLE },
   ];
 };
