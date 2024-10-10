@@ -4,7 +4,7 @@
       "id": 1,
       "lineFunction": {
         "id": 1,
-        "name": "S&E"
+        "name": "Alliance Management"
       },
       "name": "Brian Philip",
       "stage": {
@@ -24,8 +24,8 @@
     {
       "id": 2,
       "lineFunction": {
-        "id": 1,
-        "name": "S&E"
+        "id": 2,
+        "name": "Antitrust"
       },
       "name": "Ishika Roy",
       "stage": {

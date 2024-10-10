@@ -6,7 +6,7 @@ import {
   ADD_NEW_RESOURCE_BUTTON_TITLE,
   TAB_MENU_ITEMS,
 } from "./DealDetailPage.constants";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Path } from "../../routes";
 import { ResourceListView } from "../../components/ResourceListView";
 import { Tab } from "./DealDetailPage.types";
@@ -16,8 +16,14 @@ import { TabMenu, TabMenuTabChangeEvent } from "primereact/tabmenu";
 import { Button } from "primereact/button";
 
 const DealDetailPage = () => {
+  // States
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
+
+  // Navigate method
   const navigate = useNavigate();
+
+  // Fetch stateful value from the route
+  const { state } = useLocation();
 
   // If no dealId present in params, return nothing
   const { dealId } = useParams<{ dealId: string }>();
@@ -50,7 +56,7 @@ const DealDetailPage = () => {
       <div className="flex-1  w-11  p-3">
         <Breadcrumb items={getBreadcrumbItems()} />
 
-        <h1 className="font-bold text-xl line-height-2">Deal</h1>
+        <h1 className="font-bold text-xl line-height-2">{state.dealName}</h1>
 
         <div className="flex align-items-center mb-3 w-full">
           <TabMenu

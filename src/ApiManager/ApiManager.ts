@@ -46,7 +46,7 @@ class ApiManager {
   ) {
     const url = END_POINTS.FETCH_RESOURCES();
     const axios = getAxiosInstance("resourceListAPI");
-    return axios.post(url, { userId, filters, page, limit });
+    return axios.post(url, { userId, dealId, filters, page, limit });
   }
 
   static login() {

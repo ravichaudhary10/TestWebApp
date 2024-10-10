@@ -3,7 +3,7 @@ import calendarIcon from "../../assets/icons/calendar.svg";
 // Prime react imports
 import { Calendar } from "primereact/calendar";
 import { ColumnFilterElementTemplateOptions } from "primereact/column";
-import { Dropdown } from "primereact/dropdown";
+import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { MultiSelect, MultiSelectChangeEvent } from "primereact/multiselect";
 import {
@@ -58,7 +58,7 @@ export const paginatorTemplate = {
   },
 };
 
-const multiSelectListItemTemplate = (option: SelectItem) => {
+const listItemTemplate = (option: SelectItem) => {
   return (
     <div key={option.value} className="flex align-items-center gap-2">
       <span>{option.label}</span>
@@ -67,7 +67,7 @@ const multiSelectListItemTemplate = (option: SelectItem) => {
 };
 
 /**
- * Filter field template for multi select column
+ * Multiselect filter field template
  * @param data
  * @returns
  */
@@ -79,7 +79,7 @@ export const multiSelectFilterTemplate =
         <MultiSelect
           value={options.value}
           options={data || []}
-          itemTemplate={multiSelectListItemTemplate}
+          itemTemplate={listItemTemplate}
           onChange={(e: MultiSelectChangeEvent) =>
             options.filterApplyCallback(e.value)
           }
@@ -91,7 +91,31 @@ export const multiSelectFilterTemplate =
               : null
           }
           maxSelectedLabels={1}
-          // style={{ minWidth: "12rem" }}
+        />
+        <label>Select</label>
+      </div>
+    );
+  };
+
+/**
+ * Dropdown filter field template
+ * @param data
+ * @returns
+ */
+export const dropdownFilterTemplate =
+  (data: SelectItem[] | null) =>
+  (options: ColumnFilterElementTemplateOptions) => {
+    return (
+      <div className="p-float-label">
+        <Dropdown
+          value={options.value}
+          options={data || []}
+          itemTemplate={listItemTemplate}
+          onChange={(e: DropdownChangeEvent) =>
+            options.filterApplyCallback(e.value)
+          }
+          optionLabel="label"
+          className="p-column-filter"
         />
         <label>Select</label>
       </div>
@@ -137,4 +161,13 @@ export const inputTextFilterTemplate = (
       <label>Search</label>
     </div>
   );
+};
+
+/**
+ * Content template for any boolean column
+ * @param rowData
+ * @returns
+ */
+export const booleanFieldBodyTemplate = (fieldName: any) => (rowData: any) => {
+  return <span>{rowData[fieldName] ? "Yes" : "No"}</span>;
 };

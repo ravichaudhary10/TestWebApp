@@ -1,7 +1,28 @@
 import resourceData from "./data/resourceData.json";
 import { axiosMockAdapterInstance as mock } from "../utils/axios";
 import wait from "../utils/wait";
-import { Resource } from "../components/ResourceListView";
+import { Resource, ResourceListField } from "../components/ResourceListView";
+
+const LIST_FIELDS = [
+  ResourceListField.LINE_FUNCTION,
+  ResourceListField.STAGE,
+  ResourceListField.WEB_TRAINING,
+];
+
+const TEXT_FIELDS = [
+  ResourceListField.NAME,
+  ResourceListField.TITLE,
+  ResourceListField.EMAIL,
+  ResourceListField.NOVARTIS_ID,
+  ResourceListField.KICK_OFF_ATTENDANCE,
+  ResourceListField.OPTIONAL,
+  ResourceListField.SITE,
+];
+
+const BOOLEAN_FIELDS = [
+  ResourceListField.VDR_ACCESS,
+  ResourceListField.CORE_TEAM_MEMBER,
+];
 
 mock.onPost("/resources/list").reply(async (config: any) => {
   try {
@@ -13,20 +34,37 @@ mock.onPost("/resources/list").reply(async (config: any) => {
 
     if (filters) {
       data = data.filter((item: Resource) => {
-        // Filter by name
-        if (
-          filters.name &&
-          !(item.name as any).toLowerCase().includes(filters.name.toLowerCase())
-        ) {
-          return false;
+        // Filter by all text fields
+        for (const field of TEXT_FIELDS) {
+          if (
+            filters[field] &&
+            !(item[field] as any)
+              .toLowerCase()
+              .includes(filters[field].toLowerCase())
+          ) {
+            return false;
+          }
         }
 
-        // Filter by stage
-        if (
-          filters.stage?.length &&
-          !(filters.stage as any).includes((item.stage as any).id)
-        ) {
-          return false;
+        // Filter by all list fields
+        for (const field of LIST_FIELDS) {
+          if (
+            filters[field]?.length &&
+            !(filters[field] as any).includes(
+              typeof item[field] === "object"
+                ? (item[field] as any).id
+                : (item[field] as string).toLowerCase()
+            )
+          ) {
+            return false;
+          }
+        }
+
+        // Filter by all text fields
+        for (const field of BOOLEAN_FIELDS) {
+          if (filters[field] !== null && item[field] !== filters[field]) {
+            return false;
+          }
         }
 
         return true;

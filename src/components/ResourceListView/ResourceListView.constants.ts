@@ -22,13 +22,13 @@ export const CLEAR_ALL_LABEL = "Clear All";
 // Dropdown options
 export const webTrainingOptions = [
   { label: "Not Started", value: "not started" },
-  { label: "In-Progress", value: "in-progress" },
+  { label: "In-progress", value: "in-progress" },
   { label: "Completed", value: "completed" },
 ];
 
 export const booleanOptions = [
-  { label: "Yes", value: "yes" },
-  { label: "No", value: "no" },
+  { label: "Yes", value: true },
+  { label: "No", value: false },
 ];
 
 // Intial values of inline filters

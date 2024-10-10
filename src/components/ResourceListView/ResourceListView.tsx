@@ -41,7 +41,9 @@ import {
 import {
   paginatorTemplate,
   multiSelectFilterTemplate,
+  dropdownFilterTemplate,
   inputTextFilterTemplate,
+  booleanFieldBodyTemplate,
 } from "../../utils/templates";
 
 import {
@@ -91,6 +93,7 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
     // Fetches the resources satisfying the filters, page and limit parameters
     const fetchResources = async (
       userId: number,
+      dealId: number,
       filters: Record<string, any>,
       page: number,
       limit: number
@@ -119,6 +122,7 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
     user?.id &&
       fetchResources(
         user.id,
+        dealId,
         getFilterPayload(lazyState.filters),
         lazyState.page + 1,
         lazyState.rows
@@ -282,6 +286,7 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
         tableStyle={{ minWidth: "75rem" }}
         emptyMessage={EMPTY_MESSAGE}
         selectionMode="single"
+        scrollable
       >
         <Column
           field={ResourceListField.LINE_FUNCTION + ".name"}
@@ -300,7 +305,7 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
           showFilterMenu={false}
           filterField={ResourceListField.NAME}
           filterElement={inputTextFilterTemplate}
-          style={{ minWidth: "10rem" }}
+          style={{ minWidth: "15rem" }}
         />
         <Column
           field={ResourceListField.TITLE}
@@ -310,7 +315,7 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
           showFilterMenu={false}
           filterField={ResourceListField.TITLE}
           filterElement={inputTextFilterTemplate}
-          style={{ minWidth: "10rem" }}
+          style={{ minWidth: "15rem" }}
         />
         <Column
           field={ResourceListField.EMAIL}
@@ -320,7 +325,7 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
           showFilterMenu={false}
           filterField={ResourceListField.EMAIL}
           filterElement={inputTextFilterTemplate}
-          style={{ minWidth: "10rem" }}
+          style={{ minWidth: "15rem" }}
         />
         <Column
           field={ResourceListField.STAGE + ".name"}
@@ -329,14 +334,15 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
           showFilterMenu={false}
           filterField={ResourceListField.STAGE}
           filterElement={multiSelectFilterTemplate(stages)}
-          style={{ minWidth: "10rem" }}
+          style={{ minWidth: "15rem" }}
         />
         <Column
+          body={booleanFieldBodyTemplate(ResourceListField.VDR_ACCESS)}
           field={ResourceListField.VDR_ACCESS}
           header={VDR_ACCESS}
           filter
           showFilterMenu={false}
-          filterElement={multiSelectFilterTemplate(booleanOptions)}
+          filterElement={dropdownFilterTemplate(booleanOptions)}
           style={{ minWidth: "15rem" }}
         />
         <Column
@@ -355,7 +361,7 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
           showFilterMenu={false}
           filterField={ResourceListField.NOVARTIS_ID}
           filterElement={inputTextFilterTemplate}
-          style={{ minWidth: "10rem" }}
+          style={{ minWidth: "15rem" }}
         />
         <Column
           field={ResourceListField.KICK_OFF_ATTENDANCE}
@@ -365,7 +371,7 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
           showFilterMenu={false}
           filterField={ResourceListField.KICK_OFF_ATTENDANCE}
           filterElement={inputTextFilterTemplate}
-          style={{ minWidth: "10rem" }}
+          style={{ minWidth: "15rem" }}
         />
         <Column
           field={ResourceListField.OPTIONAL}
@@ -375,14 +381,15 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
           showFilterMenu={false}
           filterField={ResourceListField.OPTIONAL}
           filterElement={inputTextFilterTemplate}
-          style={{ minWidth: "10rem" }}
+          style={{ minWidth: "15rem" }}
         />
         <Column
+          body={booleanFieldBodyTemplate(ResourceListField.CORE_TEAM_MEMBER)}
           field={ResourceListField.CORE_TEAM_MEMBER}
           header={CORE_TEAM_MEMBER}
           filter
           showFilterMenu={false}
-          filterElement={multiSelectFilterTemplate(booleanOptions)}
+          filterElement={dropdownFilterTemplate(booleanOptions)}
           style={{ minWidth: "15rem" }}
         />
         <Column
@@ -393,7 +400,7 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
           showFilterMenu={false}
           filterField={ResourceListField.SITE}
           filterElement={inputTextFilterTemplate}
-          style={{ minWidth: "10rem" }}
+          style={{ minWidth: "15rem" }}
         />
         <Column
           field="actions"
