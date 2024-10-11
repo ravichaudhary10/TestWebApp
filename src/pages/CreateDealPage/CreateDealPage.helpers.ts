@@ -10,12 +10,11 @@ export const getBreadcrumbItems = (isEditDealPage: boolean) => {
     {
       icon: "pi pi-arrow-left",
       label: "Go back",
-      url: "#",
     },
     {
       icon: "pi pi-home",
       label: DASHBOARD_TITLE,
-      url: "#",
+      url: "/",
     },
     isEditDealPage
       ? { icon: "pi pi-pencil", label: EDIT_DEAL_PAGE_TITLE }

@@ -1,5 +1,3 @@
-import calendarIcon from "../../assets/icons/calendar.svg";
-
 // Prime react imports
 import { Calendar } from "primereact/calendar";
 import { ColumnFilterElementTemplateOptions } from "primereact/column";

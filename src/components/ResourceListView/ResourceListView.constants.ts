@@ -17,7 +17,6 @@ export const SITE = "Site";
 
 // Other labels
 export const EMPTY_MESSAGE = "No resources found.";
-export const CLEAR_ALL_LABEL = "Clear All";
 
 // Dropdown options
 export const webTrainingOptions = [

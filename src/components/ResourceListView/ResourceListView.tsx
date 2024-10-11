@@ -1,12 +1,8 @@
 import React, { useState, useEffect, SyntheticEvent } from "react";
 import { Resource, ResourceListField } from "./ResourceListView.types";
 import { LazyTableState } from "../../types/commonTypes";
-import editIcon from "../../assets/icons/edit.svg";
-import deleteIcon from "../../assets/icons/delete.svg";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getFilterPayload } from "../../utils/getFilterPayload";
-import { Link } from "react-router-dom";
-import { Path } from "../../routes";
 
 import {
   LINE_FUNCTION,
@@ -23,19 +19,15 @@ import {
   SITE,
   EMPTY_MESSAGE,
   INITIAL_FILTERS,
-  CLEAR_ALL_LABEL,
 } from "./ResourceListView.constants";
-import {
-  DEAL_DELETION_CONFIRMATION_HEADER,
-  DEAL_DELETION_CONFIRMATION_MSG,
-} from "../../pages/CreateDealPage/CreateDealPage.constants";
+
 import ApiManager from "../../ApiManager/ApiManager";
 import { handleError } from "../../utils/handleError";
-import { handleSuccess } from "../../utils/handleSuccess";
+
 import {
-  SUCCESS_MESSAGES,
   CONFIRM_LABEL,
   CANCEL_LABEL,
+  CLEAR_ALL_LABEL,
 } from "../../constants/global.constants";
 
 import {
@@ -73,6 +65,7 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
     totalRecords: number;
   } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
   // Create lazy state for the data table
   const [lazyState, setlazyState] = useState<LazyTableState>({
     first: 0,
@@ -137,24 +130,19 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
   const actionColumnTemplate = (rowData: Resource) => {
     return (
       <div className="flex justify-content-center">
-        <Link to={`${Path.UPDATE_DEAL}/${rowData.id}`}>
-          <img
-            src={editIcon}
-            alt="Edit Resource Button"
-            style={{ padding: "0 0.5rem" }}
-          />
-        </Link>
-
-        <div
-          onClick={() => handleDealDeletion(rowData.id)}
-          style={{ cursor: "pointer" }}
-        >
-          <img
-            src={deleteIcon}
-            alt="Delete Resource Button"
-            style={{ padding: "0 1.5rem" }}
-          />
-        </div>
+        <Button
+          icon="pi pi-pencil"
+          rounded
+          text
+          aria-label="Edit Resource Button"
+          style={{ padding: "0 0.5rem", height: "1.6rem" }}
+        />
+        <Button
+          icon="pi pi-trash"
+          text
+          aria-label="Delete Resource Button"
+          style={{ padding: "0 0.5rem", height: "1.6rem" }}
+        />
       </div>
     );
   };
@@ -211,49 +199,6 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
       const value = (item as DataTableFilterMetaData).value;
       return Boolean(value?.toString());
     });
-  };
-
-  /**
-   * Handles deletion of deal by showing a confirmation popup before deletion
-   * @param id {number} Id of the deal to be deleted
-   */
-  const handleDealDeletion = (id: number) => {
-    if (id && user?.id) {
-      const accept = () => {
-        deleteDeal(id, user.id);
-      };
-
-      confirmDialog({
-        message: DEAL_DELETION_CONFIRMATION_MSG,
-        header: DEAL_DELETION_CONFIRMATION_HEADER,
-        accept,
-      });
-    }
-  };
-
-  /**
-   * Deletes a deal with given deal Id by making API call and passing on required data.
-   * @param dealId - Id of the deal to be deleted.
-   * @param userId - If of the logged in user.
-   */
-  const deleteDeal = async (dealId: number, userId: number) => {
-    // Show loading spinner
-    setIsLoading(true);
-
-    try {
-      await ApiManager.deleteDeal(dealId, userId);
-
-      // Show success toast
-      handleSuccess(dispatch, SUCCESS_MESSAGES.DEAL_DELETION_SUCCESS);
-
-      // Rerender the deal list to fetch latest deals
-      setlazyState({ ...lazyState });
-    } catch (error: any) {
-      // Show error toast
-      handleError(dispatch, error);
-    } finally {
-      setIsLoading(false);
-    }
   };
 
   return (

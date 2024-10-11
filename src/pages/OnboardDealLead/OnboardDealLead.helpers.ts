@@ -6,12 +6,11 @@ export const getBreadcrumbItems = () => {
     {
       icon: "pi pi-arrow-left",
       label: "Go back",
-      url: "#",
     },
     {
       icon: "pi pi-home",
       label: DASHBOARD_TITLE,
-      url: "#",
+      url: "/",
     },
     { icon: "pi pi-user-plus", label: ONBOARD_DEAL_LEAD_PAGE_TITLE },
   ];

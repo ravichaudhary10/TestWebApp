@@ -1,12 +1,14 @@
 import React, { useState, useEffect, SyntheticEvent } from "react";
 import { Deal, DealListField } from "./DealListView.types";
 import { LazyTableState } from "../../types/commonTypes";
-import editIcon from "../../assets/icons/edit.svg";
-import deleteIcon from "../../assets/icons/delete.svg";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getFilterPayload } from "../../utils/getFilterPayload";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Path } from "../../routes";
+import ApiManager from "../../ApiManager/ApiManager";
+import { handleError } from "../../utils/handleError";
+import { handleSuccess } from "../../utils/handleSuccess";
+
 import {
   paginatorTemplate,
   inputTextFilterTemplate,
@@ -23,19 +25,18 @@ import {
   MODIFIED_AT,
   EMPTY_MESSAGE,
   INITIAL_FILTERS,
-  CLEAR_ALL_LABEL,
 } from "./DealListView.constants";
+
 import {
   DEAL_DELETION_CONFIRMATION_HEADER,
   DEAL_DELETION_CONFIRMATION_MSG,
 } from "../../pages/CreateDealPage/CreateDealPage.constants";
-import ApiManager from "../../ApiManager/ApiManager";
-import { handleError } from "../../utils/handleError";
-import { handleSuccess } from "../../utils/handleSuccess";
+
 import {
   SUCCESS_MESSAGES,
   CONFIRM_LABEL,
   CANCEL_LABEL,
+  CLEAR_ALL_LABEL,
 } from "../../constants/global.constants";
 
 // PrimeReact imports
@@ -67,6 +68,9 @@ const DealListView: React.FC = () => {
 
   // Dispatch function
   const dispatch = useAppDispatch();
+
+  // Navigate method
+  const navigate = useNavigate();
 
   // Selectors
   const user = useAppSelector((state) => state.user);
@@ -118,24 +122,21 @@ const DealListView: React.FC = () => {
   const actionColumnTemplate = (rowData: Deal) => {
     return (
       <div className="flex justify-content-center">
-        <Link to={`${Path.UPDATE_DEAL}/${rowData.id}`}>
-          <img
-            src={editIcon}
-            alt="Edit Deal Button"
-            style={{ padding: "0 0.5rem" }}
-          />
-        </Link>
-
-        <div
+        <Button
+          icon="pi pi-pencil"
+          rounded
+          text
+          aria-label="Edit Resource Button"
+          style={{ padding: "0 0.5rem", height: "1.6rem" }}
+          onClick={() => navigate(`${Path.UPDATE_DEAL}/${rowData.id}`)}
+        />
+        <Button
+          icon="pi pi-trash"
+          text
+          aria-label="Delete Resource Button"
+          style={{ padding: "0 0.5rem", height: "1.6rem" }}
           onClick={() => handleDealDeletion(rowData.id)}
-          style={{ cursor: "pointer" }}
-        >
-          <img
-            src={deleteIcon}
-            alt="Delete Deal Button"
-            style={{ padding: "0 1.5rem" }}
-          />
-        </div>
+        />
       </div>
     );
   };

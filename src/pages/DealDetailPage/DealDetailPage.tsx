@@ -54,7 +54,7 @@ const DealDetailPage = () => {
       <Header />
 
       <div className="flex-1  w-11  p-3">
-        <Breadcrumb items={getBreadcrumbItems()} />
+        <Breadcrumb items={getBreadcrumbItems(navigate)} />
 
         <h1 className="font-bold text-xl line-height-2">{state.dealName}</h1>
 

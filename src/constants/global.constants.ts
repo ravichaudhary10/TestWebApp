@@ -21,6 +21,7 @@ export const CONFIRM_LABEL = "Confirm";
 export const CANCEL_LABEL = "Cancel";
 export const ASSIGN_LABEL = "Assign";
 export const DEAL_LEAD_DETAILS = "Deal Lead Details";
+export const CLEAR_ALL_LABEL = "Clear All";
 
 export const MOCK_CONFIG: Record<string, boolean> = {
   dealListAPI: true,

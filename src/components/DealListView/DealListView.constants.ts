@@ -11,7 +11,6 @@ export const MODIFIED_BY = "Modified By";
 export const MODIFIED_AT = "Date Modified";
 export const DEAL_LEAD = "Deal Lead";
 export const EMPTY_MESSAGE = "No deals found.";
-export const CLEAR_ALL_LABEL = "Clear All";
 
 export const INITIAL_FILTERS: DataTableFilterMeta = {
   [DealListField.NAME]: { value: null, matchMode: "contains" },
