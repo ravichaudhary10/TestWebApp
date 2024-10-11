@@ -85,7 +85,13 @@ export const multiSelectFilterTemplate =
           className="p-column-filter"
           tooltip={
             options.value && options.value.length > 1
-              ? options.value?.map((item: string) => item)
+              ? options.value
+                  ?.map(
+                    (value: string) =>
+                      (data as any).find((item: any) => item.value === value)
+                        .label
+                  )
+                  .join(", ")
               : null
           }
           maxSelectedLabels={1}

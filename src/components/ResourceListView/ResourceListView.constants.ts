@@ -20,8 +20,8 @@ export const EMPTY_MESSAGE = "No resources found.";
 
 // Dropdown options
 export const webTrainingOptions = [
-  { label: "Not Started", value: "not started" },
-  { label: "In-progress", value: "in-progress" },
+  { label: "Not Started", value: "Not Started" },
+  { label: "In-progress", value: "In-progress" },
   { label: "Completed", value: "completed" },
 ];
 

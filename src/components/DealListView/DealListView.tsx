@@ -380,6 +380,7 @@ const DealListView: React.FC = () => {
           showFilterMenu={false}
           showClearButton={false}
           filterElement={clearFilterTemplate}
+          style={{ minWidth: "110px" }}
         ></Column>
       </DataTable>
     </div>
