@@ -81,3 +81,65 @@ export const getBreadcrumbItems = (isEditPage: boolean) => {
 export const getPageTitle = (isEditPage: boolean) => {
   return isEditPage ? EDIT_RESOURCE_PAGE_TITLE : ADD_RESOURCE_PAGE_TITLE;
 };
+
+/**
+ * Generates the payload required for "Add Resource" API call
+ * @param formData
+ * @param userId
+ * @param dealId
+ * @returns Payload object
+ */
+export const getAddResourcePayload = (
+  formData: any,
+  userId: number,
+  dealId: number
+) => ({
+  userId,
+  dealId,
+  resource: getResourcePayload(formData),
+});
+
+/**
+ * Generates the payload required for "Update Resource" API call
+ * @param formData
+ * @param userId
+ * @param dealId
+ * @param stageId
+ * @param resourceId
+ * @returns Payload object
+ */
+export const getUpdateResourcePayload = (
+  formData: any,
+  userId: number,
+  dealId: number,
+  stageId: number,
+  resourceId: number
+) => ({
+  userId,
+  dealId,
+  stageId,
+  resource: { resourceId, ...getResourcePayload(formData) },
+});
+
+/**
+ * Generates payload for resource data
+ * @param formData
+ * @returns Payload for resource data
+ */
+const getResourcePayload = (formData: any) => {
+  // Form payload for resource being added/updated
+  return {
+    [ResourceListField.EMAIL]: formData[RESOURCE_DETAILS_KEY].email,
+    stages: formData.stages,
+    [ResourceListField.LINE_FUNCTION]:
+      formData[ResourceListField.LINE_FUNCTION],
+    [ResourceListField.VDR_ACCESS]:
+      formData[ResourceListField.VDR_ACCESS] === "yes",
+    [ResourceListField.WEB_TRAINING]: formData[ResourceListField.WEB_TRAINING],
+    [ResourceListField.KICK_OFF_ATTENDANCE]:
+      formData[ResourceListField.KICK_OFF_ATTENDANCE],
+    [ResourceListField.CORE_TEAM_MEMBER]:
+      formData[ResourceListField.CORE_TEAM_MEMBER] === "yes",
+    [ResourceListField.OPTIONAL]: formData[ResourceListField.OPTIONAL],
+  };
+};

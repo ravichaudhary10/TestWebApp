@@ -27,6 +27,8 @@ import {
 } from "../../constants/global.constants";
 
 import {
+  getAddResourcePayload,
+  getUpdateResourcePayload,
   getBreadcrumbItems,
   getFormValues,
   getPageTitle,
@@ -150,48 +152,38 @@ const AddResourcePage: React.FC = () => {
    */
   const handleSave = (formData: any) => {
     // Validate dealId
-    if (!isValidId(dealId)) {
+    if (!isValidId(dealId) || !user?.id) {
       return;
     }
 
-    // Form payload
-    const payload = {
-      userId: user?.id,
-      dealId: parseInt(dealId),
-      resources: [
-        {
-          [ResourceListField.EMAIL]: formData[RESOURCE_DETAILS_KEY].email,
-          stages: formData.stages,
-          [ResourceListField.LINE_FUNCTION]:
-            formData[ResourceListField.LINE_FUNCTION],
-          [ResourceListField.VDR_ACCESS]:
-            formData[ResourceListField.VDR_ACCESS] === "yes",
-          [ResourceListField.WEB_TRAINING]:
-            formData[ResourceListField.WEB_TRAINING],
-          [ResourceListField.KICK_OFF_ATTENDANCE]:
-            formData[ResourceListField.KICK_OFF_ATTENDANCE],
-          [ResourceListField.CORE_TEAM_MEMBER]:
-            formData[ResourceListField.CORE_TEAM_MEMBER] === "yes",
-          [ResourceListField.OPTIONAL]: formData[ResourceListField.OPTIONAL],
-        },
-      ],
-    };
+    let payload;
+    if (isValidId(resourceId) && isValidId(stageId)) {
+      payload = getUpdateResourcePayload(
+        formData,
+        user.id,
+        parseInt(dealId),
+        parseInt(stageId),
+        parseInt(resourceId)
+      );
+    } else {
+      payload = getAddResourcePayload(formData, user.id, parseInt(dealId));
+    }
 
-    // Add the resource
-    addResource(payload);
+    // Add or update resource
+    addOrUpdateResource(payload);
   };
 
   /**
    * Adds/updates a resource by making an API call and passing required data
    * @param data - Payload for create/edit resource API call
    */
-  const addResource = async (data: any) => {
+  const addOrUpdateResource = async (data: any) => {
     try {
       // Show loading spinner
       setIsLoading(true);
 
       // Check whether we are adding or updating the resource
-      if (dealId && resourceId && stageId) {
+      if (!!resourceId) {
         await ApiManager.updateResource(data);
 
         // Show success toast
