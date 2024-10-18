@@ -38,7 +38,6 @@ class ApiManager {
   }
 
   static fetchResources(
-    userId: number,
     dealId: number,
     filters: Record<string, any>,
     page: number,
@@ -46,7 +45,17 @@ class ApiManager {
   ) {
     const url = END_POINTS.FETCH_RESOURCES();
     const axios = getAxiosInstance("resourceListAPI");
-    return axios.post(url, { userId, dealId, filters, page, limit });
+    return axios.post(url, { dealId, filters, page, limit });
+  }
+
+  static fetchResourceDetail(
+    resourceId: number,
+    dealId: number,
+    stageId: number
+  ) {
+    const url = END_POINTS.FETCH_RESOURCE_DETAIL();
+    const axios = getAxiosInstance("resourceDetailAPI");
+    return axios.get(url, { params: { resourceId, dealId, stageId } });
   }
 
   static login() {
@@ -83,6 +92,18 @@ class ApiManager {
     const url = END_POINTS.ASSIGN_TA();
     const axios = getAxiosInstance("taAssignAPI");
     return axios.post(url, data);
+  }
+
+  static addResources(data: any) {
+    const url = END_POINTS.ADD_RESOURCES();
+    const axios = getAxiosInstance("addResourcesAPI");
+    return axios.post(url, data);
+  }
+
+  static updateResource(data: any) {
+    const url = END_POINTS.UPDATE_RESOURCE();
+    const axios = getAxiosInstance("updateResourceAPI");
+    return axios.put(url, data);
   }
 }
 

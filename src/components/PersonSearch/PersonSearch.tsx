@@ -95,6 +95,7 @@ const PersonSearch: React.FC<PersonSearchProps> = ({
         <div className="p-float-label flex-1">
           <InputText
             value={email}
+            autoComplete="new"
             onChange={handleInputChange}
             className={`${className} w-12`}
           ></InputText>

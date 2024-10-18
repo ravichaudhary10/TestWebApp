@@ -5,7 +5,7 @@ import { AppContainer } from "../pages/AppContainer";
 import { DashboardPage } from "../pages/DashboardPage";
 import { CreateDealPage } from "../pages/CreateDealPage";
 import { DealDetailPage } from "../pages/DealDetailPage";
-import { CreateResourcePage } from "../pages/CreateResourcePage";
+import AddResourcePage from "../pages/AddResourcePage/AddResourcePage";
 import { Login } from "../pages/Login";
 import { ErrorPage } from "../pages/ErrorPage";
 import { OnboardDealLead } from "../pages/OnboardDealLead";
@@ -40,12 +40,16 @@ export const router = createBrowserRouter([
         element: <OnboardDealLead />,
       },
       {
-        path: `${Path.RESOURCES}`,
+        path: `${Path.RESOURCES}/:dealId`,
         element: <DealDetailPage />,
       },
       {
-        path: `${Path.DEALS}/${Path.CREATE_RESOURCE}`,
-        element: <CreateResourcePage />,
+        path: `${Path.RESOURCES}/:dealId/${Path.ADD_RESOURCE}`,
+        element: <AddResourcePage />,
+      },
+      {
+        path: `${Path.RESOURCES}/:dealId/${Path.UPDATE_RESOURCE}/:resourceId/stage/:stageId`,
+        element: <AddResourcePage />,
       },
     ],
   },

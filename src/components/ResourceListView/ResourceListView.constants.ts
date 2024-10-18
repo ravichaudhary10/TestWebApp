@@ -8,9 +8,9 @@ export const TITLE = "Title";
 export const EMAIL = "Email";
 export const STAGE = "Stage";
 export const VDR_ACCESS = "VDR Access";
-export const WEB_TRAINING = "Web-base Training";
+export const WEB_TRAINING = "Web-based Training";
 export const NOVARTIS_ID = "Novartis 521 Id";
-export const KICK_OFF_ATTENDANCE = "Kickoff Attendance";
+export const KICK_OFF_ATTENDANCE = "Kick-off attendance or 1:1 discussions";
 export const OPTIONAL = "Optional";
 export const CORE_TEAM_MEMBER = "Core Team Member";
 export const SITE = "Site";
@@ -20,14 +20,14 @@ export const EMPTY_MESSAGE = "No resources found.";
 
 // Dropdown options
 export const webTrainingOptions = [
-  { label: "Not Started", value: "Not Started" },
-  { label: "In-progress", value: "In-progress" },
+  { label: "Not Started", value: "not started" },
+  { label: "In-Progress", value: "in-progress" },
   { label: "Completed", value: "completed" },
 ];
 
 export const booleanOptions = [
-  { label: "Yes", value: true },
-  { label: "No", value: false },
+  { label: "Yes", value: "yes" },
+  { label: "No", value: "no" },
 ];
 
 // Intial values of inline filters

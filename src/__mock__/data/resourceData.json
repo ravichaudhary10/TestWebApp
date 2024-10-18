@@ -2,11 +2,14 @@
   "data": [
     {
       "id": 1,
+      "recordId": 1,
       "lineFunction": {
         "id": 1,
         "name": "Alliance Management"
       },
       "name": "Brian Philip",
+      "firstName": "Brian",
+      "lastName": "Philip",
       "stage": {
         "id": 1,
         "name": "Triage"
@@ -23,11 +26,326 @@
     },
     {
       "id": 2,
+      "recordId": 2,
       "lineFunction": {
         "id": 2,
         "name": "Antitrust"
       },
       "name": "Ishika Roy",
+      "firstName": "Ishika",
+      "lastName": "Roy",
+      "stage": {
+        "id": 1,
+        "name": "Triage"
+      },
+      "title": "Director of Operations",
+      "email": "ishika.roy@test.com",
+      "vdrAccessRequested": false,
+      "webTrainingStatus": "In-progress",
+      "novartis521ID": "ROYISHIK",
+      "isCoreTeamMember": true,
+      "oneToOneDiscussion": "Sample text",
+      "optionalColumn": "Sample text",
+      "siteCode": "chbs"
+    },
+    {
+      "id": 2,
+      "recordId": 3,
+      "lineFunction": {
+        "id": 2,
+        "name": "Antitrust"
+      },
+      "name": "Ishika Roy",
+      "firstName": "Ishika",
+      "lastName": "Roy",
+      "stage": {
+        "id": 1,
+        "name": "Triage"
+      },
+      "title": "Director of Operations",
+      "email": "ishika.roy@test.com",
+      "vdrAccessRequested": false,
+      "webTrainingStatus": "In-progress",
+      "novartis521ID": "ROYISHIK",
+      "isCoreTeamMember": true,
+      "oneToOneDiscussion": "Sample text",
+      "optionalColumn": "Sample text",
+      "siteCode": "chbs"
+    },
+    {
+      "id": 3,
+      "recordId": 4,
+      "lineFunction": {
+        "id": 2,
+        "name": "Antitrust"
+      },
+      "name": "Ishika Roy",
+      "firstName": "Ishika",
+      "lastName": "Roy",
+      "stage": {
+        "id": 1,
+        "name": "Triage"
+      },
+      "title": "Director of Operations",
+      "email": "ishika.roy@test.com",
+      "vdrAccessRequested": false,
+      "webTrainingStatus": "In-progress",
+      "novartis521ID": "ROYISHIK",
+      "isCoreTeamMember": true,
+      "oneToOneDiscussion": "Sample text",
+      "optionalColumn": "Sample text",
+      "siteCode": "chbs"
+    },
+    {
+      "id": 4,
+      "recordId": 5,
+      "lineFunction": {
+        "id": 2,
+        "name": "Antitrust"
+      },
+      "name": "Ishika Roy",
+      "firstName": "Ishika",
+      "lastName": "Roy",
+      "stage": {
+        "id": 1,
+        "name": "Triage"
+      },
+      "title": "Director of Operations",
+      "email": "ishika.roy@test.com",
+      "vdrAccessRequested": false,
+      "webTrainingStatus": "In-progress",
+      "novartis521ID": "ROYISHIK",
+      "isCoreTeamMember": true,
+      "oneToOneDiscussion": "Sample text",
+      "optionalColumn": "Sample text",
+      "siteCode": "chbs"
+    },
+    {
+      "id": 5,
+      "recordId": 6,
+      "lineFunction": {
+        "id": 2,
+        "name": "Antitrust"
+      },
+      "name": "Ishika Roy",
+      "firstName": "Ishika",
+      "lastName": "Roy",
+      "stage": {
+        "id": 1,
+        "name": "Triage"
+      },
+      "title": "Director of Operations",
+      "email": "ishika.roy@test.com",
+      "vdrAccessRequested": false,
+      "webTrainingStatus": "In-progress",
+      "novartis521ID": "ROYISHIK",
+      "isCoreTeamMember": true,
+      "oneToOneDiscussion": "Sample text",
+      "optionalColumn": "Sample text",
+      "siteCode": "chbs"
+    },
+    {
+      "id": 6,
+      "recordId": 7,
+      "lineFunction": {
+        "id": 2,
+        "name": "Antitrust"
+      },
+      "name": "Ishika Roy",
+      "firstName": "Ishika",
+      "lastName": "Roy",
+      "stage": {
+        "id": 1,
+        "name": "Triage"
+      },
+      "title": "Director of Operations",
+      "email": "ishika.roy@test.com",
+      "vdrAccessRequested": false,
+      "webTrainingStatus": "In-progress",
+      "novartis521ID": "ROYISHIK",
+      "isCoreTeamMember": true,
+      "oneToOneDiscussion": "Sample text",
+      "optionalColumn": "Sample text",
+      "siteCode": "chbs"
+    },
+    {
+      "id": 7,
+      "recordId": 8,
+      "lineFunction": {
+        "id": 2,
+        "name": "Antitrust"
+      },
+      "name": "Ishika Roy",
+      "firstName": "Ishika",
+      "lastName": "Roy",
+      "stage": {
+        "id": 1,
+        "name": "Triage"
+      },
+      "title": "Director of Operations",
+      "email": "ishika.roy@test.com",
+      "vdrAccessRequested": false,
+      "webTrainingStatus": "In-progress",
+      "novartis521ID": "ROYISHIK",
+      "isCoreTeamMember": true,
+      "oneToOneDiscussion": "Sample text",
+      "optionalColumn": "Sample text",
+      "siteCode": "chbs"
+    },
+    {
+      "id": 8,
+      "recordId": 9,
+      "lineFunction": {
+        "id": 2,
+        "name": "Antitrust"
+      },
+      "name": "Ishika Roy",
+      "firstName": "Ishika",
+      "lastName": "Roy",
+      "stage": {
+        "id": 1,
+        "name": "Triage"
+      },
+      "title": "Director of Operations",
+      "email": "ishika.roy@test.com",
+      "vdrAccessRequested": false,
+      "webTrainingStatus": "In-progress",
+      "novartis521ID": "ROYISHIK",
+      "isCoreTeamMember": true,
+      "oneToOneDiscussion": "Sample text",
+      "optionalColumn": "Sample text",
+      "siteCode": "chbs"
+    },
+    {
+      "id": 9,
+      "recordId": 10,
+      "lineFunction": {
+        "id": 2,
+        "name": "Antitrust"
+      },
+      "name": "Ishika Roy",
+      "firstName": "Ishika",
+      "lastName": "Roy",
+      "stage": {
+        "id": 1,
+        "name": "Triage"
+      },
+      "title": "Director of Operations",
+      "email": "ishika.roy@test.com",
+      "vdrAccessRequested": false,
+      "webTrainingStatus": "In-progress",
+      "novartis521ID": "ROYISHIK",
+      "isCoreTeamMember": true,
+      "oneToOneDiscussion": "Sample text",
+      "optionalColumn": "Sample text",
+      "siteCode": "chbs"
+    },
+    {
+      "id": 10,
+      "recordId": 11,
+      "lineFunction": {
+        "id": 2,
+        "name": "Antitrust"
+      },
+      "name": "Ishika Roy",
+      "firstName": "Ishika",
+      "lastName": "Roy",
+      "stage": {
+        "id": 1,
+        "name": "Triage"
+      },
+      "title": "Director of Operations",
+      "email": "ishika.roy@test.com",
+      "vdrAccessRequested": false,
+      "webTrainingStatus": "In-progress",
+      "novartis521ID": "ROYISHIK",
+      "isCoreTeamMember": true,
+      "oneToOneDiscussion": "Sample text",
+      "optionalColumn": "Sample text",
+      "siteCode": "chbs"
+    },
+    {
+      "id": 11,
+      "recordId": 12,
+      "lineFunction": {
+        "id": 2,
+        "name": "Antitrust"
+      },
+      "name": "Ishika Roy",
+      "firstName": "Ishika",
+      "lastName": "Roy",
+      "stage": {
+        "id": 1,
+        "name": "Triage"
+      },
+      "title": "Director of Operations",
+      "email": "ishika.roy@test.com",
+      "vdrAccessRequested": false,
+      "webTrainingStatus": "In-progress",
+      "novartis521ID": "ROYISHIK",
+      "isCoreTeamMember": true,
+      "oneToOneDiscussion": "Sample text",
+      "optionalColumn": "Sample text",
+      "siteCode": "chbs"
+    },
+    {
+      "id": 12,
+      "recordId": 13,
+      "lineFunction": {
+        "id": 2,
+        "name": "Antitrust"
+      },
+      "name": "Ishika Roy",
+      "firstName": "Ishika",
+      "lastName": "Roy",
+      "stage": {
+        "id": 1,
+        "name": "Triage"
+      },
+      "title": "Director of Operations",
+      "email": "ishika.roy@test.com",
+      "vdrAccessRequested": false,
+      "webTrainingStatus": "In-progress",
+      "novartis521ID": "ROYISHIK",
+      "isCoreTeamMember": true,
+      "oneToOneDiscussion": "Sample text",
+      "optionalColumn": "Sample text",
+      "siteCode": "chbs"
+    },
+    {
+      "id": 13,
+      "recordId": 14,
+      "lineFunction": {
+        "id": 2,
+        "name": "Antitrust"
+      },
+      "name": "Ishika Roy",
+      "firstName": "Ishika",
+      "lastName": "Roy",
+      "stage": {
+        "id": 1,
+        "name": "Triage"
+      },
+      "title": "Director of Operations",
+      "email": "ishika.roy@test.com",
+      "vdrAccessRequested": false,
+      "webTrainingStatus": "In-progress",
+      "novartis521ID": "ROYISHIK",
+      "isCoreTeamMember": true,
+      "oneToOneDiscussion": "Sample text",
+      "optionalColumn": "Sample text",
+      "siteCode": "chbs"
+    },
+    {
+      "id": 14,
+      "recordId": 15,
+      "lineFunction": {
+        "id": 2,
+        "name": "Antitrust"
+      },
+      "name": "Ishika Roy",
+      "firstName": "Ishika",
+      "lastName": "Roy",
       "stage": {
         "id": 1,
         "name": "Triage"

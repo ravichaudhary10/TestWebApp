@@ -7,6 +7,10 @@ const END_POINTS = {
     return `/deals/${id}`;
   },
 
+  FETCH_RESOURCE_DETAIL: () => {
+    return `/resources/detail`;
+  },
+
   FETCH_STAGES: () => {
     return `/stages`;
   },
@@ -48,6 +52,14 @@ const END_POINTS = {
   ASSIGN_TA: () => {
     let url = `/therapeutic-areas/assign`;
     return url;
+  },
+
+  ADD_RESOURCES: () => {
+    return `/resources/add`;
+  },
+
+  UPDATE_RESOURCE: () => {
+    return `/resources/update`;
   },
 };
 

@@ -3,6 +3,7 @@ import { Resource, ResourceListField } from "./ResourceListView.types";
 import { LazyTableState } from "../../types/commonTypes";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getFilterPayload } from "../../utils/getFilterPayload";
+import { useNavigate } from "react-router-dom";
 
 import {
   LINE_FUNCTION,
@@ -53,6 +54,7 @@ import {
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Path } from "../../routes";
 
 interface ResourceListViewProps {
   dealId: number;
@@ -82,10 +84,12 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
   // Dispatch function
   const dispatch = useAppDispatch();
 
+  // Navigate method
+  const navigate = useNavigate();
+
   useEffect(() => {
     // Fetches the resources satisfying the filters, page and limit parameters
     const fetchResources = async (
-      userId: number,
       dealId: number,
       filters: Record<string, any>,
       page: number,
@@ -96,7 +100,6 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
 
       try {
         const response = await ApiManager.fetchResources(
-          userId,
           dealId,
           filters,
           page,
@@ -114,7 +117,6 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
     // Fetch the list of deals from backend API
     user?.id &&
       fetchResources(
-        user.id,
         dealId,
         getFilterPayload(lazyState.filters),
         lazyState.page + 1,
@@ -136,6 +138,11 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
           text
           aria-label="Edit Resource Button"
           style={{ padding: "0 0.5rem", height: "1.6rem" }}
+          onClick={() =>
+            navigate(
+              `${Path.UPDATE_RESOURCE}/${rowData.id}/stage/${rowData.stage?.id}`
+            )
+          }
         />
         <Button
           icon="pi pi-trash"
@@ -216,7 +223,7 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
         value={resources?.data}
         size="small"
         lazy
-        dataKey="id"
+        dataKey="recordId"
         paginator
         first={lazyState.first}
         rows={lazyState.rows}

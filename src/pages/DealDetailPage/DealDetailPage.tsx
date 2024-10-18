@@ -38,7 +38,7 @@ const DealDetailPage = () => {
 
   // Opens create deal view
   const openAddResourceView = () => {
-    // navigate(Path.CREATE_RESOURCE);
+    navigate(Path.ADD_RESOURCE);
   };
 
   // Create the appropriate view based on the selected tab in TabMenu

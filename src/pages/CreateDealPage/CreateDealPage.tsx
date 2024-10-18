@@ -21,21 +21,25 @@ import {
   CANCEL_LABEL,
   DEAL_LEAD_DETAILS,
   ASSIGN_LABEL,
+  CANCEL_FORM_CONFIRMATION_MSG,
+  CANCEL_FORM_CONFIRMATION_HEADER,
+  REQUIRED_MESSAGE,
 } from "../../constants/global.constants";
+
+import {
+  ADD_DEAL_LEAD,
+  DEAL_LEAD_REMOVAL_CONFIRMATION_HEADER,
+  DEAL_LEAD_REMOVAL_CONFIRMATION_MSG,
+} from "./CreateDealPage.constants";
 
 import {
   DEAL_NAME,
   DEAL_STAGE,
   THERAPEUTIC_AREA,
   DEAL_LEAD,
-  ADD_DEAL_LEAD,
-  DEAL_LEAD_REMOVAL_CONFIRMATION_HEADER,
-  DEAL_LEAD_REMOVAL_CONFIRMATION_MSG,
-  CANCEL_CREATE_DEAL_CONFIRMATION_MSG,
-  CANCEL_CREATE_DEAL_CONFIRMATION_HEADER,
-  REQUIRED_MESSAGE,
-  Field,
-} from "./CreateDealPage.constants";
+} from "../../components/DealListView/DealListView.constants";
+
+import { Field } from "./CreateDealPage.types";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
@@ -130,8 +134,8 @@ const CreateDealPage: React.FC = () => {
     };
 
     confirmDialog({
-      message: CANCEL_CREATE_DEAL_CONFIRMATION_MSG,
-      header: CANCEL_CREATE_DEAL_CONFIRMATION_HEADER,
+      message: CANCEL_FORM_CONFIRMATION_MSG,
+      header: CANCEL_FORM_CONFIRMATION_HEADER,
       accept,
     });
   };
@@ -186,7 +190,7 @@ const CreateDealPage: React.FC = () => {
       userId: user?.id,
     };
 
-    // Create the deal
+    // Create/update the deal
     const dealId = params.dealId ? parseInt(params.dealId) : null;
     createDeal(dealId, payload);
   };
@@ -323,7 +327,7 @@ const CreateDealPage: React.FC = () => {
         <Breadcrumb items={getBreadcrumbItems(!!params.dealId)} />
 
         {/* Create deal form */}
-        <form>
+        <form autoComplete="off">
           {/* Page Header section */}
           <div className="flex align-items-center mb-5 w-full">
             <h1 className="font-bold text-xl line-height-2">

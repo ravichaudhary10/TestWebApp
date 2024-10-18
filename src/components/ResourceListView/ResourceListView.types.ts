@@ -4,6 +4,8 @@ export interface Resource {
   id: number;
   lineFunction?: Item | null;
   name?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
   title?: string | null;
   email?: string | null;
   stage?: Item | null;
@@ -21,6 +23,8 @@ export enum ResourceListField {
   ID = "id",
   LINE_FUNCTION = "lineFunction",
   NAME = "name",
+  FIRST_NAME = "firstName",
+  LAST_NAME = "lastName",
   TITLE = "title",
   EMAIL = "email",
   STAGE = "stage",

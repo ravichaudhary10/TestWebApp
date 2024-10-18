@@ -81,3 +81,41 @@ mock.onPost("/resources/list").reply(async (config: any) => {
     return [500, { data: null, error: { message: "Internal server error" } }];
   }
 });
+
+mock.onGet(/resources\/detail\/?.*/).reply(async (config: any) => {
+  try {
+    await wait(1000);
+
+    const dealId = config.params.dealId;
+    const stageId = config.params.stageId;
+    const resourceId = config.params.resourceId;
+
+    if (!isNaN(dealId) && !isNaN(stageId) && !isNaN(resourceId)) {
+      let data = [...resourceData.data];
+      const item = data.find(
+        (item) => item.id === resourceId && item.stage.id === stageId
+      );
+      if (item) {
+        return [200, item];
+      }
+      return [404, { message: "Resource not found" }];
+    }
+    return [400, { message: "Resource Id not found in URL" }];
+  } catch (err) {
+    console.error(err);
+    return [500, { data: null, error: { message: "Internal server error" } }];
+  }
+});
+
+mock.onPost("/resources/add").reply(async (config: any) => {
+  try {
+    await wait(1000);
+
+    const { dealId, userId, resources } = JSON.parse(config.data);
+
+    return [200, { message: "Resource added successfully" }];
+  } catch (err) {
+    console.error(err);
+    return [500, { data: null, error: { message: "Internal server error" } }];
+  }
+});
