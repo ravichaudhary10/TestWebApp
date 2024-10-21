@@ -127,14 +127,14 @@ const DealListView: React.FC = () => {
           rounded
           text
           aria-label="Edit Resource Button"
-          style={{ padding: "0 0.5rem", height: "1.6rem" }}
+          className="action-icon-button"
           onClick={() => navigate(`${Path.UPDATE_DEAL}/${rowData.id}`)}
         />
         <Button
           icon="pi pi-trash"
           text
           aria-label="Delete Resource Button"
-          style={{ padding: "0 0.5rem", height: "1.6rem" }}
+          className="action-icon-button"
           onClick={() => handleDealDeletion(rowData.id)}
         />
       </div>

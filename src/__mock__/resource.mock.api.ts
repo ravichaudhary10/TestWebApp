@@ -132,3 +132,16 @@ mock.onPut("/resources/update").reply(async (config: any) => {
     return [500, { data: null, error: { message: "Internal server error" } }];
   }
 });
+
+mock.onDelete("/resources/delete").reply(async (config: any) => {
+  try {
+    await wait(1000);
+
+    const { userId, dealId, resourceId, stageId } = JSON.parse(config.data);
+
+    return [200, { message: "Resource deleted successfully" }];
+  } catch (err) {
+    console.error(err);
+    return [500, { data: null, error: { message: "Internal server error" } }];
+  }
+});

@@ -29,6 +29,7 @@ import {
   CONFIRM_LABEL,
   CANCEL_LABEL,
   CLEAR_ALL_LABEL,
+  SUCCESS_MESSAGES,
 } from "../../constants/global.constants";
 
 import {
@@ -55,6 +56,11 @@ import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { Path } from "../../routes";
+import {
+  RESOURCE_DELETION_CONFIRMATION_HEADER,
+  RESOURCE_DELETION_CONFIRMATION_MSG,
+} from "../../pages/AddResourcePage/AddResourcePage.constants";
+import { handleSuccess } from "../../utils/handleSuccess";
 
 interface ResourceListViewProps {
   dealId: number;
@@ -137,7 +143,7 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
           rounded
           text
           aria-label="Edit Resource Button"
-          style={{ padding: "0 0.5rem", height: "1.6rem" }}
+          className="action-icon-button"
           onClick={() =>
             navigate(
               `${Path.UPDATE_RESOURCE}/${rowData.id}/stage/${rowData.stage?.id}`
@@ -148,7 +154,8 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
           icon="pi pi-trash"
           text
           aria-label="Delete Resource Button"
-          style={{ padding: "0 0.5rem", height: "1.6rem" }}
+          className="action-icon-button"
+          onClick={() => handleResourceDeletion(rowData.id, rowData.stage?.id)}
         />
       </div>
     );
@@ -206,6 +213,58 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
       const value = (item as DataTableFilterMetaData).value;
       return Boolean(value?.toString());
     });
+  };
+
+  /**
+   * Handles deletion of resource by showing a confirmation popup before deletion
+   * @param id {number} Id of the resource to be deleted
+   */
+  const handleResourceDeletion = (
+    resourceId: number,
+    stageId: number | undefined
+  ) => {
+    if (user?.id && resourceId && stageId) {
+      const accept = () => {
+        const payload = {
+          userId: user.id,
+          dealId,
+          stageId,
+          resourceId,
+        };
+
+        deleteResource(payload);
+      };
+
+      confirmDialog({
+        message: RESOURCE_DELETION_CONFIRMATION_MSG,
+        header: RESOURCE_DELETION_CONFIRMATION_HEADER,
+        accept,
+      });
+    }
+  };
+
+  /**
+   * Deletes a resource with given Id by making API call and passing on required data.
+   * @param data - Payload needed for Delete Resource API call
+   */
+  const deleteResource = async (data: any) => {
+    // Show loading spinner
+    setIsLoading(true);
+
+    try {
+      await ApiManager.deleteResource(data);
+
+      // Show success toast
+      handleSuccess(dispatch, SUCCESS_MESSAGES.RESOURCE_DELETION_SUCCESS);
+
+      // Rerender the deal list to fetch latest deals
+      setlazyState({ ...lazyState });
+    } catch (error: any) {
+      // Show error toast
+      handleError(dispatch, error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

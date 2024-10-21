@@ -105,6 +105,12 @@ class ApiManager {
     const axios = getAxiosInstance("updateResourceAPI");
     return axios.put(url, data);
   }
+
+  static deleteResource(data: any) {
+    const url = END_POINTS.DELETE_RESOURCE();
+    const axios = getAxiosInstance("deleteResourceAPI");
+    return axios.delete(url, data);
+  }
 }
 
 export default ApiManager;

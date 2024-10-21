@@ -61,6 +61,10 @@ const END_POINTS = {
   UPDATE_RESOURCE: () => {
     return `/resources/update`;
   },
+
+  DELETE_RESOURCE: () => {
+    return `/resources/delete`;
+  },
 };
 
 export default END_POINTS;
