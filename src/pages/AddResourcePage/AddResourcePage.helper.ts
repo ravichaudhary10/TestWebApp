@@ -96,7 +96,7 @@ export const getAddResourcePayload = (
 ) => ({
   userId,
   dealId,
-  resource: getResourcePayload(formData),
+  resources: [{ ...getResourcePayload(formData), stages: formData.stages }],
 });
 
 /**
@@ -118,7 +118,7 @@ export const getUpdateResourcePayload = (
   userId,
   dealId,
   stageId,
-  resource: { resourceId, ...getResourcePayload(formData) },
+  resourceData: { resourceId, ...getResourcePayload(formData) },
 });
 
 /**
@@ -130,7 +130,6 @@ const getResourcePayload = (formData: any) => {
   // Form payload for resource being added/updated
   return {
     [ResourceListField.EMAIL]: formData[RESOURCE_DETAILS_KEY].email,
-    stages: formData.stages,
     [ResourceListField.LINE_FUNCTION]:
       formData[ResourceListField.LINE_FUNCTION],
     [ResourceListField.VDR_ACCESS]:
