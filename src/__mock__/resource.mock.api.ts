@@ -119,3 +119,16 @@ mock.onPost("/resources/add").reply(async (config: any) => {
     return [500, { data: null, error: { message: "Internal server error" } }];
   }
 });
+
+mock.onPut("/resources/update").reply(async (config: any) => {
+  try {
+    await wait(1000);
+
+    const { dealId, userId, resourceData } = JSON.parse(config.data);
+
+    return [200, { message: "Resource updated successfully" }];
+  } catch (err) {
+    console.error(err);
+    return [500, { data: null, error: { message: "Internal server error" } }];
+  }
+});
