@@ -362,35 +362,22 @@ const AddResourcePage: React.FC = () => {
               </div>
             </div>
 
-            {/* Deal stage field */}
-            <div className="flex flex-column gap-2">
-              <div className="font-bold text-base">
-                {STAGE}
-                {requiredFieldIndicator}
-              </div>
-              <div className="field">
-                <div className="p-float-label">
-                  <Controller
-                    name={!!resourceId ? ResourceListField.STAGE : STAGES}
-                    control={control}
-                    rules={{
-                      required: REQUIRED_MESSAGE.replace("{0}", STAGE),
-                    }}
-                    render={({ field, fieldState }) =>
-                      !!resourceId ? (
-                        <Dropdown
-                          options={stages || []}
-                          value={field.value}
-                          onChange={(e) => {
-                            field.onChange(e.value);
-                          }}
-                          optionLabel="label"
-                          className={
-                            "w-5 item-min-width " +
-                            classNames({ "p-invalid": fieldState.invalid })
-                          }
-                        />
-                      ) : (
+            {/* Deal stage field - show in case of new resource being added*/}
+            {!resourceId && (
+              <div className="flex flex-column gap-2">
+                <div className="font-bold text-base">
+                  {STAGE}
+                  {requiredFieldIndicator}
+                </div>
+                <div className="field">
+                  <div className="p-float-label">
+                    <Controller
+                      name={!!resourceId ? ResourceListField.STAGE : STAGES}
+                      control={control}
+                      rules={{
+                        required: REQUIRED_MESSAGE.replace("{0}", STAGE),
+                      }}
+                      render={({ field, fieldState }) => (
                         <MultiSelect
                           options={stages || []}
                           value={field.value}
@@ -404,15 +391,15 @@ const AddResourcePage: React.FC = () => {
                             classNames({ "p-invalid": fieldState.invalid })
                           }
                         />
-                      )
-                    }
-                  />
+                      )}
+                    />
 
-                  <label>Select</label>
+                    <label>Select</label>
+                  </div>
+                  {getFormErrorMessage(ResourceListField.STAGE)}
                 </div>
-                {getFormErrorMessage(ResourceListField.STAGE)}
               </div>
-            </div>
+            )}
 
             {/* VDR Access Requested field */}
             <div className="flex flex-column gap-2">

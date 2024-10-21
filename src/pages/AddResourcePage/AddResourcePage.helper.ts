@@ -21,8 +21,7 @@ export const getFormValues = (data: Resource | null) => {
         ? "yes"
         : "no"
       : null,
-    [ResourceListField.WEB_TRAINING]:
-      data?.webTrainingStatus?.toLowerCase() || "",
+    [ResourceListField.WEB_TRAINING]: data?.webTrainingStatus || "",
     [ResourceListField.KICK_OFF_ATTENDANCE]: data?.oneToOneDiscussion || "",
     [ResourceListField.CORE_TEAM_MEMBER]: data
       ? data.isCoreTeamMember
