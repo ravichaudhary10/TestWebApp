@@ -62,8 +62,8 @@ const END_POINTS = {
     return `/resources/update`;
   },
 
-  DELETE_RESOURCE: () => {
-    return `/resources/delete`;
+  DELETE_RESOURCE: (dealId: number, stageId: number, resourceId: number) => {
+    return `/resources/${resourceId}/stage/${stageId}/deal/${dealId}/`;
   },
 };
 

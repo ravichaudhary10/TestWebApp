@@ -225,14 +225,7 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
   ) => {
     if (user?.id && resourceId && stageId) {
       const accept = () => {
-        const payload = {
-          userId: user.id,
-          dealId,
-          stageId,
-          resourceId,
-        };
-
-        deleteResource(payload);
+        deleteResource(dealId, stageId, resourceId);
       };
 
       confirmDialog({
@@ -245,14 +238,20 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
 
   /**
    * Deletes a resource with given Id by making API call and passing on required data.
-   * @param data - Payload needed for Delete Resource API call
+   * @param dealId
+   * @param stageId
+   * @param resourceId
    */
-  const deleteResource = async (data: any) => {
+  const deleteResource = async (
+    dealId: number,
+    stageId: number,
+    resourceId: number
+  ) => {
     // Show loading spinner
     setIsLoading(true);
 
     try {
-      await ApiManager.deleteResource(data);
+      await ApiManager.deleteResource(dealId, stageId, resourceId, user?.id);
 
       // Show success toast
       handleSuccess(dispatch, SUCCESS_MESSAGES.RESOURCE_DELETION_SUCCESS);

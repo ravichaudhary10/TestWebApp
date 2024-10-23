@@ -18,13 +18,15 @@ export const SITE = "Site";
 // Other labels
 export const EMPTY_MESSAGE = "No resources found.";
 
-// Dropdown options
+// List of options for web-training-status dropdown field
 export const webTrainingOptions = [
   { label: "Not Started", value: "Not Started" },
   { label: "In-Progress", value: "In-progress" },
   { label: "Completed", value: "completed" },
 ];
 
+// This list of options is source of data for dropdown fields like VDR Access, Core Team Member
+// dropdown fields etc. which have only 2 possible boolean values - Yes or No
 export const booleanOptions = [
   { label: "Yes", value: "yes" },
   { label: "No", value: "no" },

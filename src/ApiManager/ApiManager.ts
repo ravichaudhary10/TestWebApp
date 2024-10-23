@@ -106,10 +106,15 @@ class ApiManager {
     return axios.put(url, data);
   }
 
-  static deleteResource(data: any) {
-    const url = END_POINTS.DELETE_RESOURCE();
+  static deleteResource(
+    dealId: number,
+    stageId: number,
+    resourceId: number,
+    userId?: number
+  ) {
+    const url = END_POINTS.DELETE_RESOURCE(dealId, stageId, resourceId);
     const axios = getAxiosInstance("deleteResourceAPI");
-    return axios.delete(url, data);
+    return axios.delete(url, { params: { userId } });
   }
 }
 
