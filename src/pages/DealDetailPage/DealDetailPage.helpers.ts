@@ -16,3 +16,16 @@ export const getBreadcrumbItems = (navigate: Function) => {
     { icon: "pi pi-folder", label: DEAL_DETAIL_PAGE_TITLE },
   ];
 };
+
+/**
+ * Generates and returns the file name for resource template file.
+ * @returns
+ */
+export const getFileName = () => {
+  // current date and format as YYYY-MM-DD
+  const currentDate: Date = new Date();
+  const formattedDate: string = currentDate.toISOString().slice(0, 10);
+
+  //filename with the current date
+  return `Resource_Upload_Template_${formattedDate}.xlsx`;
+};

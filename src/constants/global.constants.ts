@@ -12,7 +12,7 @@ export const SUCCESS_MESSAGES = {
   DEAL_UPDATION_SUCCESS: "Deal updated successfully",
   DEAL_DELETION_SUCCESS: "Deal deleted successfully",
   TA_ASSIGNMENT_SUCCESS: "Therapeutic areas assigned successfully",
-  RESOURCE_CREATION_SUCCESS: "Resource created successfully",
+  RESOURCE_CREATION_SUCCESS: "Resource(s) added successfully",
   RESOURCE_UPDATION_SUCCESS: "Resource updated successfully",
   RESOURCE_DELETION_SUCCESS: "Resource deleted successfully",
 };

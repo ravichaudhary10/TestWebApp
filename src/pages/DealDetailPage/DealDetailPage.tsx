@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { Breadcrumb } from "../../components/Breadcrumb";
 import { Header } from "../../components/Header";
-import { getBreadcrumbItems } from "./DealDetailPage.helpers";
+import { getBreadcrumbItems, getFileName } from "./DealDetailPage.helpers";
 import {
   ADD_NEW_RESOURCE_BUTTON_TITLE,
+  DOWNLOAD_TEMPLATE,
   TAB_MENU_ITEMS,
+  UPLOAD_EXCEL,
 } from "./DealDetailPage.constants";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Path } from "../../routes";
 import { ResourceListView } from "../../components/ResourceListView";
 import { Tab } from "./DealDetailPage.types";
+import { saveAs } from "file-saver";
+import { RESOURCE_TEMPLATE_FILE_BASE64 } from "./ResourceTemplate.base64";
 
 // Primereact imports
 import { TabMenu, TabMenuTabChangeEvent } from "primereact/tabmenu";
@@ -49,6 +53,35 @@ const DealDetailPage = () => {
       <p className="m-0">History</p>
     );
 
+  /**
+   * Generates and downloads the resource template excel file
+   */
+  const handleResourceTemplateDownload = () => {
+    const sliceSize: number = 1024;
+    const byteCharacters: string = atob(RESOURCE_TEMPLATE_FILE_BASE64);
+    const bytesLength: number = byteCharacters.length;
+    const slicesCount: number = Math.ceil(bytesLength / sliceSize);
+    const byteArrays: Uint8Array[] = new Array(slicesCount);
+
+    for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+      const begin: number = sliceIndex * sliceSize;
+      const end: number = Math.min(begin + sliceSize, bytesLength);
+      const bytes: number[] = new Array(end - begin);
+
+      for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
+        bytes[i] = byteCharacters[offset].charCodeAt(0);
+      }
+
+      byteArrays[sliceIndex] = new Uint8Array(bytes);
+    }
+
+    // Save the file
+    saveAs(
+      new Blob(byteArrays, { type: "application/vnd.ms-excel" }),
+      getFileName()
+    );
+  };
+
   return (
     <div className="flex flex-column align-items-center">
       <Header />
@@ -69,13 +102,19 @@ const DealDetailPage = () => {
             <Button
               icon="pi pi-download"
               outlined
-              aria-label="Download Template"
+              aria-label={DOWNLOAD_TEMPLATE}
+              tooltip={DOWNLOAD_TEMPLATE}
+              tooltipOptions={{ position: "top" }}
+              onClick={handleResourceTemplateDownload}
             />
             <Button icon="pi pi-upload" outlined aria-label="Upload" />
             <Button
               label={ADD_NEW_RESOURCE_BUTTON_TITLE}
               size="small"
               onClick={openAddResourceView}
+              aria-label={UPLOAD_EXCEL}
+              tooltip={UPLOAD_EXCEL}
+              tooltipOptions={{ position: "top" }}
             />
           </div>
         </div>
