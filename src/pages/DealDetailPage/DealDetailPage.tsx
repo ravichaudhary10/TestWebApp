@@ -34,10 +34,13 @@ import { webTrainingOptions } from "../../components/ResourceListView/ResourceLi
 import { TabMenu, TabMenuTabChangeEvent } from "primereact/tabmenu";
 import { Button } from "primereact/button";
 import { getLabelToValueMap } from "../../utils/getLabelToValueMap";
+import { LoadingIndicator } from "../../components/LoadingIndicator";
 
 const DealDetailPage = () => {
   // States
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [testProp, setTestProp] = useState<Object>({});
 
   // Ref to hold the reference of file input element
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -97,6 +100,9 @@ const DealDetailPage = () => {
         return;
       }
 
+      // Clear file input
+      clearFileInput();
+
       const fileExtension = file.name.split(".").pop()?.toLowerCase();
       if (!fileExtension || !VALID_FILE_EXTENSIONS.includes(fileExtension)) {
         throw new Error(FILE_ERROR_MESSAGES.invalidFile);
@@ -125,17 +131,35 @@ const DealDetailPage = () => {
           .catch((e) => {
             // Show error toast message
             showErrorToast(e.message);
-
-            // Clear file input
-            clearFileInput();
           });
       });
     } catch (e: any) {
       // Show error toast message
       showErrorToast(e.message);
+    }
+  };
 
-      // Clear file input
-      clearFileInput();
+  /**
+   * Adds resources by making an API call and passing required data
+   * @param data - Payload for add resource API call
+   */
+  const addResources = async (data: any) => {
+    try {
+      // Show loading mask
+      setIsLoading(true);
+
+      await ApiManager.addResources(data);
+
+      // Show success toast
+      handleSuccess(dispatch, SUCCESS_MESSAGES.RESOURCE_CREATION_SUCCESS);
+
+      setTestProp({});
+    } catch (error: any) {
+      // Show error toast
+      handleError(dispatch, error);
+    } finally {
+      // Hide loading mask
+      setIsLoading(false);
     }
   };
 
@@ -159,32 +183,18 @@ const DealDetailPage = () => {
     );
   };
 
-  /**
-   * Adds resources by making an API call and passing required data
-   * @param data - Payload for add resource API call
-   */
-  const addResources = async (data: any) => {
-    try {
-      await ApiManager.addResources(data);
-      // Show success toast
-      handleSuccess(dispatch, SUCCESS_MESSAGES.RESOURCE_CREATION_SUCCESS);
-    } catch (error: any) {
-      // Show error toast
-      handleError(dispatch, error);
-    } finally {
-    }
-  };
-
   // Create the appropriate view based on the selected tab in TabMenu
   const selectedTabView =
     activeTabIndex === Tab.RESOURCES ? (
-      <ResourceListView dealId={parseInt(dealId)} />
+      <ResourceListView dealId={parseInt(dealId)} testProp={testProp} />
     ) : (
       <p className="m-0">History</p>
     );
 
   return (
     <div className="flex flex-column align-items-center">
+      {isLoading && <LoadingIndicator />}
+
       <Header />
 
       <div className="flex-1  w-11  p-3">

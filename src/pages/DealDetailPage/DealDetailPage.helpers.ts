@@ -17,7 +17,6 @@ export const getBreadcrumbItems = (navigate: Function) => {
     {
       icon: "pi pi-arrow-left",
       label: "Go back",
-      command: navigate(-1),
     },
     {
       icon: "pi pi-home",

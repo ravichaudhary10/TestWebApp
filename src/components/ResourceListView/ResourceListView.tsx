@@ -64,9 +64,13 @@ import { handleSuccess } from "../../utils/handleSuccess";
 
 interface ResourceListViewProps {
   dealId: number;
+  testProp: Object;
 }
 
-const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
+const ResourceListView: React.FC<ResourceListViewProps> = ({
+  dealId,
+  testProp,
+}) => {
   // States
   const [resources, setResources] = useState<{
     data: Resource[];
@@ -128,7 +132,7 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({ dealId }) => {
         lazyState.page + 1,
         lazyState.rows
       );
-  }, [dispatch, lazyState, user, dealId]);
+  }, [dispatch, lazyState, user, dealId, testProp]);
 
   /**
    * Action buttons template for Data table

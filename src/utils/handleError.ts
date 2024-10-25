@@ -7,8 +7,7 @@ export const handleError = (dispatch: AppDispatch, error: any) => {
   dispatch(
     showToast({
       severity: "error",
-      message:
-        error?.response?.data?.message || ERROR_MESSAGES.GENERIC_API_ERROR,
+      message: error?.response?.data || ERROR_MESSAGES.GENERIC_API_ERROR,
     })
   );
 };
