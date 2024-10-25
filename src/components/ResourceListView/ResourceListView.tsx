@@ -1,6 +1,6 @@
 import React, { useState, useEffect, SyntheticEvent } from "react";
-import { Resource, ResourceListField } from "./ResourceListView.types";
-import { LazyTableState } from "../../types/commonTypes";
+import { Resource } from "./ResourceListView.types";
+import { LazyTableState, ResourceListField } from "../../types/commonTypes";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getFilterPayload } from "../../utils/getFilterPayload";
 import { useNavigate } from "react-router-dom";

@@ -1,5 +1,5 @@
 import { DataTableFilterMeta } from "primereact/datatable";
-import { ResourceListField } from "./ResourceListView.types";
+import { ResourceListField } from "../../types/commonTypes";
 
 // Field labels
 export const LINE_FUNCTION = "Line Function";

@@ -4,11 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Breadcrumb } from "../../components/Breadcrumb";
 import { PersonSearch } from "../../components/PersonSearch";
-import { Person } from "../../types/commonTypes";
+import { Person, ResourceListField } from "../../types/commonTypes";
 import { PersonInfoCard } from "../../components/PersonInfoCard";
 import { LoadingIndicator } from "../../components/LoadingIndicator";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { Resource, ResourceListField } from "../../components/ResourceListView";
+import { Resource } from "../../components/ResourceListView";
 
 import useAuth from "../../hooks/useAuth";
 import ApiManager from "../../ApiManager/ApiManager";
@@ -175,7 +175,7 @@ const AddResourcePage: React.FC = () => {
 
   /**
    * Adds/updates a resource by making an API call and passing required data
-   * @param data - Payload for create/edit resource API call
+   * @param data - Payload for add/edit resource API call
    */
   const addOrUpdateResource = async (data: any) => {
     try {

@@ -1,7 +1,8 @@
 import resourceData from "./data/resourceData.json";
 import { axiosMockAdapterInstance as mock } from "../utils/axios";
 import wait from "../utils/wait";
-import { Resource, ResourceListField } from "../components/ResourceListView";
+import { Resource } from "../components/ResourceListView";
+import { ResourceListField } from "../types/commonTypes";
 
 const LIST_FIELDS = [
   ResourceListField.LINE_FUNCTION,

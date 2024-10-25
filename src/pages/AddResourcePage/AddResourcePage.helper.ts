@@ -1,5 +1,7 @@
-import { Resource, ResourceListField } from "../../components/ResourceListView";
+import { Resource } from "../../components/ResourceListView";
 import { DASHBOARD_TITLE } from "../../constants/global.constants";
+import { ResourceListField } from "../../types/commonTypes";
+
 import {
   ADD_RESOURCE_PAGE_TITLE,
   EDIT_RESOURCE_PAGE_TITLE,
