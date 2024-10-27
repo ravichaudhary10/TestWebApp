@@ -21,26 +21,30 @@ import { Tab } from "./DealDetailPage.types";
 
 //@ts-ignore
 import { ExcelRenderer } from "react-excel-renderer";
+
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 import ApiManager from "../../ApiManager/ApiManager";
-import { handleError } from "../../utils/handleError";
 import { handleSuccess } from "../../utils/handleSuccess";
-import { SUCCESS_MESSAGES } from "../../constants/global.constants";
+import {
+  ERROR_MESSAGES,
+  SUCCESS_MESSAGES,
+} from "../../constants/global.constants";
 import { showToast } from "../../redux/slices/rootSlice";
 import { webTrainingOptions } from "../../components/ResourceListView/ResourceListView.constants";
+import { getLabelToValueMap } from "../../utils/getLabelToValueMap";
+import { LoadingIndicator } from "../../components/LoadingIndicator";
+import { generateFileWithContent } from "../../utils/generateFileWithContent";
 
 // Primereact imports
 import { TabMenu, TabMenuTabChangeEvent } from "primereact/tabmenu";
 import { Button } from "primereact/button";
-import { getLabelToValueMap } from "../../utils/getLabelToValueMap";
-import { LoadingIndicator } from "../../components/LoadingIndicator";
 
 const DealDetailPage = () => {
   // States
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [testProp, setTestProp] = useState<Object>({});
+  const [refreshResourceList, setRefreshResourceList] = useState({});
 
   // Ref to hold the reference of file input element
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -121,7 +125,7 @@ const DealDetailPage = () => {
           webTrainingOptions: getLabelToValueMap(webTrainingOptions),
         })
           .then((resources) => {
-            // Add resources
+            // Make API call to add resources
             addResources({
               dealId: parseInt(dealId),
               userId: user?.id,
@@ -152,14 +156,25 @@ const DealDetailPage = () => {
 
       // Show success toast
       handleSuccess(dispatch, SUCCESS_MESSAGES.RESOURCE_CREATION_SUCCESS);
-
-      setTestProp({});
     } catch (error: any) {
       // Show error toast
-      handleError(dispatch, error);
+      const errorObj = error?.response?.data;
+      let message = errorObj?.message || ERROR_MESSAGES.GENERIC_API_ERROR;
+      let generateErrorLogFile;
+
+      if (errorObj?.failedResources?.length) {
+        generateErrorLogFile = () => {
+          generateFileWithContent(errorObj?.failedResources.join("\n"));
+        };
+      }
+
+      showErrorToast(message, generateErrorLogFile);
     } finally {
       // Hide loading mask
       setIsLoading(false);
+
+      // Refresh the resource list in child component
+      setRefreshResourceList({});
     }
   };
 
@@ -174,11 +189,26 @@ const DealDetailPage = () => {
    * Shows error toast with the specified message
    * @param message
    */
-  const showErrorToast = (message: string) => {
+  const showErrorToast = (
+    message: string,
+    viewDetailsHandler?: (event: any) => void
+  ) => {
     dispatch(
       showToast({
         severity: "error",
-        message,
+        message: (
+          <div className="">
+            <div>{message}</div>
+            {viewDetailsHandler && (
+              <Button
+                text
+                label="View Details"
+                onClick={viewDetailsHandler}
+                style={{ padding: "5px 0" }}
+              />
+            )}
+          </div>
+        ),
       })
     );
   };
@@ -186,7 +216,10 @@ const DealDetailPage = () => {
   // Create the appropriate view based on the selected tab in TabMenu
   const selectedTabView =
     activeTabIndex === Tab.RESOURCES ? (
-      <ResourceListView dealId={parseInt(dealId)} testProp={testProp} />
+      <ResourceListView
+        dealId={parseInt(dealId)}
+        refreshList={refreshResourceList}
+      />
     ) : (
       <p className="m-0">History</p>
     );

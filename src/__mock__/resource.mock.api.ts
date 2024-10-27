@@ -114,10 +114,25 @@ mock.onPost("/resources/add").reply(async (config: any) => {
 
     const { dealId, userId, resources } = JSON.parse(config.data);
 
-    return [200, { message: "Resource added successfully" }];
+    return [
+      500,
+      {
+        message: "Internal server error",
+        failedResources: [
+          "Resource 1: resource is not part of Triage stage",
+          "Resource 2: resource is not part of Focused dilligence stage",
+        ],
+      },
+    ];
+    // return [200, { message: "Resource added successfully" }];
   } catch (err) {
     console.error(err);
-    return [500, { data: null, error: { message: "Internal server error" } }];
+    return [
+      500,
+      {
+        message: "Internal server error",
+      },
+    ];
   }
 });
 
