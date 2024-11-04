@@ -33,15 +33,14 @@ import { ConfirmDialog } from "primereact/confirmdialog";
 import { confirmDialog } from "primereact/confirmdialog";
 import { Button } from "primereact/button";
 import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
+import { differenceBetweenSets } from "../../utils/differenceBetweenSets";
 
 const OnboardDealLead: React.FC = () => {
   // States
   const [isLoading, setIsLoading] = useState(false);
   const [dealLeadInfo, setDealLeadInfo] = useState<Person | null>(null);
-  const [selectedTherapeuticAreas, setSelectedTherapeuticAreas] = useState<
-    number[]
-  >([]);
-  const [disabledTA, setDisabledTA] = useState<number[]>([]);
+  const [selectedTAs, setSelectedTAs] = useState<Set<number>>(new Set());
+  const [preselectedTAs, setPreselectedTAs] = useState<Set<number>>(new Set());
 
   // Selectors
   const therapeuticAreas = useAppSelector((state) => state.therapeuticAreas);
@@ -83,8 +82,8 @@ const OnboardDealLead: React.FC = () => {
       const selected = person.therapeuticAreas
         ? person.therapeuticAreas.map((item) => item.id)
         : [];
-      setSelectedTherapeuticAreas(selected);
-      setDisabledTA(selected);
+      setSelectedTAs(new Set(selected));
+      setPreselectedTAs(new Set(selected));
     }
   }, []);
 
@@ -93,16 +92,16 @@ const OnboardDealLead: React.FC = () => {
    * @param e
    */
   const onSelectedTAChange = (e: CheckboxChangeEvent) => {
-    let selected = [...selectedTherapeuticAreas];
+    let selected = new Set(selectedTAs);
 
     if (e.checked) {
-      selected.push(e.value);
+      selected.add(e.value);
     } else {
-      selected.splice(selected.indexOf(e.value), 1);
+      selected.delete(e.value);
     }
 
     // Update selected therapeutic areas
-    setSelectedTherapeuticAreas(selected);
+    setSelectedTAs(selected);
   };
 
   /**
@@ -111,9 +110,9 @@ const OnboardDealLead: React.FC = () => {
    */
   const onSelectAllTAChange = (e: CheckboxChangeEvent) => {
     if (e.checked && therapeuticAreas) {
-      setSelectedTherapeuticAreas(therapeuticAreas?.map((item) => item.value));
+      setSelectedTAs(new Set(therapeuticAreas?.map((item) => item.value)));
     } else {
-      setSelectedTherapeuticAreas([...disabledTA]);
+      setSelectedTAs(new Set());
     }
   };
 
@@ -126,7 +125,12 @@ const OnboardDealLead: React.FC = () => {
     const payload = {
       adminUserId: user?.id,
       dealLeadId: dealLeadInfo?.id,
-      therapeuticAreaIds: selectedTherapeuticAreas,
+      therapeuticAreaIds: Array.from(
+        differenceBetweenSets(selectedTAs, preselectedTAs)
+      ),
+      unassignTA: Array.from(
+        differenceBetweenSets(preselectedTAs, selectedTAs)
+      ),
     };
 
     assignTA(payload);
@@ -193,7 +197,7 @@ const OnboardDealLead: React.FC = () => {
               <Button
                 label={SAVE}
                 size="small"
-                disabled={!dealLeadInfo || !selectedTherapeuticAreas?.length}
+                disabled={!dealLeadInfo || !selectedTAs?.size}
                 onClick={handleSaveClick}
               />
             </div>
@@ -222,7 +226,7 @@ const OnboardDealLead: React.FC = () => {
                   </div>
 
                   {/* Show this section if no TA's assigned */}
-                  {!disabledTA.length && (
+                  {!preselectedTAs.size && (
                     <div className="font-normal text-base secondary-text">
                       {NO_THERAPEUTIC_AREA_ASSIGNED_MSG}
                     </div>
@@ -234,10 +238,7 @@ const OnboardDealLead: React.FC = () => {
                         <Checkbox
                           name="therapeuticArea"
                           onChange={onSelectAllTAChange}
-                          checked={
-                            selectedTherapeuticAreas.length ===
-                            therapeuticAreas.length
-                          }
+                          checked={selectedTAs.size === therapeuticAreas.length}
                         />
                         <label className="ml-2 primary-text">All</label>
                       </div>
@@ -249,8 +250,7 @@ const OnboardDealLead: React.FC = () => {
                             name="therapeuticArea"
                             value={value}
                             onChange={onSelectedTAChange}
-                            checked={selectedTherapeuticAreas.includes(value)}
-                            disabled={disabledTA.includes(value)}
+                            checked={selectedTAs.has(value)}
                           />
                           <label htmlFor={value} className="ml-2 primary-text">
                             {label}
