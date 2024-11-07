@@ -116,6 +116,12 @@ class ApiManager {
     const axios = getAxiosInstance("deleteResourceAPI");
     return axios.delete(url, { params: { userId } });
   }
+
+  static onboardDealLead(data: any) {
+    const url = END_POINTS.ONBOARD_DEAL_LEAD();
+    const axios = getAxiosInstance("onboardDealLeadAPI");
+    return axios.post(url, data);
+  }
 }
 
 export default ApiManager;

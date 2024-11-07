@@ -1,11 +1,11 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { LoadingIndicator } from "../../components/LoadingIndicator";
 import { Header } from "../../components/Header";
 import { Breadcrumb } from "../../components/Breadcrumb";
 import { getBreadcrumbItems } from "./OnboardDealLead.helpers";
 import { PersonSearch } from "../../components/PersonSearch";
 import { PersonInfoCard } from "../../components/PersonInfoCard";
-import { Person } from "../../types/commonTypes";
+import { Person, Role } from "../../types/commonTypes";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import ApiManager from "../../ApiManager/ApiManager";
 import useAuth from "../../hooks/useAuth";
@@ -18,14 +18,17 @@ import {
   SAVE,
   DEAL_LEAD_DETAILS,
   SUCCESS_MESSAGES,
+  CANCEL_FORM_CONFIRMATION_MSG,
+  CANCEL_FORM_CONFIRMATION_HEADER,
 } from "../../constants/global.constants";
 import { useNavigate } from "react-router-dom";
 import {
-  CANCEL_ONBOARD_LEAD_HEADER,
-  CANCEL_ONBOARD_LEAD_MSG,
   NO_THERAPEUTIC_AREA_ASSIGNED_MSG,
   ONBOARD_DEAL_LEAD_PAGE_TITLE,
+  ONBOARD_LEAD_MSG,
+  ONBOARDING_ERROR_MSG,
   THERAPEUTIC_AREA_ASSIGNMENT_HEADER,
+  USER_ONBOARDED_AS_RESOURCE_MSG,
 } from "./OnboardDealLead.constants";
 
 // Prime react imports
@@ -55,23 +58,6 @@ const OnboardDealLead: React.FC = () => {
   const dispatch = useAppDispatch();
 
   /**
-   * Gets invoked when user clicks form cancel button
-   */
-  const handleCancelClick = (e: any) => {
-    e.preventDefault();
-
-    const accept = () => {
-      navigate(-1);
-    };
-
-    confirmDialog({
-      message: CANCEL_ONBOARD_LEAD_MSG,
-      header: CANCEL_ONBOARD_LEAD_HEADER,
-      accept,
-    });
-  };
-
-  /**
    * Update deal lead info with the person info passed as parameter.
    * @param person
    */
@@ -91,49 +77,130 @@ const OnboardDealLead: React.FC = () => {
    * Gets invoked when TA checkboxes are selected
    * @param e
    */
-  const onSelectedTAChange = (e: CheckboxChangeEvent) => {
-    let selected = new Set(selectedTAs);
+  const onSelectedTAChange = useCallback(
+    (e: CheckboxChangeEvent) => {
+      let selected = new Set(selectedTAs);
 
-    if (e.checked) {
-      selected.add(e.value);
-    } else {
-      selected.delete(e.value);
-    }
+      if (e.checked) {
+        selected.add(e.value);
+      } else {
+        selected.delete(e.value);
+      }
 
-    // Update selected therapeutic areas
-    setSelectedTAs(selected);
-  };
+      // Update selected therapeutic areas
+      setSelectedTAs(selected);
+    },
+    [selectedTAs]
+  );
 
   /**
    * Gets invoked when TA checkbox with label "All" is selected
    * @param e
    */
-  const onSelectAllTAChange = (e: CheckboxChangeEvent) => {
-    if (e.checked && therapeuticAreas) {
-      setSelectedTAs(new Set(therapeuticAreas?.map((item) => item.value)));
-    } else {
-      setSelectedTAs(new Set());
-    }
+  const onSelectAllTAChange = useCallback(
+    (e: CheckboxChangeEvent) => {
+      if (e.checked && therapeuticAreas) {
+        setSelectedTAs(new Set(therapeuticAreas?.map((item) => item.value)));
+      } else {
+        setSelectedTAs(new Set());
+      }
+    },
+    [therapeuticAreas]
+  );
+
+  /**
+   * Gets invoked when user clicks form cancel button
+   */
+  const handleCancelClick = (e: any) => {
+    e.preventDefault();
+
+    const accept = () => {
+      navigate(-1);
+    };
+
+    confirmDialog({
+      message: CANCEL_FORM_CONFIRMATION_MSG,
+      header: CANCEL_FORM_CONFIRMATION_HEADER,
+      accept,
+    });
   };
 
   /**
    * Get invoked when Save button is clicked
    * @param e
    */
-  const handleSaveClick = () => {
-    // Form payload
-    const payload = {
-      adminUserId: user?.id,
-      dealLeadId: dealLeadInfo?.id,
-      therapeuticAreaIds: Array.from(
-        differenceBetweenSets(selectedTAs, preselectedTAs)
-      ),
-      unassignTA: Array.from(
-        differenceBetweenSets(preselectedTAs, selectedTAs)
-      ),
-    };
+  const handleSaveClick = (e: any) => {
+    e.preventDefault();
 
-    assignTA(payload);
+    if (dealLeadInfo?.id && dealLeadInfo?.role === Role.DEAL_LEAD) {
+      assignTA(getAssignTAPayload(dealLeadInfo?.id));
+    } else {
+      // Perform Deal Lead onboarding after confirmation
+      const accept = () => {
+        onboardDealLead();
+      };
+
+      confirmDialog({
+        message: ONBOARD_LEAD_MSG,
+        header: CONFIRM_LABEL,
+        accept,
+      });
+    }
+
+    // // If role is Resource, show error popup
+    // else if (dealLeadInfo?.role === Role.RESOURCE) {
+    //   confirmDialog({
+    //     message: USER_ONBOARDED_AS_RESOURCE_MSG,
+    //     acceptLabel: "OK",
+    //     rejectClassName: "hidden",
+    //   });
+    // }
+  };
+
+  /**
+   * Makes the API call to onboard the person with specified email as a Deal Lead.
+   * Once the onboarding is successful, assigns/unassigns the TAs to the deal lead.
+   */
+  const onboardDealLead = async () => {
+    try {
+      // Form payload for onboard API call
+      const payload = {
+        emailId: dealLeadInfo?.email,
+        firstName: dealLeadInfo?.firstName,
+        lastName: dealLeadInfo?.lastName,
+        novartis521Id: dealLeadInfo?.novartis521ID,
+        title: dealLeadInfo?.title,
+        siteCode: dealLeadInfo?.siteCode,
+        phone: dealLeadInfo?.siteCode,
+        countryCode: dealLeadInfo?.siteCode,
+      };
+
+      // Show loading spinner
+      setIsLoading(true);
+
+      // Make an API call to onboard user as a Deal Lead
+      const response = await ApiManager.onboardDealLead(payload);
+
+      // Make another API call to assign/unassign TAs to newly onboarded deal lead
+      await ApiManager.assignTherapeuticAreas(
+        getAssignTAPayload(response.data?.id)
+      );
+
+      // Show success toast
+      handleSuccess(
+        dispatch,
+        SUCCESS_MESSAGES.ONBOARDING_AND_TA_ASSIGNMENT_SUCCESS
+      );
+
+      // Go back to previous view on success
+      navigate(-1);
+    } catch (error: any) {
+      // Show error toast
+      handleError(dispatch, error);
+    } finally {
+      // Hide loading spinner
+      setIsLoading(false);
+    }
   };
 
   /**
@@ -161,6 +228,19 @@ const OnboardDealLead: React.FC = () => {
     }
   };
 
+  const getAssignTAPayload = (dealLeadId: number) => {
+    return {
+      adminUserId: user?.id,
+      dealLeadId: dealLeadId,
+      therapeuticAreaIds: Array.from(
+        differenceBetweenSets(selectedTAs, preselectedTAs)
+      ),
+      unassignTA: Array.from(
+        differenceBetweenSets(preselectedTAs, selectedTAs)
+      ),
+    };
+  };
+
   return (
     <div className="flex flex-column align-items-center">
       {isLoading && <LoadingIndicator />}
@@ -172,6 +252,7 @@ const OnboardDealLead: React.FC = () => {
         acceptClassName="p-button-sm"
         rejectClassName="p-button-outlined p-button-sm"
         defaultFocus="reject"
+        className="popup-width"
       />
 
       <Header />
@@ -226,7 +307,7 @@ const OnboardDealLead: React.FC = () => {
                   </div>
 
                   {/* Show this section if no TA's assigned */}
-                  {!preselectedTAs.size && (
+                  {!preselectedTAs?.size && (
                     <div className="font-normal text-base secondary-text">
                       {NO_THERAPEUTIC_AREA_ASSIGNED_MSG}
                     </div>

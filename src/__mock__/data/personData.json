@@ -1,20 +1,39 @@
 [
   {
-    "id": 1,
+    "email": "brian.philip@novartis.com",
+    "novartis521ID": "brian.philip",
+    "title": "Exe. Director, Search and Elevation",
+    "firstName": "Brian",
+    "lastName": "Philip",
+    "siteCode": "HQ",
+    "phone": "",
+    "countryCode": "",
+    "therapeuticAreas": []
+  },
+  {
+    "id": 2,
+    "role": "Resource",
     "email": "rose.michelle@novartis.com",
     "novartis521ID": "michelle.rose",
     "title": "Exe. Director, Search and Elevation",
     "firstName": "Ross",
     "lastName": "Michelle",
+    "siteCode": "HQ",
+    "phone": "",
+    "countryCode": "",
     "therapeuticAreas": []
   },
   {
-    "id": 2,
+    "id": 3,
     "email": "ravi.chaudhary@novartis.com",
+    "role": "DealLead",
     "title": "Deal Lead",
     "firstName": "Ravi",
     "lastName": "Chaudhary",
     "novartis521ID": "chaudhary.ravi",
+    "siteCode": "HQ",
+    "phone": "",
+    "countryCode": "",
     "therapeuticAreas": [
       {
         "id": 1,

@@ -11,7 +11,9 @@ export const SUCCESS_MESSAGES = {
   DEAL_CREATION_SUCCESS: "Deal created successfully",
   DEAL_UPDATION_SUCCESS: "Deal updated successfully",
   DEAL_DELETION_SUCCESS: "Deal deleted successfully",
-  TA_ASSIGNMENT_SUCCESS: "Therapeutic areas assigned successfully",
+  TA_ASSIGNMENT_SUCCESS: "Therapeutic areas assigned/unassigned successfully",
+  ONBOARDING_AND_TA_ASSIGNMENT_SUCCESS:
+    "Deal Lead onboarded and Therapeutic areas assigned/unassigned successfully",
   RESOURCE_CREATION_SUCCESS: "Resource(s) added successfully",
   RESOURCE_UPDATION_SUCCESS: "Resource updated successfully",
   RESOURCE_DELETION_SUCCESS: "Resource deleted successfully",
@@ -47,4 +49,5 @@ export const MOCK_CONFIG: Record<string, boolean> = {
   addResourcesAPI: true,
   updateResourceAPI: true,
   deleteResourceAPI: true,
+  onboardDealLeadAPI: true,
 };

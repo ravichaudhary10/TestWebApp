@@ -13,8 +13,9 @@ export interface Item {
 }
 
 export enum Role {
-  ADMIN = "admin",
-  DEAL_LEAD = "deal lead",
+  ADMIN = "SystemAdmin",
+  DEAL_LEAD = "DealLead",
+  RESOURCE = "Resource",
 }
 
 export interface User {
@@ -24,12 +25,16 @@ export interface User {
 }
 
 export interface Person {
-  id?: string;
+  id?: number;
+  role?: string;
   email?: string;
   novartis521ID?: string;
   firstName?: string;
   lastName?: string;
   title?: string;
+  siteCode?: string;
+  phone?: string;
+  countryCode?: string;
   therapeuticAreas?: Item[];
 }
 

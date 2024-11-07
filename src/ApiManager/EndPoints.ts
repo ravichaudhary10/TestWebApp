@@ -49,6 +49,11 @@ const END_POINTS = {
     return `/deals/${id}?userId=${userId}`;
   },
 
+  ONBOARD_DEAL_LEAD: () => {
+    let url = `/onboard-deallead`;
+    return url;
+  },
+
   ASSIGN_TA: () => {
     let url = `/therapeutic-areas/assign`;
     return url;
