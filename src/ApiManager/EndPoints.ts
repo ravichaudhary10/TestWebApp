@@ -50,7 +50,7 @@ const END_POINTS = {
   },
 
   ONBOARD_DEAL_LEAD: () => {
-    let url = `/onboard-deallead`;
+    let url = `/resources/onboard-deallead`;
     return url;
   },
 

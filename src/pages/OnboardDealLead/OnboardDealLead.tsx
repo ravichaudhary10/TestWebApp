@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import { LoadingIndicator } from "../../components/LoadingIndicator";
 import { Header } from "../../components/Header";
 import { Breadcrumb } from "../../components/Breadcrumb";
@@ -26,9 +26,7 @@ import {
   NO_THERAPEUTIC_AREA_ASSIGNED_MSG,
   ONBOARD_DEAL_LEAD_PAGE_TITLE,
   ONBOARD_LEAD_MSG,
-  ONBOARDING_ERROR_MSG,
   THERAPEUTIC_AREA_ASSIGNMENT_HEADER,
-  USER_ONBOARDED_AS_RESOURCE_MSG,
 } from "./OnboardDealLead.constants";
 
 // Prime react imports
@@ -165,10 +163,11 @@ const OnboardDealLead: React.FC = () => {
     try {
       // Form payload for onboard API call
       const payload = {
+        userId: user?.id,
         emailId: dealLeadInfo?.email,
         firstName: dealLeadInfo?.firstName,
         lastName: dealLeadInfo?.lastName,
-        novartis521Id: dealLeadInfo?.novartis521ID,
+        novartis521ID: dealLeadInfo?.novartis521ID,
         title: dealLeadInfo?.title,
         siteCode: dealLeadInfo?.siteCode,
         phone: dealLeadInfo?.siteCode,

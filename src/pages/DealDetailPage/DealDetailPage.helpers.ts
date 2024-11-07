@@ -114,7 +114,7 @@ export const generateResourcePayloadFromExcelFile = async (
         );
       }
 
-      const value = row[index]?.trim();
+      const value = row[index]?.toString()?.trim() || "";
 
       switch (fieldName) {
         case ResourceListField.EMAIL:

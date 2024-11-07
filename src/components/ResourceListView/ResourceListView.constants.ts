@@ -28,8 +28,8 @@ export const webTrainingOptions = [
 // This list of options is source of data for dropdown fields like VDR Access, Core Team Member
 // dropdown fields etc. which have only 2 possible boolean values - Yes or No
 export const booleanOptions = [
-  { label: "Yes", value: "yes" },
-  { label: "No", value: "no" },
+  { label: "Yes", value: true },
+  { label: "No", value: false },
 ];
 
 // Intial values of inline filters

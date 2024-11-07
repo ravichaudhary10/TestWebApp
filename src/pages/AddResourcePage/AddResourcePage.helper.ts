@@ -18,18 +18,10 @@ export const getFormValues = (data: Resource | null) => {
   const formValues = {
     [ResourceListField.LINE_FUNCTION]: data?.lineFunction?.id || null,
     [ResourceListField.STAGE]: data?.stage?.id || null,
-    [ResourceListField.VDR_ACCESS]: data
-      ? data.vdrAccessRequested
-        ? "yes"
-        : "no"
-      : null,
+    [ResourceListField.VDR_ACCESS]: data ? data.vdrAccessRequested : null,
     [ResourceListField.WEB_TRAINING]: data?.webTrainingStatus || "",
     [ResourceListField.KICK_OFF_ATTENDANCE]: data?.oneToOneDiscussion || "",
-    [ResourceListField.CORE_TEAM_MEMBER]: data
-      ? data.isCoreTeamMember
-        ? "yes"
-        : "no"
-      : null,
+    [ResourceListField.CORE_TEAM_MEMBER]: data ? data.isCoreTeamMember : null,
     [ResourceListField.OPTIONAL]: data?.optionalColumn || "",
     [STAGES]: data?.stage?.id ? [data.stage?.id] : [],
     [RESOURCE_DETAILS_KEY]: data
@@ -133,13 +125,12 @@ const getResourcePayload = (formData: any) => {
     [ResourceListField.EMAIL]: formData[RESOURCE_DETAILS_KEY].email,
     [ResourceListField.LINE_FUNCTION]:
       formData[ResourceListField.LINE_FUNCTION],
-    [ResourceListField.VDR_ACCESS]:
-      formData[ResourceListField.VDR_ACCESS] === "yes",
+    [ResourceListField.VDR_ACCESS]: formData[ResourceListField.VDR_ACCESS],
     [ResourceListField.WEB_TRAINING]: formData[ResourceListField.WEB_TRAINING],
     [ResourceListField.KICK_OFF_ATTENDANCE]:
       formData[ResourceListField.KICK_OFF_ATTENDANCE],
     [ResourceListField.CORE_TEAM_MEMBER]:
-      formData[ResourceListField.CORE_TEAM_MEMBER] === "yes",
+      formData[ResourceListField.CORE_TEAM_MEMBER],
     [ResourceListField.OPTIONAL]: formData[ResourceListField.OPTIONAL],
   };
 };

@@ -414,7 +414,12 @@ const AddResourcePage: React.FC = () => {
                     name={ResourceListField.VDR_ACCESS}
                     control={control}
                     rules={{
-                      required: REQUIRED_MESSAGE.replace("{0}", VDR_ACCESS),
+                      validate: (value) => {
+                        if (value == null) {
+                          return REQUIRED_MESSAGE.replace("{0}", VDR_ACCESS);
+                        }
+                        return true;
+                      },
                     }}
                     render={({ field, fieldState }) => (
                       <Dropdown
@@ -548,10 +553,15 @@ const AddResourcePage: React.FC = () => {
                     name={ResourceListField.CORE_TEAM_MEMBER}
                     control={control}
                     rules={{
-                      required: REQUIRED_MESSAGE.replace(
-                        "{0}",
-                        CORE_TEAM_MEMBER
-                      ),
+                      validate: (value) => {
+                        if (value == null) {
+                          return REQUIRED_MESSAGE.replace(
+                            "{0}",
+                            CORE_TEAM_MEMBER
+                          );
+                        }
+                        return true;
+                      },
                     }}
                     render={({ field, fieldState }) => (
                       <Dropdown
