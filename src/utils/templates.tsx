@@ -169,9 +169,14 @@ export const inputTextFilterTemplate = (
 
 /**
  * Content template for any boolean column
- * @param rowData
- * @returns
  */
 export const booleanFieldBodyTemplate = (fieldName: any) => (rowData: any) => {
   return <span>{rowData[fieldName] ? "Yes" : "No"}</span>;
+};
+
+/**
+ * Content template for any long text column
+ */
+export const longTextFieldBodyTemplate = (fieldName: any) => (rowData: any) => {
+  return <div className="truncate-text">{rowData[fieldName]}</div>;
 };

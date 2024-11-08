@@ -42,6 +42,7 @@ import {
   dropdownFilterTemplate,
   inputTextFilterTemplate,
   booleanFieldBodyTemplate,
+  longTextFieldBodyTemplate,
 } from "../../utils/templates";
 
 import {
@@ -388,6 +389,9 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({
           style={{ minWidth: "14rem" }}
         />
         <Column
+          body={longTextFieldBodyTemplate(
+            ResourceListField.KICK_OFF_ATTENDANCE
+          )}
           field={ResourceListField.KICK_OFF_ATTENDANCE}
           header={KICK_OFF_ATTENDANCE}
           filter
@@ -398,6 +402,7 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({
           style={{ minWidth: "14rem" }}
         />
         <Column
+          body={longTextFieldBodyTemplate(ResourceListField.OPTIONAL)}
           field={ResourceListField.OPTIONAL}
           header={OPTIONAL}
           filter
