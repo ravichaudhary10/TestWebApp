@@ -26,6 +26,7 @@ import {
   NO_THERAPEUTIC_AREA_ASSIGNED_MSG,
   ONBOARD_DEAL_LEAD_PAGE_TITLE,
   ONBOARD_LEAD_MSG,
+  ONBOARDING_ADMIN_ERROR_MSG,
   THERAPEUTIC_AREA_ASSIGNMENT_HEADER,
 } from "./OnboardDealLead.constants";
 
@@ -132,6 +133,12 @@ const OnboardDealLead: React.FC = () => {
 
     if (dealLeadInfo?.id && dealLeadInfo?.role === Role.DEAL_LEAD) {
       assignTA(getAssignTAPayload(dealLeadInfo?.id));
+    } else if (dealLeadInfo?.id && dealLeadInfo?.role === Role.ADMIN) {
+      confirmDialog({
+        message: ONBOARDING_ADMIN_ERROR_MSG,
+        acceptLabel: "OK",
+        rejectClassName: "hidden",
+      });
     } else {
       // Perform Deal Lead onboarding after confirmation
       const accept = () => {
@@ -144,15 +151,6 @@ const OnboardDealLead: React.FC = () => {
         accept,
       });
     }
-
-    // // If role is Resource, show error popup
-    // else if (dealLeadInfo?.role === Role.RESOURCE) {
-    //   confirmDialog({
-    //     message: USER_ONBOARDED_AS_RESOURCE_MSG,
-    //     acceptLabel: "OK",
-    //     rejectClassName: "hidden",
-    //   });
-    // }
   };
 
   /**

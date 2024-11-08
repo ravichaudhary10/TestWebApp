@@ -5,8 +5,5 @@ export const NO_THERAPEUTIC_AREA_ASSIGNED_MSG =
 export const ONBOARD_DEAL_LEAD_PAGE_TITLE = "Onboard Deal Lead";
 export const ONBOARD_LEAD_MSG = "Do you want to assign Deal Lead permissions";
 
-export const USER_ONBOARDED_AS_RESOURCE_MSG =
-  "This person is already assigned as a resource under one or more deals. Deal Lead permissions cannot be granted.";
-
-export const ONBOARDING_ERROR_MSG =
-  "Deal Lead permissions cannot be granted to this user.";
+export const ONBOARDING_ADMIN_ERROR_MSG =
+  "System Admin can't be onboarded as a Deal Lead.";
