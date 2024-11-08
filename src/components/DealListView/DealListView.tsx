@@ -1,6 +1,6 @@
 import React, { useState, useEffect, SyntheticEvent } from "react";
 import { Deal, DealListField } from "./DealListView.types";
-import { LazyTableState } from "../../types/commonTypes";
+import { LazyTableState, Role } from "../../types/commonTypes";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getFilterPayload } from "../../utils/getFilterPayload";
 import { Link, useNavigate } from "react-router-dom";
@@ -49,6 +49,7 @@ import {
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import RoleBasedGuard from "../../guards/RoleBasedGuard";
 
 const DealListView: React.FC = () => {
   // States
@@ -121,22 +122,24 @@ const DealListView: React.FC = () => {
    */
   const actionColumnTemplate = (rowData: Deal) => {
     return (
-      <div className="flex justify-content-center">
-        <Button
-          icon="pi pi-pencil"
-          rounded
-          text
-          aria-label="Edit Resource Button"
-          className="action-icon-button"
-          onClick={() => navigate(`${Path.UPDATE_DEAL}/${rowData.id}`)}
-        />
-        <Button
-          icon="pi pi-trash"
-          text
-          aria-label="Delete Resource Button"
-          className="action-icon-button"
-          onClick={() => handleDealDeletion(rowData.id)}
-        />
+      <div className="flex justify-content-center action-cell-height">
+        <RoleBasedGuard accessibleRoles={[Role.ADMIN]}>
+          <Button
+            icon="pi pi-pencil"
+            rounded
+            text
+            aria-label="Edit Resource Button"
+            className="action-icon-button"
+            onClick={() => navigate(`${Path.UPDATE_DEAL}/${rowData.id}`)}
+          />
+          <Button
+            icon="pi pi-trash"
+            text
+            aria-label="Delete Resource Button"
+            className="action-icon-button"
+            onClick={() => handleDealDeletion(rowData.id)}
+          />
+        </RoleBasedGuard>
       </div>
     );
   };
@@ -184,8 +187,9 @@ const DealListView: React.FC = () => {
    */
   const dealNameBodyTemplate = (rowData: Deal) => {
     const dealName = rowData[DealListField.NAME] || "";
+    const dealLeadId = rowData[DealListField.LEADS]?.[0]?.id;
     return (
-      <Link to={`/deals/${rowData.id}`} state={{ dealName }}>
+      <Link to={`/deals/${rowData.id}`} state={{ dealName, dealLeadId }}>
         <span>{dealName}</span>
       </Link>
     );
@@ -372,6 +376,7 @@ const DealListView: React.FC = () => {
           filterElement={inputTextFilterTemplate}
           style={{ minWidth: "10rem" }}
         />
+
         <Column
           field="actions"
           header=""

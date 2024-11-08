@@ -39,6 +39,7 @@ import { generateFileWithContent } from "../../utils/generateFileWithContent";
 // Primereact imports
 import { TabMenu, TabMenuTabChangeEvent } from "primereact/tabmenu";
 import { Button } from "primereact/button";
+import { Role } from "../../types/commonTypes";
 
 const DealDetailPage = () => {
   // States
@@ -218,6 +219,7 @@ const DealDetailPage = () => {
     activeTabIndex === Tab.RESOURCES ? (
       <ResourceListView
         dealId={parseInt(dealId)}
+        dealLeadId={state.dealLeadId}
         refreshList={refreshResourceList}
       />
     ) : (
@@ -242,37 +244,40 @@ const DealDetailPage = () => {
             onTabChange={handleTabChange}
             style={{ display: "inline-block" }}
           />
-          <div className="flex flex-1 gap-2 justify-content-end ">
-            <Button
-              icon="pi pi-download"
-              outlined
-              aria-label={DOWNLOAD_TEMPLATE}
-              tooltip={DOWNLOAD_TEMPLATE}
-              tooltipOptions={{ position: "top" }}
-              onClick={generateResourceTemplateFile}
-            />
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".xlsx, .xls"
-              style={{ display: "none" }} // Hiding the file input element
-              onChange={handleFileChange}
-            />
+          {user?.role === Role.ADMIN ||
+            (state.dealLeadId === user?.id && (
+              <div className="flex flex-1 gap-2 justify-content-end ">
+                <Button
+                  icon="pi pi-download"
+                  outlined
+                  aria-label={DOWNLOAD_TEMPLATE}
+                  tooltip={DOWNLOAD_TEMPLATE}
+                  tooltipOptions={{ position: "top" }}
+                  onClick={generateResourceTemplateFile}
+                />
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".xlsx, .xls"
+                  style={{ display: "none" }} // Hiding the file input element
+                  onChange={handleFileChange}
+                />
 
-            <Button
-              icon="pi pi-upload"
-              outlined
-              aria-label={UPLOAD_EXCEL}
-              tooltip={UPLOAD_EXCEL}
-              tooltipOptions={{ position: "top" }}
-              onClick={handleExcelUpload}
-            />
-            <Button
-              label={ADD_NEW_RESOURCE_BUTTON_TITLE}
-              size="small"
-              onClick={openAddResourceView}
-            />
-          </div>
+                <Button
+                  icon="pi pi-upload"
+                  outlined
+                  aria-label={UPLOAD_EXCEL}
+                  tooltip={UPLOAD_EXCEL}
+                  tooltipOptions={{ position: "top" }}
+                  onClick={handleExcelUpload}
+                />
+                <Button
+                  label={ADD_NEW_RESOURCE_BUTTON_TITLE}
+                  size="small"
+                  onClick={openAddResourceView}
+                />
+              </div>
+            ))}
         </div>
 
         {selectedTabView}

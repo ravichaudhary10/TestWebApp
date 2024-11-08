@@ -1,6 +1,10 @@
 import React, { useState, useEffect, SyntheticEvent } from "react";
 import { Resource } from "./ResourceListView.types";
-import { LazyTableState, ResourceListField } from "../../types/commonTypes";
+import {
+  LazyTableState,
+  ResourceListField,
+  Role,
+} from "../../types/commonTypes";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getFilterPayload } from "../../utils/getFilterPayload";
 import { useNavigate } from "react-router-dom";
@@ -64,11 +68,13 @@ import { handleSuccess } from "../../utils/handleSuccess";
 
 interface ResourceListViewProps {
   dealId: number;
+  dealLeadId: number;
   refreshList: Object;
 }
 
 const ResourceListView: React.FC<ResourceListViewProps> = ({
   dealId,
+  dealLeadId,
   refreshList,
 }) => {
   // States
@@ -270,6 +276,10 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({
     }
   };
 
+  // Determine whether to show action buttons or not
+  const showActionButtons =
+    user?.role === Role.ADMIN || dealLeadId === user?.id;
+
   return (
     <div>
       <ConfirmDialog
@@ -416,15 +426,16 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({
           filterElement={inputTextFilterTemplate}
           style={{ minWidth: "14rem" }}
         />
+
         <Column
           field="actions"
           header=""
-          body={actionColumnTemplate}
+          body={showActionButtons ? actionColumnTemplate : null}
           filter
           showFilterMenu={false}
           showClearButton={false}
           filterElement={clearFilterTemplate}
-          frozen
+          frozen={showActionButtons}
           alignFrozen="right"
           style={{ minWidth: "110px" }}
         ></Column>

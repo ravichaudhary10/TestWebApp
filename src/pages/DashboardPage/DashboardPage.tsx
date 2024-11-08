@@ -66,12 +66,12 @@ const DashboardPage: React.FC = () => {
             style={{ display: "inline-block" }}
           />
           <div className="flex flex-1 gap-2 justify-content-end ">
-            <Button
-              label={CREATE_NEW_DEAL_BUTTON_TITLE}
-              size="small"
-              onClick={openCreateDealView}
-            />
             <RoleBasedGuard accessibleRoles={[Role.ADMIN]}>
+              <Button
+                label={CREATE_NEW_DEAL_BUTTON_TITLE}
+                size="small"
+                onClick={openCreateDealView}
+              />
               <Button
                 label={ONBOARD_DEAL_LEAD_BUTTON_TITLE}
                 size="small"
