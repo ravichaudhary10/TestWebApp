@@ -87,25 +87,26 @@ export const generateResourcePayloadFromExcelFile = async (
   }
 
   // Get data rows
-  const dataRows = fileData.rows.slice(1);
+  let dataRows = fileData.rows.slice(1);
+  dataRows = dataRows.filter((row: any[]) => row?.length);
 
   // Check if dataRows is empty
   if (!dataRows.length) {
-    throw new Error(FILE_ERROR_MESSAGES.invalidFileData);
+    throw new Error(FILE_ERROR_MESSAGES.emptyFile);
   }
 
   // Get header row
   const headerRow = fileData.rows[0];
 
   // Generate payload by iterating over dataRows array
-  return dataRows.map((row: any[]) => {
+  return dataRows.map((row: any[], rowIndex: number) => {
     const resource: any = {};
+
     if (!row || row.length !== headerRow.length) {
       throw new Error(FILE_ERROR_MESSAGES.invalidFileData);
     }
 
-    headerRow.forEach((header: string, index: number) => {
-      const rowNum = (index + 2).toString();
+    headerRow.forEach((header: string, colIndex: number) => {
       const fieldName = COLUMN_NAME_TO_FIELD_MAP[header];
 
       if (!fieldName) {
@@ -114,7 +115,7 @@ export const generateResourcePayloadFromExcelFile = async (
         );
       }
 
-      const value = row[index]?.toString()?.trim() || "";
+      const value = row[colIndex]?.toString()?.trim() || "";
 
       switch (fieldName) {
         case ResourceListField.EMAIL:
@@ -163,7 +164,7 @@ export const generateResourcePayloadFromExcelFile = async (
       if (MANDATORY_FIELDS.has(fieldName) && resource[fieldName] == null) {
         throw new Error(
           FILE_ERROR_MESSAGES.invalidColumnValue
-            .replace("{0}", rowNum)
+            .replace("{0}", (rowIndex + 1).toString())
             .replace("{1}", header)
         );
       }

@@ -18,6 +18,7 @@ export const FILE_ERROR_MESSAGES: Record<string, string> = {
   noFile: "No file selected",
   invalidFile: "Please upload an Excel file (.xlsx or .xls)",
   parseError: "Failed to read the Excel File",
+  emptyFile: "No resource data found in file selected.",
   invalidFileData: "Please upload a file with valid data",
   invalidColumnName: "Invalid column name: {0}",
   invalidColumnValue: "Invalid value : Row {0} Column: {1}",
