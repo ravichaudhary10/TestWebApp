@@ -316,6 +316,7 @@ const DealListView: React.FC = () => {
         tableStyle={{ minWidth: "75rem" }}
         emptyMessage={EMPTY_MESSAGE}
         selectionMode="single"
+        scrollable
       >
         <Column
           body={dealNameBodyTemplate}
@@ -376,7 +377,6 @@ const DealListView: React.FC = () => {
           filterElement={inputTextFilterTemplate}
           style={{ minWidth: "10rem" }}
         />
-
         <Column
           field="actions"
           header=""
@@ -386,6 +386,8 @@ const DealListView: React.FC = () => {
           showClearButton={false}
           filterElement={clearFilterTemplate}
           style={{ minWidth: "110px" }}
+          frozen
+          alignFrozen="right"
         ></Column>
       </DataTable>
     </div>
