@@ -276,8 +276,8 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({
     }
   };
 
-  // Determine whether to show action buttons or not
-  const showActionButtons =
+  // Determine whether the user has access to edit or delte resources
+  const hasEditResourceAccess =
     user?.role === Role.ADMIN || dealLeadId === user?.id;
 
   return (
@@ -430,12 +430,12 @@ const ResourceListView: React.FC<ResourceListViewProps> = ({
         <Column
           field="actions"
           header=""
-          body={showActionButtons ? actionColumnTemplate : null}
+          body={hasEditResourceAccess ? actionColumnTemplate : null}
           filter
           showFilterMenu={false}
           showClearButton={false}
           filterElement={clearFilterTemplate}
-          frozen={showActionButtons}
+          frozen={hasEditResourceAccess}
           alignFrozen="right"
           style={{ minWidth: "110px" }}
         ></Column>

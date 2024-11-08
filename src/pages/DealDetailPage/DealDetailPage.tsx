@@ -226,6 +226,10 @@ const DealDetailPage = () => {
       <p className="m-0">History</p>
     );
 
+  // Determine whether the user has access to add resources or not
+  const hasAddResourceAccess =
+    user?.role === Role.ADMIN || state.dealLeadId === user?.id;
+
   return (
     <div className="flex flex-column align-items-center">
       {isLoading && <LoadingIndicator />}
@@ -244,40 +248,39 @@ const DealDetailPage = () => {
             onTabChange={handleTabChange}
             style={{ display: "inline-block" }}
           />
-          {user?.role === Role.ADMIN ||
-            (state.dealLeadId === user?.id && (
-              <div className="flex flex-1 gap-2 justify-content-end ">
-                <Button
-                  icon="pi pi-download"
-                  outlined
-                  aria-label={DOWNLOAD_TEMPLATE}
-                  tooltip={DOWNLOAD_TEMPLATE}
-                  tooltipOptions={{ position: "top" }}
-                  onClick={generateResourceTemplateFile}
-                />
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept=".xlsx, .xls"
-                  style={{ display: "none" }} // Hiding the file input element
-                  onChange={handleFileChange}
-                />
+          {hasAddResourceAccess && (
+            <div className="flex flex-1 gap-2 justify-content-end ">
+              <Button
+                icon="pi pi-download"
+                outlined
+                aria-label={DOWNLOAD_TEMPLATE}
+                tooltip={DOWNLOAD_TEMPLATE}
+                tooltipOptions={{ position: "top" }}
+                onClick={generateResourceTemplateFile}
+              />
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".xlsx, .xls"
+                style={{ display: "none" }} // Hiding the file input element
+                onChange={handleFileChange}
+              />
 
-                <Button
-                  icon="pi pi-upload"
-                  outlined
-                  aria-label={UPLOAD_EXCEL}
-                  tooltip={UPLOAD_EXCEL}
-                  tooltipOptions={{ position: "top" }}
-                  onClick={handleExcelUpload}
-                />
-                <Button
-                  label={ADD_NEW_RESOURCE_BUTTON_TITLE}
-                  size="small"
-                  onClick={openAddResourceView}
-                />
-              </div>
-            ))}
+              <Button
+                icon="pi pi-upload"
+                outlined
+                aria-label={UPLOAD_EXCEL}
+                tooltip={UPLOAD_EXCEL}
+                tooltipOptions={{ position: "top" }}
+                onClick={handleExcelUpload}
+              />
+              <Button
+                label={ADD_NEW_RESOURCE_BUTTON_TITLE}
+                size="small"
+                onClick={openAddResourceView}
+              />
+            </div>
+          )}
         </div>
 
         {selectedTabView}
