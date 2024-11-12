@@ -50,4 +50,5 @@ export const MOCK_CONFIG: Record<string, boolean> = {
   updateResourceAPI: true,
   deleteResourceAPI: true,
   onboardDealLeadAPI: true,
+  auditTrailListAPI: true,
 };

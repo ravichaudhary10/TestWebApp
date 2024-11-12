@@ -56,7 +56,7 @@ export const paginatorTemplate = {
   },
 };
 
-const listItemTemplate = (option: SelectItem) => {
+export const listItemTemplate = (option: SelectItem) => {
   return (
     <div key={option.value} className="flex align-items-center gap-2">
       <span>{option.label}</span>

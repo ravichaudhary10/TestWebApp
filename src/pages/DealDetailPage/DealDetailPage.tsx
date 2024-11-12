@@ -40,6 +40,7 @@ import { generateFileWithContent } from "../../utils/generateFileWithContent";
 import { TabMenu, TabMenuTabChangeEvent } from "primereact/tabmenu";
 import { Button } from "primereact/button";
 import { Role } from "../../types/commonTypes";
+import { AuditTrailListView } from "../../components/AuditTrailListView";
 
 const DealDetailPage = () => {
   // States
@@ -65,8 +66,7 @@ const DealDetailPage = () => {
   const { state } = useLocation();
 
   // If no dealId present in params, return nothing
-  const { dealId } = useParams<{ dealId: string }>();
-  if (!dealId || isNaN(parseInt(dealId))) {
+  if (!state.dealId || isNaN(state.dealId)) {
     return null;
   }
 
@@ -128,7 +128,7 @@ const DealDetailPage = () => {
           .then((resources) => {
             // Make API call to add resources
             addResources({
-              dealId: parseInt(dealId),
+              dealId: state.dealId,
               userId: user?.id,
               resources: resources,
             });
@@ -218,16 +218,16 @@ const DealDetailPage = () => {
   const selectedTabView =
     activeTabIndex === Tab.RESOURCES ? (
       <ResourceListView
-        dealId={parseInt(dealId)}
+        dealId={state.dealId}
         dealLeadId={state.dealLeadId}
         refreshList={refreshResourceList}
       />
     ) : (
-      <p className="m-0">History</p>
+      <AuditTrailListView dealId={state.dealId} />
     );
 
   // Determine whether the user has access to add resources or not
-  const hasAddResourceAccess =
+  const userHasAddResourceAccess =
     user?.role === Role.ADMIN || state.dealLeadId === user?.id;
 
   return (
@@ -248,7 +248,7 @@ const DealDetailPage = () => {
             onTabChange={handleTabChange}
             style={{ display: "inline-block" }}
           />
-          {hasAddResourceAccess && (
+          {activeTabIndex === Tab.RESOURCES && userHasAddResourceAccess && (
             <div className="flex flex-1 gap-2 justify-content-end ">
               <Button
                 icon="pi pi-download"

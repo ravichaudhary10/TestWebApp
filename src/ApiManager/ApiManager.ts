@@ -48,6 +48,18 @@ class ApiManager {
     return axios.post(url, { dealId, filters, page, limit });
   }
 
+  static fetchAuditTrailData(
+    userId: number,
+    dealId: number,
+    filters: Record<string, any>,
+    page: number,
+    limit: number
+  ) {
+    const url = END_POINTS.FETCH_AUDIT_TRAIL_DATA();
+    const axios = getAxiosInstance("auditTrailListAPI");
+    return axios.post(url, { userId, dealId, filters, page, limit });
+  }
+
   static fetchResourceDetail(
     resourceId: number,
     dealId: number,

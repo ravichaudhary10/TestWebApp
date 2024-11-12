@@ -186,10 +186,11 @@ const DealListView: React.FC = () => {
    * @returns
    */
   const dealNameBodyTemplate = (rowData: Deal) => {
+    const dealId = rowData[DealListField.ID];
     const dealName = rowData[DealListField.NAME] || "";
     const dealLeadId = rowData[DealListField.LEADS]?.[0]?.id;
     return (
-      <Link to={`/deals/${rowData.id}`} state={{ dealName, dealLeadId }}>
+      <Link to={`/deals/${dealId}`} state={{ dealId, dealName, dealLeadId }}>
         <span>{dealName}</span>
       </Link>
     );

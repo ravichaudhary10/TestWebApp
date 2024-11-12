@@ -29,6 +29,10 @@ const END_POINTS = {
     return `/resources/list`;
   },
 
+  FETCH_AUDIT_TRAIL_DATA: () => {
+    return `/audit-trail`;
+  },
+
   LOGIN: () => {
     return `/login`;
   },

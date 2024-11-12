@@ -1,0 +1,158 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "action": "created",
+      "actionDate": "2024-09-24",
+      "performedBy": {
+        "id": 1,
+        "name": "Ravi Chaudhary"
+      },
+      "description": "Ravi Chaudhary created the deal with name 'TEST'."
+    },
+    {
+      "id": 2,
+      "action": "added",
+      "actionDate": "2024-09-24",
+      "performedBy": {
+        "id": 1,
+        "name": "Ravi Chaudhary"
+      },
+      "description": "Ravi Chaudhary added a new Resource 'Aditya Mantha'."
+    },
+    {
+      "id": 3,
+      "action": "removed",
+      "actionDate": "2024-09-24",
+      "performedBy": {
+        "id": 1,
+        "name": "Ravi Chaudhary"
+      },
+      "description": "Ravi Chaudhary removed the Resource 'Aditya Mantha'."
+    },
+    {
+      "id": 4,
+      "action": "renamed",
+      "actionDate": "2024-09-24",
+      "performedBy": {
+        "id": 1,
+        "name": "Ravi Chaudhary"
+      },
+      "description": "Ravi Chaudhary renamed the deal from 'Test' to 'BANFF TEAM'."
+    },
+    {
+      "id": 5,
+      "action": "updated",
+      "actionDate": "2024-09-24",
+      "performedBy": {
+        "id": 1,
+        "name": "Ravi Chaudhary"
+      },
+      "description": "Ravi Chaudhary updated the deal stage from 'Triage' to 'Focused Dilligence'."
+    },
+    {
+      "id": 6,
+      "action": "updated",
+      "actionDate": "2024-09-24",
+      "performedBy": {
+        "id": 1,
+        "name": "Ravi Chaudhary"
+      },
+      "description": "Ravi Chaudhary updated the deal stage from 'Triage' to 'Focused Dilligence'."
+    },
+    {
+      "id": 7,
+      "action": "updated",
+      "actionDate": "2024-09-24",
+      "performedBy": {
+        "id": 1,
+        "name": "Ravi Chaudhary"
+      },
+      "description": "Ravi Chaudhary updated the deal stage from 'Triage' to 'Focused Dilligence'."
+    },
+    {
+      "id": 8,
+      "action": "updated",
+      "actionDate": "2024-09-24",
+      "performedBy": {
+        "id": 1,
+        "name": "Ravi Chaudhary"
+      },
+      "description": "Ravi Chaudhary updated the deal stage from 'Triage' to 'Focused Dilligence'."
+    },
+    {
+      "id": 9,
+      "action": "updated",
+      "actionDate": "2024-09-24",
+      "performedBy": {
+        "id": 1,
+        "name": "Ravi Chaudhary"
+      },
+      "description": "Ravi Chaudhary updated the deal stage from 'Triage' to 'Focused Dilligence'."
+    },
+    {
+      "id": 10,
+      "action": "updated",
+      "actionDate": "2024-09-24",
+      "performedBy": {
+        "id": 1,
+        "name": "Ravi Chaudhary"
+      },
+      "description": "Ravi Chaudhary updated the deal stage from 'Triage' to 'Focused Dilligence'."
+    },
+    {
+      "id": 11,
+      "action": "updated",
+      "actionDate": "2024-09-24",
+      "performedBy": {
+        "id": 1,
+        "name": "Ravi Chaudhary"
+      },
+      "description": "Ravi Chaudhary updated the deal stage from 'Triage' to 'Focused Dilligence'."
+    },
+    {
+      "id": 12,
+      "action": "updated",
+      "actionDate": "2024-09-24",
+      "performedBy": {
+        "id": 1,
+        "name": "Ravi Chaudhary"
+      },
+      "description": "Ravi Chaudhary updated the deal stage from 'Triage' to 'Focused Dilligence'."
+    },
+    {
+      "id": 13,
+      "action": "updated",
+      "actionDate": "2024-09-24",
+      "performedBy": {
+        "id": 1,
+        "name": "Ravi Chaudhary"
+      },
+      "description": "Ravi Chaudhary updated the deal stage from 'Triage' to 'Focused Dilligence'."
+    },
+    {
+      "id": 14,
+      "action": "updated",
+      "actionDate": "2024-09-24",
+      "performedBy": {
+        "id": 1,
+        "name": "Ravi Chaudhary"
+      },
+      "description": "Ravi Chaudhary updated the deal stage from 'Triage' to 'Focused Dilligence'."
+    },
+    {
+      "id": 15,
+      "action": "updated",
+      "actionDate": "2024-09-24",
+      "performedBy": {
+        "id": 1,
+        "name": "Ravi Chaudhary"
+      },
+      "description": "Ravi Chaudhary updated the deal stage from 'Triage' to 'Focused Dilligence'."
+    }
+  ],
+  "totalRecords": 12,
+  "currentPage": 1,
+  "totalPages": 2,
+  "pageSize": 10
+}
