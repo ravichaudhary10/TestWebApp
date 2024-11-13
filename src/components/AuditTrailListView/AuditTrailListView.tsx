@@ -13,7 +13,6 @@ import "./AuditTrailListView.styles.scss";
 
 // Prime react imports
 import { Paginator, PaginatorPageChangeEvent } from "primereact/paginator";
-import { Divider } from "primereact/divider";
 
 interface AuditTrailListViewProps {
   dealId: number;
@@ -26,6 +25,7 @@ const AuditTrailListView: React.FC<AuditTrailListViewProps> = ({ dealId }) => {
     totalRecords: number;
   } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [showEmptyMessage, setShowEmptyMessage] = useState(false);
 
   // Create lazy state for the data table
   const [lazyState, setlazyState] = useState({
@@ -67,6 +67,7 @@ const AuditTrailListView: React.FC<AuditTrailListViewProps> = ({ dealId }) => {
         handleError(dispatch, error);
       } finally {
         setIsLoading(false);
+        setShowEmptyMessage(true);
       }
     };
 
@@ -109,7 +110,7 @@ const AuditTrailListView: React.FC<AuditTrailListViewProps> = ({ dealId }) => {
   }, [lazyState]);
 
   return (
-    <div className="relative" style={{ minHeight: "11rem" }}>
+    <div className="relative">
       {isLoading && <LoadingIndicator />}
 
       {/* Audit trail filter section */}
@@ -134,7 +135,7 @@ const AuditTrailListView: React.FC<AuditTrailListViewProps> = ({ dealId }) => {
           </div>
         </>
       ) : (
-        <div className="p-2 text-gray">{EMPTY_MESSAGE}</div>
+        showEmptyMessage && <div className="p-2 text-gray">{EMPTY_MESSAGE}</div>
       )}
 
       <div className="divider" />
