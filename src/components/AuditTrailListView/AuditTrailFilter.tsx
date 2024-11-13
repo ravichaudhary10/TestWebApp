@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { listItemTemplate } from "../../utils/templates";
+import { CLEAR_ALL_LABEL } from "../../constants/global.constants";
 import {
   ACTION,
   ACTION_DATE,
@@ -8,13 +10,11 @@ import {
   INITIAL_FILTERS,
   PERFORMED_BY,
 } from "./AuditTrailListView.constants";
-import { listItemTemplate } from "../../utils/templates";
 
 // Prime react imports
 import { Calendar } from "primereact/calendar";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
-import { CLEAR_ALL_LABEL } from "../../constants/global.constants";
 import { Button } from "primereact/button";
 
 interface AuditTrailFilterProps {
@@ -50,7 +50,7 @@ const AuditTrailFilter: React.FC<AuditTrailFilterProps> = ({ onFilter }) => {
   };
 
   return (
-    <div className="flex align-items-center gap-5 p-2">
+    <div className="flex align-items-center gap-5 p-2 filter-box">
       <div className="flex-grow-1 flex align-items-center gap-5">
         <span className="font-semibold text-base primary-text">
           {FILTER_BY_LABEL}

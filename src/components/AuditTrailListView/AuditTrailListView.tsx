@@ -8,11 +8,12 @@ import { paginatorTemplate } from "../../utils/templates";
 import AuditTrailFilter from "./AuditTrailFilter";
 import { getFilterPayload } from "./AuditTrailListView.helpers";
 import { LoadingIndicator } from "../LoadingIndicator";
+import { debounce } from "../../utils/debounce";
 import "./AuditTrailListView.styles.scss";
 
 // Prime react imports
 import { Paginator, PaginatorPageChangeEvent } from "primereact/paginator";
-import { debounce } from "../../utils/debounce";
+import { Divider } from "primereact/divider";
 
 interface AuditTrailListViewProps {
   dealId: number;
@@ -111,51 +112,41 @@ const AuditTrailListView: React.FC<AuditTrailListViewProps> = ({ dealId }) => {
     <div className="relative" style={{ minHeight: "11rem" }}>
       {isLoading && <LoadingIndicator />}
 
+      {/* Audit trail filter section */}
       <AuditTrailFilter onFilter={filterHandler} />
 
       {auditTrailData?.data?.length ? (
         <>
-          <div className="mt-4">
+          <div className="">
             {auditTrailData.data.map((item) => (
               <div
                 key={item.id}
-                className="flex justify-content-between list-item font-normal text-base primary-text"
+                className="flex justify-content-start gap-4 list-item text-gray font-normal text-base"
               >
-                <div>{item.description}</div>
-                <div>{new Date(item.actionDate as any).toDateString()}</div>
+                <div className="flex-grow-1 truncate-text">
+                  {item.description}
+                </div>
+                <div style={{ minWidth: "9rem", textAlign: "right" }}>
+                  {new Date(item.actionDate as any).toDateString()}
+                </div>
               </div>
             ))}
           </div>
-          <Paginator
-            template={paginatorTemplate}
-            first={lazyState.first}
-            rows={lazyState.rows}
-            totalRecords={auditTrailData?.totalRecords || 0}
-            onPageChange={onPage}
-            className="justify-content-end"
-          />
         </>
       ) : (
-        auditTrailData?.data?.length === 0 && (
-          <div className="mt-4">{EMPTY_MESSAGE}</div>
-        )
+        <div className="p-2 text-gray">{EMPTY_MESSAGE}</div>
       )}
 
-      {/* <DataView
-        value={auditTrailData?.data}
-        itemTemplate={itemTemplate}
-        dataKey="id"
-        paginator
-        lazy
+      <div className="divider" />
+      <Paginator
+        template={paginatorTemplate}
         first={lazyState.first}
         rows={lazyState.rows}
         totalRecords={auditTrailData?.totalRecords || 0}
-        paginatorTemplate={paginatorTemplate}
-        paginatorClassName="justify-content-end"
-        onPage={onPage}
-        loading={isLoading}
-        emptyMessage={EMPTY_MESSAGE}
-      /> */}
+        onPageChange={onPage}
+        className="justify-content-end"
+      />
+      <div className="divider" />
     </div>
   );
 };
