@@ -8,10 +8,6 @@ import {
 export const getBreadcrumbItems = (isEditDealPage: boolean) => {
   return [
     {
-      icon: "pi pi-arrow-left",
-      label: "Go back",
-    },
-    {
       icon: "pi pi-home",
       label: DASHBOARD_TITLE,
       url: "/",

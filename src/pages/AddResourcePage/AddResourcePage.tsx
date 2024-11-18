@@ -62,6 +62,7 @@ import { ConfirmDialog } from "primereact/confirmdialog";
 import { confirmDialog } from "primereact/confirmdialog";
 import { MultiSelect, MultiSelectChangeEvent } from "primereact/multiselect";
 import { isValidId } from "../../utils/isValidId";
+import { BackButton } from "../../components/BackButton";
 
 const AddResourcePage: React.FC = () => {
   // States
@@ -246,7 +247,10 @@ const AddResourcePage: React.FC = () => {
       <Header />
 
       <div className="flex-1  w-11  p-3">
-        <Breadcrumb items={getBreadcrumbItems(!!resourceId)} />
+        <div className="flex align-items-start gap-3">
+          <BackButton />
+          <Breadcrumb items={getBreadcrumbItems(!!resourceId)} />
+        </div>
 
         {/* Add resource form */}
         <form autoComplete="off">

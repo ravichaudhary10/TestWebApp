@@ -49,10 +49,6 @@ export const getFormValues = (data: Resource | null) => {
 export const getBreadcrumbItems = (isEditPage: boolean) => {
   return [
     {
-      icon: "pi pi-arrow-left",
-      label: "Go back",
-    },
-    {
       icon: "pi pi-home",
       label: DASHBOARD_TITLE,
       url: "/",

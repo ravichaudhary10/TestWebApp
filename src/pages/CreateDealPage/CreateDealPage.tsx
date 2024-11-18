@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Breadcrumb } from "../../components/Breadcrumb";
+import { BackButton } from "../../components/BackButton";
 import {
   DEAL_LEAD_NO_TA_ASSIGNMENT_HEADER,
   DEAL_LEAD_NO_TA_ASSIGNMENT_MSG,
@@ -12,6 +13,13 @@ import { Item, Person } from "../../types/commonTypes";
 import { PersonInfoCard } from "../../components/PersonInfoCard";
 import { LoadingIndicator } from "../../components/LoadingIndicator";
 import { getBreadcrumbItems, getPageTitle } from "./CreateDealPage.helpers";
+import { Field } from "./CreateDealPage.types";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import useAuth from "../../hooks/useAuth";
+import ApiManager from "../../ApiManager/ApiManager";
+import { handleError } from "../../utils/handleError";
+import { handleSuccess } from "../../utils/handleSuccess";
+import { getLabelByValue } from "../../utils/getLabelByValue";
 
 import {
   CANCEL,
@@ -39,10 +47,6 @@ import {
   DEAL_LEAD,
 } from "../../components/DealListView/DealListView.constants";
 
-import { Field } from "./CreateDealPage.types";
-
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-
 // Prime react imports
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
@@ -50,11 +54,6 @@ import { Dropdown } from "primereact/dropdown";
 import { classNames } from "primereact/utils";
 import { ConfirmDialog } from "primereact/confirmdialog";
 import { confirmDialog } from "primereact/confirmdialog";
-import useAuth from "../../hooks/useAuth";
-import ApiManager from "../../ApiManager/ApiManager";
-import { handleError } from "../../utils/handleError";
-import { handleSuccess } from "../../utils/handleSuccess";
-import { getLabelByValue } from "../../utils/getLabelByValue";
 
 const CreateDealPage: React.FC = () => {
   // States
@@ -324,7 +323,10 @@ const CreateDealPage: React.FC = () => {
       <Header />
 
       <div className="flex-1  w-11  p-3">
-        <Breadcrumb items={getBreadcrumbItems(!!params.dealId)} />
+        <div className="flex align-items-start gap-3">
+          <BackButton />
+          <Breadcrumb items={getBreadcrumbItems(!!params.dealId)} />
+        </div>
 
         {/* Create deal form */}
         <form autoComplete="off">

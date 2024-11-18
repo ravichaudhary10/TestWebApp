@@ -14,7 +14,7 @@ import {
   FILE_ERROR_MESSAGES,
   VALID_FILE_EXTENSIONS,
 } from "./DealDetailPage.constants";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Path } from "../../routes";
 import { ResourceListView } from "../../components/ResourceListView";
 import { Tab } from "./DealDetailPage.types";
@@ -41,6 +41,7 @@ import { TabMenu, TabMenuTabChangeEvent } from "primereact/tabmenu";
 import { Button } from "primereact/button";
 import { Role } from "../../types/commonTypes";
 import { AuditTrailListView } from "../../components/AuditTrailListView";
+import { BackButton } from "../../components/BackButton";
 
 const DealDetailPage = () => {
   // States
@@ -237,7 +238,10 @@ const DealDetailPage = () => {
       <Header />
 
       <div className="flex-1  w-11  p-3">
-        <Breadcrumb items={getBreadcrumbItems(navigate)} />
+        <div className="flex align-items-start gap-3">
+          <BackButton />
+          <Breadcrumb items={getBreadcrumbItems()} />
+        </div>
 
         <h1 className="font-bold text-xl line-height-2">{state.dealName}</h1>
 

@@ -12,12 +12,8 @@ import {
 import { saveAs } from "file-saver";
 import { RESOURCE_TEMPLATE_FILE_BASE64 } from "./ResourceTemplate.base64";
 
-export const getBreadcrumbItems = (navigate: Function) => {
+export const getBreadcrumbItems = () => {
   return [
-    {
-      icon: "pi pi-arrow-left",
-      label: "Go back",
-    },
     {
       icon: "pi pi-home",
       label: DASHBOARD_TITLE,

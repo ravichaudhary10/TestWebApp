@@ -36,6 +36,7 @@ import { confirmDialog } from "primereact/confirmdialog";
 import { Button } from "primereact/button";
 import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
 import { differenceBetweenSets } from "../../utils/differenceBetweenSets";
+import { BackButton } from "../../components/BackButton";
 
 const OnboardDealLead: React.FC = () => {
   // States
@@ -255,7 +256,10 @@ const OnboardDealLead: React.FC = () => {
       <Header />
 
       <div className="flex-1  w-11  p-3">
-        <Breadcrumb items={getBreadcrumbItems()} />
+        <div className="flex align-items-start gap-3">
+          <BackButton />
+          <Breadcrumb items={getBreadcrumbItems()} />
+        </div>
 
         {/* Onboard deal lead form */}
         <div>
