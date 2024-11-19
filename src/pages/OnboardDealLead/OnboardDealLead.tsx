@@ -179,6 +179,13 @@ const OnboardDealLead: React.FC = () => {
       // Make an API call to onboard user as a Deal Lead
       const response = await ApiManager.onboardDealLead(payload);
 
+      // Update deal lead Id and role in dealLeadInfo object
+      setDealLeadInfo({
+        ...dealLeadInfo,
+        id: response.data?.id,
+        role: Role.DEAL_LEAD,
+      });
+
       // Make another API call to assign/unassign TAs to newly onboarded deal lead
       await ApiManager.assignTherapeuticAreas(
         getAssignTAPayload(response.data?.id)
@@ -230,9 +237,7 @@ const OnboardDealLead: React.FC = () => {
     return {
       adminUserId: user?.id,
       dealLeadId: dealLeadId,
-      therapeuticAreaIds: Array.from(
-        differenceBetweenSets(selectedTAs, preselectedTAs)
-      ),
+      therapeuticAreaIds: Array.from(selectedTAs),
       unassignTA: Array.from(
         differenceBetweenSets(preselectedTAs, selectedTAs)
       ),
