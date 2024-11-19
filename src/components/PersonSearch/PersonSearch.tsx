@@ -45,8 +45,8 @@ const PersonSearch: React.FC<PersonSearchProps> = ({
   /**
    * Search button click handler
    */
-  const handleSearch = async (e: React.SyntheticEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const handleSearch = async (e?: React.MouseEvent<HTMLButtonElement>) => {
+    e?.preventDefault();
 
     try {
       // Reset states
@@ -79,6 +79,19 @@ const PersonSearch: React.FC<PersonSearchProps> = ({
     }
   };
 
+  /**
+   * This handler facilitates searching on press of Enter key.
+   * @param e
+   */
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (validateEmail(email)) {
+        handleSearch();
+      }
+    }
+  };
+
   return (
     <div className="flex flex-column gap-2">
       {showCancel && (
@@ -97,6 +110,7 @@ const PersonSearch: React.FC<PersonSearchProps> = ({
             value={email}
             autoComplete="new"
             onChange={handleInputChange}
+            onKeyDown={handleKeyPress}
             className={`${className} w-12`}
           ></InputText>
           <label>Email</label>
